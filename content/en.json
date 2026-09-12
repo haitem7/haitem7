@@ -1,0 +1,439 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "locale": "en",
+  "label": "English",
+  "path": "en/",
+  "meta": {
+    "title": "TLEMCENYA — Cold-extracted Sigoise olive oil, Tlemcen, Algeria",
+    "description": "Olive mill in Tlemcen, Algeria. Cold-extracted Sigoise extra virgin olive oil, 0.28% free acidity, traceable lots. Bulk, flexitank, tin and glass, FOB Ghazaouet.",
+    "og_locale": "en_GB"
+  },
+  "skip": "Skip to main content",
+  "nav": [
+    {
+      "href": "#variety",
+      "label": "The variety"
+    },
+    {
+      "href": "#process",
+      "label": "The process"
+    },
+    {
+      "href": "#analysis",
+      "label": "Analysis"
+    },
+    {
+      "href": "#logistics",
+      "label": "Logistics"
+    },
+    {
+      "href": "#quote",
+      "label": "Get a quote"
+    }
+  ],
+  "nav_cta": "Request a quotation",
+  "nav_menu_open": "Open menu",
+  "nav_menu_close": "Close menu",
+  "hero": {
+    "title_lines": [
+      "Sigoise olives,",
+      "extracted cold"
+    ],
+    "lede": "We press fruit from the Beni Snous hillsides within six hours of picking, and never above 27 °C. What leaves the decanter goes into stainless tanks the same day.",
+    "cta_primary": "Request a quotation",
+    "cta_secondary": "Read the lot analysis",
+    "data": [
+      {
+        "label": "Free acidity",
+        "value": "0.28%"
+      },
+      {
+        "label": "Peroxide value",
+        "value": "7.2 meq O₂/kg"
+      },
+      {
+        "label": "Total polyphenols",
+        "value": "412 mg/kg"
+      },
+      {
+        "label": "Harvest",
+        "value": "Oct – Jan"
+      },
+      {
+        "label": "Shipping",
+        "value": "FOB Ghazaouet"
+      }
+    ]
+  },
+  "variety": {
+    "id": "variety",
+    "title": "Why Sigoise",
+    "body": [
+      "Sigoise is the olive of western Algeria. It grows on the limestone hillsides between Tlemcen and Ghazaouet, where summers are dry and nights are cool. That day-to-night swing concentrates polyphenols instead of diluting them.",
+      "Its flesh-to-stone ratio yields 18 to 22% under cold extraction. On the palate: raw artichoke, green almond, a clean bitterness and a pepper that stays in the throat. It holds up to heat and it does not disappear into a vinaigrette."
+    ],
+    "facts": [
+      {
+        "label": "Cold-extraction yield",
+        "value": "18 – 22%"
+      },
+      {
+        "label": "Grove elevation",
+        "value": "420 – 760 m"
+      },
+      {
+        "label": "Planting density",
+        "value": "180 trees / ha"
+      },
+      {
+        "label": "Average tree age",
+        "value": "45 years"
+      }
+    ],
+    "slot": {
+      "file": "../assets/img/grove-beni-snous.jpg",
+      "alt": "Terraced olive grove on the Beni Snous hillsides near Tlemcen",
+      "caption": "Beni Snous parcels, 620 m elevation",
+      "ratio": "4 / 5"
+    }
+  },
+  "process": {
+    "id": "process",
+    "title": "From tree to tank",
+    "lede": "Six operations, in order. Each one carries a time or temperature constraint, and that is where the quality of a lot is decided.",
+    "steps": [
+      {
+        "title": "Picking",
+        "body": "Pneumatic combs and ground nets. Fruit travels in ventilated 22 kg crates, never in sacks — a sack crushes the olive and raises acidity before it reaches the mill.",
+        "tag": "≤ 6 h to the mill"
+      },
+      {
+        "title": "Intake and washing",
+        "body": "Weighing, de-leafing, cold-water washing. Every delivery is assigned a lot number that follows the oil all the way to the container.",
+        "tag": "Lot opened"
+      },
+      {
+        "title": "Milling",
+        "body": "Stainless hammer mill, continuous flow. The paste is formed with as little air contact as the line allows.",
+        "tag": "Stainless steel"
+      },
+      {
+        "title": "Malaxation",
+        "body": "Forty minutes under nitrogen, 26 °C maximum. Run it warmer and you gain yield and lose aroma; we decide for aroma.",
+        "tag": "26 °C max"
+      },
+      {
+        "title": "Extraction",
+        "body": "Two-phase centrifugal decanter. No added water, so no polyphenols washed out and no olive mill wastewater to treat.",
+        "tag": "Two-phase"
+      },
+      {
+        "title": "Storage",
+        "body": "Nitrogen-blanketed 12,000 l stainless tanks at 16 °C, in the dark. Packing happens against an order, never in advance.",
+        "tag": "16 °C, under nitrogen"
+      }
+    ]
+  },
+  "gallery": {
+    "title": "The mill",
+    "shots": [
+      {
+        "file": "../assets/img/mill-floor.jpg",
+        "alt": "Milling and malaxation line inside the mill",
+        "caption": "Milling floor, continuous line"
+      },
+      {
+        "file": "../assets/img/tanks.jpg",
+        "alt": "Nitrogen-blanketed stainless steel storage tanks",
+        "caption": "Stainless tanks, nitrogen blanket"
+      },
+      {
+        "file": "../assets/img/loading.jpg",
+        "alt": "Pallets of tins loaded into a shipping container",
+        "caption": "Loading, outbound Ghazaouet"
+      }
+    ]
+  },
+  "specs": {
+    "id": "analysis",
+    "title": "Lot analysis",
+    "lede": "Current lot, measured by an accredited third-party laboratory using International Olive Council methods. A certificate of analysis travels with every shipment.",
+    "lot_label": "Lot",
+    "lot_value": "TLM-25-114",
+    "campaign_label": "Campaign",
+    "campaign_value": "2025 / 26",
+    "caption": "Extra virgin — regulatory IOC limits for the category.",
+    "head": [
+      "Parameter",
+      "Result",
+      "Method",
+      "Extra virgin limit"
+    ],
+    "rows": [
+      [
+        "Free acidity (% oleic acid)",
+        "0.28",
+        "COI/T.20/Doc. No. 34",
+        "≤ 0.80"
+      ],
+      [
+        "Peroxide value (meq O₂/kg)",
+        "7.2",
+        "COI/T.20/Doc. No. 35",
+        "≤ 20.0"
+      ],
+      [
+        "K232 extinction",
+        "1.94",
+        "COI/T.20/Doc. No. 19",
+        "≤ 2.50"
+      ],
+      [
+        "K270 extinction",
+        "0.14",
+        "COI/T.20/Doc. No. 19",
+        "≤ 0.22"
+      ],
+      [
+        "Delta-K",
+        "0.00",
+        "COI/T.20/Doc. No. 19",
+        "≤ 0.01"
+      ],
+      [
+        "Total polyphenols (mg/kg)",
+        "412",
+        "COI/T.20/Doc. No. 29",
+        "no ceiling"
+      ],
+      [
+        "Wax content (mg/kg)",
+        "98",
+        "COI/T.20/Doc. No. 28",
+        "≤ 150"
+      ],
+      [
+        "Defect median (sensory)",
+        "0.0",
+        "COI/T.20/Doc. No. 15",
+        "= 0"
+      ]
+    ],
+    "cta": "Download the certificate of analysis (PDF)",
+    "cta_file": "../assets/doc/coa-tlm-25-114.pdf",
+    "cta_note": "Drop the signed certificate at this path."
+  },
+  "logistics": {
+    "id": "logistics",
+    "title": "Packaging and logistics",
+    "lede": "We load bulk for bottlers and retail units for distributors. Quantities below are per 20-foot container.",
+    "head": [
+      "Format",
+      "Volume",
+      "Units / pallet",
+      "Pallets / 20′",
+      "Net / container"
+    ],
+    "rows": [
+      [
+        "Flexitank",
+        "22,000 l",
+        "—",
+        "1",
+        "22,000 l"
+      ],
+      [
+        "Stainless IBC",
+        "1,000 l",
+        "1",
+        "20",
+        "20,000 l"
+      ],
+      [
+        "Tin can",
+        "5 l",
+        "72",
+        "20",
+        "7,200 l"
+      ],
+      [
+        "Amber glass",
+        "750 ml",
+        "480",
+        "20",
+        "7,200 l"
+      ],
+      [
+        "Amber glass",
+        "500 ml",
+        "720",
+        "20",
+        "7,200 l"
+      ]
+    ],
+    "facts": [
+      {
+        "label": "Port of loading",
+        "value": "Ghazaouet, 40 km — Oran as alternate"
+      },
+      {
+        "label": "Incoterms",
+        "value": "EXW, FOB, CFR, CIF"
+      },
+      {
+        "label": "Minimum order",
+        "value": "1 pallet in glass, 1 container in bulk"
+      },
+      {
+        "label": "Loading lead time",
+        "value": "10 working days after confirmation"
+      },
+      {
+        "label": "Private label",
+        "value": "From 3,000 units"
+      }
+    ]
+  },
+  "certs": {
+    "title": "Controls and certification",
+    "items": [
+      {
+        "name": "ISO 22000:2018",
+        "body": "Food safety management, audited annually at the Tlemcen site."
+      },
+      {
+        "name": "HACCP",
+        "body": "Hazard control plan covering intake, malaxation, extraction and packing."
+      },
+      {
+        "name": "International Olive Council",
+        "body": "Analysis methods and grading follow the IOC trade standard in force."
+      },
+      {
+        "name": "Organic (EU 2018/848)",
+        "body": "Conversion under way on two Beni Snous parcels; certification expected for the next campaign."
+      }
+    ]
+  },
+  "rfq": {
+    "id": "quote",
+    "title": "Request a quotation",
+    "lede": "Tell us the format and the volume. We answer within 48 working hours with a price, a loading window and a sample on request.",
+    "error_summary_title": "Fix these fields to send your request",
+    "required_note": "Fields marked with an asterisk are required.",
+    "submit": "Send request",
+    "submitting": "Sending",
+    "success_title": "Request received",
+    "success_body": "We will reply within 48 working hours. If it is urgent, call us directly during opening hours.",
+    "fields": [
+      {
+        "name": "company",
+        "type": "text",
+        "label": "Company",
+        "required": true,
+        "autocomplete": "organization",
+        "error": "Enter your company name."
+      },
+      {
+        "name": "contact",
+        "type": "text",
+        "label": "Contact name",
+        "required": true,
+        "autocomplete": "name",
+        "error": "Enter your name."
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "label": "Work email",
+        "required": true,
+        "autocomplete": "email",
+        "inputmode": "email",
+        "hint": "We do not send a newsletter.",
+        "error": "Enter a valid email address, for example buying@company.com."
+      },
+      {
+        "name": "phone",
+        "type": "tel",
+        "label": "Phone",
+        "required": false,
+        "autocomplete": "tel",
+        "inputmode": "tel",
+        "hint": "Include the country code."
+      },
+      {
+        "name": "country",
+        "type": "text",
+        "label": "Destination country",
+        "required": true,
+        "autocomplete": "country-name",
+        "error": "Enter the destination country."
+      },
+      {
+        "name": "format",
+        "type": "select",
+        "label": "Format",
+        "required": true,
+        "error": "Choose a format.",
+        "options": [
+          "Bulk — 22,000 l flexitank",
+          "Bulk — 1,000 l stainless IBC",
+          "5 l tin can",
+          "750 ml amber glass",
+          "500 ml amber glass",
+          "Private label"
+        ]
+      },
+      {
+        "name": "volume",
+        "type": "select",
+        "label": "Estimated annual volume",
+        "required": true,
+        "error": "Choose a volume.",
+        "options": [
+          "Under 10 t",
+          "10 – 50 t",
+          "50 – 200 t",
+          "Over 200 t"
+        ]
+      },
+      {
+        "name": "incoterm",
+        "type": "select",
+        "label": "Preferred Incoterm",
+        "required": false,
+        "options": [
+          "FOB Ghazaouet",
+          "EXW Tlemcen",
+          "CFR",
+          "CIF",
+          "To be agreed"
+        ]
+      },
+      {
+        "name": "message",
+        "type": "textarea",
+        "label": "Anything else",
+        "required": false,
+        "hint": "Labelling, timing, certification requirements."
+      }
+    ]
+  },
+  "footer": {
+    "address_label": "Mill",
+    "address": [
+      "TLEMCENYA",
+      "Industrial zone — TODO",
+      "Tlemcen 13000, Algeria"
+    ],
+    "phone_label": "Phone",
+    "phone": "+213 TODO",
+    "email_label": "Export sales",
+    "email": "export@tlemcenya.dz",
+    "hours_label": "Opening hours",
+    "hours": "Sunday – Thursday, 08:00 – 17:00 (UTC+1)",
+    "lang_label": "Language",
+    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria."
+  }
+}

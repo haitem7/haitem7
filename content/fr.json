@@ -1,0 +1,439 @@
+{
+  "lang": "fr",
+  "dir": "ltr",
+  "locale": "fr-DZ",
+  "label": "Français",
+  "path": "",
+  "meta": {
+    "title": "TLEMCENYA — Huile d'olive extra vierge de Sigoise, Tlemcen",
+    "description": "Huilerie à Tlemcen, Algérie. Sigoise extraite à froid, acidité 0,28 %, lots tracés. Vrac, flexitank, fer-blanc et verre, départ FOB Ghazaouet.",
+    "og_locale": "fr_DZ"
+  },
+  "skip": "Aller au contenu principal",
+  "nav": [
+    {
+      "href": "#variete",
+      "label": "La variété"
+    },
+    {
+      "href": "#procede",
+      "label": "Le procédé"
+    },
+    {
+      "href": "#analyse",
+      "label": "Analyse"
+    },
+    {
+      "href": "#logistique",
+      "label": "Logistique"
+    },
+    {
+      "href": "#cotation",
+      "label": "Cotation"
+    }
+  ],
+  "nav_cta": "Demander une cotation",
+  "nav_menu_open": "Ouvrir le menu",
+  "nav_menu_close": "Fermer le menu",
+  "hero": {
+    "title_lines": [
+      "La Sigoise,",
+      "pressée à froid"
+    ],
+    "lede": "Nous pressons les olives des coteaux de Beni Snous dans les six heures qui suivent la cueillette, sans jamais dépasser 27 °C. Ce qui sort du décanteur part en cuve inox le jour même.",
+    "cta_primary": "Demander une cotation",
+    "cta_secondary": "Voir l'analyse du lot",
+    "data": [
+      {
+        "label": "Acidité libre",
+        "value": "0,28 %"
+      },
+      {
+        "label": "Indice de peroxyde",
+        "value": "7,2 meq O₂/kg"
+      },
+      {
+        "label": "Polyphénols totaux",
+        "value": "412 mg/kg"
+      },
+      {
+        "label": "Récolte",
+        "value": "oct. – janv."
+      },
+      {
+        "label": "Départ",
+        "value": "FOB Ghazaouet"
+      }
+    ]
+  },
+  "variety": {
+    "id": "variete",
+    "title": "Pourquoi la Sigoise",
+    "body": [
+      "La Sigoise est l'olive de l'ouest algérien. Elle pousse sur les coteaux calcaires entre Tlemcen et Ghazaouet, où l'été est sec et la nuit fraîche. Cet écart de température concentre les polyphénols au lieu de les diluer.",
+      "Son rapport pulpe/noyau donne un rendement de 18 à 22 % en extraction à froid. En bouche : artichaut cru, amande verte, une amertume franche et un poivre qui reste en fin de gorge. C'est une huile qui tient la cuisson et qui ne s'efface pas dans une vinaigrette."
+    ],
+    "facts": [
+      {
+        "label": "Rendement en extraction à froid",
+        "value": "18 – 22 %"
+      },
+      {
+        "label": "Altitude des parcelles",
+        "value": "420 – 760 m"
+      },
+      {
+        "label": "Densité de plantation",
+        "value": "180 arbres / ha"
+      },
+      {
+        "label": "Âge moyen des oliviers",
+        "value": "45 ans"
+      }
+    ],
+    "slot": {
+      "file": "assets/img/grove-beni-snous.jpg",
+      "alt": "Oliveraie en terrasses sur les coteaux de Beni Snous, près de Tlemcen",
+      "caption": "Parcelles de Beni Snous, 620 m d'altitude",
+      "ratio": "4 / 5"
+    }
+  },
+  "process": {
+    "id": "procede",
+    "title": "De l'arbre à la cuve",
+    "lede": "Six opérations, dans l'ordre. Chacune a une contrainte de temps ou de température, et c'est là que se décide la qualité du lot.",
+    "steps": [
+      {
+        "title": "Cueillette",
+        "body": "Peignes pneumatiques et filets. Les olives descendent en caisses ajourées de 22 kg, jamais en sacs : un sac écrase le fruit et fait monter l'acidité avant même l'arrivée au moulin.",
+        "tag": "≤ 6 h jusqu'au moulin"
+      },
+      {
+        "title": "Réception et lavage",
+        "body": "Pesée, effeuillage, lavage à l'eau froide. Chaque apport reçoit un numéro de lot qui suivra l'huile jusqu'au conteneur.",
+        "tag": "Lot ouvert"
+      },
+      {
+        "title": "Broyage",
+        "body": "Broyeur à marteaux inox, flux continu. La pâte est formée à l'abri de l'air autant que l'installation le permet.",
+        "tag": "Acier inoxydable"
+      },
+      {
+        "title": "Malaxage",
+        "body": "Quarante minutes sous azote, 26 °C au maximum. Plus chaud, on gagne du rendement et on perd les arômes : nous arbitrons pour les arômes.",
+        "tag": "26 °C max"
+      },
+      {
+        "title": "Extraction",
+        "body": "Décanteur centrifuge à deux phases. Pas d'eau ajoutée, donc pas de polyphénols lessivés et pas de margines à traiter.",
+        "tag": "Deux phases"
+      },
+      {
+        "title": "Stockage",
+        "body": "Cuves inox de 12 000 l inertées à l'azote, à 16 °C et à l'obscurité. Le conditionnement se fait à la commande, jamais à l'avance.",
+        "tag": "16 °C, sous azote"
+      }
+    ]
+  },
+  "gallery": {
+    "title": "L'huilerie",
+    "shots": [
+      {
+        "file": "assets/img/mill-floor.jpg",
+        "alt": "Ligne de broyage et de malaxage dans l'huilerie",
+        "caption": "Salle de broyage, ligne continue"
+      },
+      {
+        "file": "assets/img/tanks.jpg",
+        "alt": "Cuves de stockage en acier inoxydable inertées à l'azote",
+        "caption": "Cuves inox, inertage azote"
+      },
+      {
+        "file": "assets/img/loading.jpg",
+        "alt": "Palettes de bidons chargées dans un conteneur maritime",
+        "caption": "Chargement, départ Ghazaouet"
+      }
+    ]
+  },
+  "specs": {
+    "id": "analyse",
+    "title": "Analyse du lot",
+    "lede": "Valeurs du lot courant, mesurées par un laboratoire tiers accrédité selon les méthodes du Conseil oléicole international. Un certificat d'analyse accompagne chaque expédition.",
+    "lot_label": "Lot",
+    "lot_value": "TLM-25-114",
+    "campaign_label": "Campagne",
+    "campaign_value": "2025 / 26",
+    "caption": "Extra vierge — limites réglementaires COI pour la catégorie.",
+    "head": [
+      "Paramètre",
+      "Résultat",
+      "Méthode",
+      "Limite extra vierge"
+    ],
+    "rows": [
+      [
+        "Acidité libre (% acide oléique)",
+        "0,28",
+        "COI/T.20/Doc. nº 34",
+        "≤ 0,80"
+      ],
+      [
+        "Indice de peroxyde (meq O₂/kg)",
+        "7,2",
+        "COI/T.20/Doc. nº 35",
+        "≤ 20,0"
+      ],
+      [
+        "Extinction K232",
+        "1,94",
+        "COI/T.20/Doc. nº 19",
+        "≤ 2,50"
+      ],
+      [
+        "Extinction K270",
+        "0,14",
+        "COI/T.20/Doc. nº 19",
+        "≤ 0,22"
+      ],
+      [
+        "Delta-K",
+        "0,00",
+        "COI/T.20/Doc. nº 19",
+        "≤ 0,01"
+      ],
+      [
+        "Polyphénols totaux (mg/kg)",
+        "412",
+        "COI/T.20/Doc. nº 29",
+        "non plafonné"
+      ],
+      [
+        "Teneur en cires (mg/kg)",
+        "98",
+        "COI/T.20/Doc. nº 28",
+        "≤ 150"
+      ],
+      [
+        "Médiane du défaut (organoleptique)",
+        "0,0",
+        "COI/T.20/Doc. nº 15",
+        "= 0"
+      ]
+    ],
+    "cta": "Télécharger le certificat d'analyse (PDF)",
+    "cta_file": "assets/doc/coa-tlm-25-114.pdf",
+    "cta_note": "Déposez le certificat signé à cet emplacement."
+  },
+  "logistics": {
+    "id": "logistique",
+    "title": "Conditionnement et logistique",
+    "lede": "Nous chargeons en vrac pour les embouteilleurs et en unités de vente pour les distributeurs. Les quantités ci-dessous correspondent à un conteneur 20 pieds.",
+    "head": [
+      "Format",
+      "Contenance",
+      "Unités / palette",
+      "Palettes / 20′",
+      "Net / conteneur"
+    ],
+    "rows": [
+      [
+        "Flexitank",
+        "22 000 l",
+        "—",
+        "1",
+        "22 000 l"
+      ],
+      [
+        "IBC inox",
+        "1 000 l",
+        "1",
+        "20",
+        "20 000 l"
+      ],
+      [
+        "Bidon fer-blanc",
+        "5 l",
+        "72",
+        "20",
+        "7 200 l"
+      ],
+      [
+        "Verre ambré",
+        "750 ml",
+        "480",
+        "20",
+        "7 200 l"
+      ],
+      [
+        "Verre ambré",
+        "500 ml",
+        "720",
+        "20",
+        "7 200 l"
+      ]
+    ],
+    "facts": [
+      {
+        "label": "Port de départ",
+        "value": "Ghazaouet, 40 km — Oran en alternative"
+      },
+      {
+        "label": "Incoterms",
+        "value": "EXW, FOB, CFR, CIF"
+      },
+      {
+        "label": "Commande minimum",
+        "value": "1 palette en verre, 1 conteneur en vrac"
+      },
+      {
+        "label": "Délai de chargement",
+        "value": "10 jours ouvrés après confirmation"
+      },
+      {
+        "label": "Marque propre",
+        "value": "À partir de 3 000 unités"
+      }
+    ]
+  },
+  "certs": {
+    "title": "Contrôles et certifications",
+    "items": [
+      {
+        "name": "ISO 22000:2018",
+        "body": "Management de la sécurité des denrées alimentaires, audité annuellement sur le site de Tlemcen."
+      },
+      {
+        "name": "HACCP",
+        "body": "Plan de maîtrise sanitaire couvrant la réception, le malaxage, l'extraction et le conditionnement."
+      },
+      {
+        "name": "Conseil oléicole international",
+        "body": "Méthodes d'analyse et classification selon le référentiel COI en vigueur."
+      },
+      {
+        "name": "Agriculture biologique (UE 2018/848)",
+        "body": "Conversion en cours sur deux parcelles de Beni Snous, certification attendue pour la campagne suivante."
+      }
+    ]
+  },
+  "rfq": {
+    "id": "cotation",
+    "title": "Demander une cotation",
+    "lede": "Dites-nous le format et le volume. Nous répondons sous 48 heures ouvrées avec un prix, un calendrier de chargement et un échantillon sur demande.",
+    "error_summary_title": "Corrigez ces champs pour envoyer la demande",
+    "required_note": "Les champs marqués d'un astérisque sont obligatoires.",
+    "submit": "Envoyer la demande",
+    "submitting": "Envoi en cours",
+    "success_title": "Demande reçue",
+    "success_body": "Nous revenons vers vous sous 48 heures ouvrées. Si votre besoin est urgent, appelez-nous directement aux heures d'ouverture.",
+    "fields": [
+      {
+        "name": "company",
+        "type": "text",
+        "label": "Société",
+        "required": true,
+        "autocomplete": "organization",
+        "error": "Indiquez le nom de votre société."
+      },
+      {
+        "name": "contact",
+        "type": "text",
+        "label": "Nom du contact",
+        "required": true,
+        "autocomplete": "name",
+        "error": "Indiquez votre nom."
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "label": "E-mail professionnel",
+        "required": true,
+        "autocomplete": "email",
+        "inputmode": "email",
+        "hint": "Nous n'envoyons aucune lettre d'information.",
+        "error": "Saisissez une adresse e-mail valide, par exemple achat@societe.com."
+      },
+      {
+        "name": "phone",
+        "type": "tel",
+        "label": "Téléphone",
+        "required": false,
+        "autocomplete": "tel",
+        "inputmode": "tel",
+        "hint": "Avec l'indicatif pays."
+      },
+      {
+        "name": "country",
+        "type": "text",
+        "label": "Pays de destination",
+        "required": true,
+        "autocomplete": "country-name",
+        "error": "Indiquez le pays de destination."
+      },
+      {
+        "name": "format",
+        "type": "select",
+        "label": "Format souhaité",
+        "required": true,
+        "error": "Choisissez un format.",
+        "options": [
+          "Vrac — flexitank 22 000 l",
+          "Vrac — IBC inox 1 000 l",
+          "Bidon fer-blanc 5 l",
+          "Verre ambré 750 ml",
+          "Verre ambré 500 ml",
+          "Marque propre"
+        ]
+      },
+      {
+        "name": "volume",
+        "type": "select",
+        "label": "Volume annuel estimé",
+        "required": true,
+        "error": "Choisissez un volume.",
+        "options": [
+          "Moins de 10 t",
+          "10 – 50 t",
+          "50 – 200 t",
+          "Plus de 200 t"
+        ]
+      },
+      {
+        "name": "incoterm",
+        "type": "select",
+        "label": "Incoterm souhaité",
+        "required": false,
+        "options": [
+          "FOB Ghazaouet",
+          "EXW Tlemcen",
+          "CFR",
+          "CIF",
+          "À définir"
+        ]
+      },
+      {
+        "name": "message",
+        "type": "textarea",
+        "label": "Précisions",
+        "required": false,
+        "hint": "Étiquetage, échéance, exigences de certification."
+      }
+    ]
+  },
+  "footer": {
+    "address_label": "Huilerie",
+    "address": [
+      "TLEMCENYA",
+      "Zone d'activité — TODO",
+      "Tlemcen 13000, Algérie"
+    ],
+    "phone_label": "Téléphone",
+    "phone": "+213 TODO",
+    "email_label": "Commerce export",
+    "email": "export@tlemcenya.dz",
+    "hours_label": "Heures d'ouverture",
+    "hours": "Dimanche – jeudi, 8 h – 17 h (UTC+1)",
+    "lang_label": "Langue",
+    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie."
+  }
+}

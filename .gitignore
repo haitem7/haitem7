@@ -1,0 +1,4 @@
+node_modules/
+.shot*.mjs
+.verify.mjs
+.rm.mjs

@@ -1,0 +1,29 @@
+{
+  "name": "tlemcenya-site",
+  "version": "1.0.0",
+  "description": "TLEMCENYA - static trilingual export site for an olive mill in Tlemcen, Algeria",
+  "scripts": {
+    "css": "tailwindcss -i src/site.css -o assets/css/site.css --minify",
+    "css:watch": "tailwindcss -i src/site.css -o assets/css/site.css --watch",
+    "html": "python3 build.py",
+    "build": "npm run css && npm run html",
+    "serve": "python3 -m http.server 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haitem7/haitem7.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haitem7/haitem7/issues"
+  },
+  "homepage": "https://github.com/haitem7/haitem7#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "playwright": "^1.63.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "private": true
+}
