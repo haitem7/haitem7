@@ -214,6 +214,42 @@ def variety(c: dict) -> str:
 </section>"""
 
 
+def products(c: dict) -> str:
+    p = c["products"]
+    sl = p["slot"]
+    rows = ""
+    for it in p["items"]:
+        price = it.get("price", "").strip()
+        # No invented prices: an empty field renders as a link to the
+        # quotation form, which is how B2B export pricing actually works.
+        value = (f'<span class="tnum">{e(price)}</span>' if price
+                 else f'<a href="#{e(c["rfq"]["id"])}">{e(p["price_pending"])}</a>')
+        rows += f"""<li class="product reveal">
+      <p class="product-head"><span class="product-name tnum">{e(it["size"])}</span>
+        <span class="product-size">{e(it["material"])}</span></p>
+      <p class="product-body">{e(it["body"])}</p>
+      <p class="product-price"><span>{e(p["price_label"])}</span> {value}</p>
+    </li>"""
+    return f"""<section class="band band-paper" id="{e(p["id"])}">
+  <div class="shell split">
+    <div class="split-text">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{e(p["title"])}</h2>
+        <p class="measure sec-lede">{e(p["lede"])}</p>
+      </div>
+      <ul class="products">{rows}</ul>
+      <p class="price-note reveal">{e(p["price_note"])}</p>
+    </div>
+    <figure class="split-media reveal">
+      <div class="slot" style="aspect-ratio: {e(sl["ratio"])}">
+        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 32vw, 92vw")}
+      </div>
+      <figcaption class="media-note">{e(sl["caption"])}</figcaption>
+    </figure>
+  </div>
+</section>"""
+
+
 def process(c: dict) -> str:
     p = c["process"]
     steps = ""
@@ -441,6 +477,7 @@ def page(c: dict, alts: list[dict]) -> str:
             '<main id="main">',
             hero(c),
             variety(c),
+            products(c),
             process(c),
             gallery(c),
             specs(c),

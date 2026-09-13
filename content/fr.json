@@ -16,6 +16,10 @@
       "label": "La variété"
     },
     {
+      "href": "#produits",
+      "label": "Produits"
+    },
+    {
       "href": "#procede",
       "label": "Le procédé"
     },
@@ -101,6 +105,52 @@
       "alt": "Deux mains cueillant des olives vertes sur la branche, un couffin en alfa rempli d'olives au premier plan",
       "caption": "Cueillette à la main, olives vertes",
       "ratio": "1200 / 1600"
+    }
+  },
+  "products": {
+    "id": "produits",
+    "title": "Nos produits",
+    "lede": "Une seule huile, cinq conditionnements. Même lot, même spécification : le format change, pas le contenu.",
+    "items": [
+      {
+        "size": "250 ml",
+        "material": "Verre",
+        "body": "Format dégustation et coffret.",
+        "price": ""
+      },
+      {
+        "size": "500 ml",
+        "material": "Verre",
+        "body": "Format cadeau, et l'échantillon avant commande.",
+        "price": ""
+      },
+      {
+        "size": "750 ml",
+        "material": "Verre",
+        "body": "Format table.",
+        "price": ""
+      },
+      {
+        "size": "1 litre",
+        "material": "PET",
+        "body": "Le format courant. Anse de portage intégrée, étiquette recto-verso avec tableau nutritionnel et code-barres.",
+        "price": ""
+      },
+      {
+        "size": "5 litres",
+        "material": "PET",
+        "body": "Format familial et restauration. Poignée moulée, bouchon à bague d'inviolabilité.",
+        "price": ""
+      }
+    ],
+    "price_label": "Prix",
+    "price_pending": "Sur demande",
+    "price_note": "Le prix dépend du volume, de l'Incoterm et de la campagne. Nous le donnons dans la cotation, sous 48 heures ouvrées.",
+    "slot": {
+      "file": "assets/img/bottles-1l.jpg",
+      "ratio": "900 / 1174",
+      "alt": "Trois bouteilles PET d'un litre d'huile d'olive TLEMCENYA vierge extra, vues de face et de dos",
+      "caption": "Format 1 litre, PET alimentaire"
     }
   },
   "process": {
@@ -249,6 +299,13 @@
         "20 000 l"
       ],
       [
+        "Bidon PET",
+        "5 l",
+        "144",
+        "20",
+        "14 400 l"
+      ],
+      [
         "Bouteille PET",
         "1 l",
         "720",
@@ -256,25 +313,25 @@
         "14 400 l"
       ],
       [
-        "Bidon fer-blanc",
-        "5 l",
-        "72",
-        "20",
-        "7 200 l"
-      ],
-      [
-        "Verre ambré",
+        "Verre",
         "750 ml",
-        "480",
+        "960",
         "20",
-        "7 200 l"
+        "14 400 l"
       ],
       [
-        "Verre ambré",
+        "Verre",
         "500 ml",
-        "720",
+        "1 344",
         "20",
-        "7 200 l"
+        "13 440 l"
+      ],
+      [
+        "Verre",
+        "250 ml",
+        "2 160",
+        "20",
+        "10 800 l"
       ]
     ],
     "facts": [

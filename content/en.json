@@ -16,6 +16,10 @@
       "label": "The variety"
     },
     {
+      "href": "#products",
+      "label": "Products"
+    },
+    {
       "href": "#process",
       "label": "The process"
     },
@@ -101,6 +105,52 @@
       "alt": "Two hands picking green olives from the branch, a woven esparto basket of olives in the foreground",
       "caption": "Hand picking, green olives",
       "ratio": "1200 / 1600"
+    }
+  },
+  "products": {
+    "id": "products",
+    "title": "Our products",
+    "lede": "One oil, five packs. Same lot, same specification: the format changes, the contents do not.",
+    "items": [
+      {
+        "size": "250 ml",
+        "material": "Glass",
+        "body": "Tasting and gift-box format.",
+        "price": ""
+      },
+      {
+        "size": "500 ml",
+        "material": "Glass",
+        "body": "Gift format, and the sample before an order.",
+        "price": ""
+      },
+      {
+        "size": "750 ml",
+        "material": "Glass",
+        "body": "Table format.",
+        "price": ""
+      },
+      {
+        "size": "1 litre",
+        "material": "PET",
+        "body": "The everyday format. Moulded carry loop, front and back labels with nutrition panel and barcode.",
+        "price": ""
+      },
+      {
+        "size": "5 litres",
+        "material": "PET",
+        "body": "Family and catering format. Moulded handle, tamper-evident cap.",
+        "price": ""
+      }
+    ],
+    "price_label": "Price",
+    "price_pending": "On request",
+    "price_note": "Price depends on volume, Incoterm and the campaign. We give it in the quotation, within 48 working hours.",
+    "slot": {
+      "file": "../assets/img/bottles-1l.jpg",
+      "ratio": "900 / 1174",
+      "alt": "Three one-litre PET bottles of TLEMCENYA extra virgin olive oil, front and back",
+      "caption": "One-litre format, food-grade PET"
     }
   },
   "process": {
@@ -249,6 +299,13 @@
         "20,000 l"
       ],
       [
+        "PET jerrycan",
+        "5 l",
+        "144",
+        "20",
+        "14,400 l"
+      ],
+      [
         "PET bottle",
         "1 l",
         "720",
@@ -256,25 +313,25 @@
         "14,400 l"
       ],
       [
-        "Tin can",
-        "5 l",
-        "72",
-        "20",
-        "7,200 l"
-      ],
-      [
-        "Amber glass",
+        "Glass",
         "750 ml",
-        "480",
+        "960",
         "20",
-        "7,200 l"
+        "14,400 l"
       ],
       [
-        "Amber glass",
+        "Glass",
         "500 ml",
-        "720",
+        "1,344",
         "20",
-        "7,200 l"
+        "13,440 l"
+      ],
+      [
+        "Glass",
+        "250 ml",
+        "2,160",
+        "20",
+        "10,800 l"
       ]
     ],
     "facts": [

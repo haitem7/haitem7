@@ -34,6 +34,8 @@ about a food product.
 | `process.steps[].tag` | ≤ 6 h to mill, 26 °C max, 16 °C storage, tank volumes |
 | `specs.rows` | Now shows only the published IOC limits, which are real. Measured values are promised on the certificate of analysis instead. |
 
+| `products.items[].price` | **Empty on purpose.** No price is invented. An empty field renders as "On request" linking to the quotation form. Fill in only with real numbers, and say on what basis — currency, Incoterm, volume band. |
+| `products.items[].material` | Glass for 250/500/750 ml is assumed, not confirmed. Only the 1 L PET and the 5 L PET jerrycan are visible in the supplied photographs. |
 | `logistics.rows` | Units per pallet, pallets per container, net volumes — including the 1 L PET row (720/pallet is a realistic estimate, not your figure) |
 | `logistics.facts` | Lead time, minimum order, private-label threshold |
 | `certs.items` | **ISO 22000, HACCP, IOC and organic status** — only claim what you hold |
