@@ -305,13 +305,7 @@
         "label": "Marque propre",
         "value": "À partir de 3 000 unités"
       }
-    ],
-    "slot": {
-      "file": "assets/img/bottles-1l.jpg",
-      "ratio": "900 / 1174",
-      "alt": "Trois bouteilles PET d'un litre d'huile d'olive TLEMCENYA vierge extra, vues de face et de dos",
-      "caption": "Format 1 litre, PET alimentaire"
-    }
+    ]
   },
   "certs": {
     "title": "Contrôles et certifications",
