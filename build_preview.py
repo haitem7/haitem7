@@ -51,6 +51,11 @@ for loc in ("en", "ar"):
 for f in ("assets/css/site.css", "assets/js/site.js", "assets/img/favicon.svg"):
     shutil.copy(ROOT / f, OUT / f)
 
+# Video files placed in preview/assets/video by hand are kept, not wiped.
+_keep = ROOT / ".preview-video"
+if _keep.is_dir():
+    shutil.copytree(_keep, OUT / "assets" / "video", dirs_exist_ok=True)
+
 for p in sorted(OUT.rglob("*")):
     if p.is_file():
         print(f"  {p.relative_to(OUT)}  ({p.stat().st_size:,} B)")

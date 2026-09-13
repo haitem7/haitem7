@@ -48,8 +48,10 @@
     --shell: 78rem;
   }
 
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within { scroll-behavior: smooth; }
+  }
 
   body {
     background: var(--color-stone);
@@ -59,7 +61,6 @@
     font-weight: 350;
     line-height: 1.6;
     font-feature-settings: "kern" 1, "liga" 1;
-    overflow-x: hidden;
   }
 
   /* Arabic: Reem Kufi for display, Plex Arabic for text. */

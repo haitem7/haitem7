@@ -3,3 +3,4 @@ node_modules/
 .verify.mjs
 .rm.mjs
 preview/
+.preview-video/
