@@ -47,3 +47,9 @@ Un fichier committé reste dans l'historique du dépôt pour toujours, même
 supprimé ensuite. En dessous de 5 Mo, ce n'est pas un problème. Au-delà,
 mieux vaut héberger la vidéo ailleurs (Cloudflare R2, Bunny, S3) et ne
 garder ici que le poster.
+
+## Fichiers présents
+
+| Fichier | État |
+|---|---|
+| `iron1-watermarked.mp4` | **Non utilisable en production.** Filigrane `tryveo3.ai` incrusté sur les 8 secondes, export en palier gratuit, licence commerciale non acquise. Conservé comme référence de direction artistique : macro d'huile qui coule, contre-jour, fond sombre. 1280×720, piste audio inutile. |
