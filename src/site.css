@@ -605,7 +605,7 @@
   .req { color: var(--color-amber); }
 
   .rfq-form .field label { color: var(--color-stone); }
-  .rfq-form .field .hint { color: color-mix(in oklab, var(--color-stone) 65%, transparent); }
+  .rfq-form .field .hint { color: color-mix(in oklab, var(--color-stone) 82%, transparent); }
   .rfq-form .field .err { color: #f0a79a; }
   .rfq-form .field[data-invalid="true"] input,
   .rfq-form .field[data-invalid="true"] select,
