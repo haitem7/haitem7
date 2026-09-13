@@ -44,7 +44,7 @@
       "Sigoise olives,",
       "extracted cold"
     ],
-    "lede": "We press fruit from the Beni Snous hillsides within six hours of picking, and never above 27 °C. What leaves the decanter goes into stainless tanks the same day.",
+    "lede": "We press fruit from the Oued Lakhdar hillsides within six hours of picking, and never above 27 °C. What leaves the decanter goes into stainless tanks the same day.",
     "cta_primary": "Request a quotation",
     "cta_secondary": "Read the specification",
     "data": [
@@ -212,6 +212,10 @@
         "alt": "Pallets of tins loaded into a shipping container",
         "caption": "Loading, outbound Ghazaouet"
       }
+    ],
+    "body": [
+      "We show the room as it is, unstaged. A buyer committing to a container has a right to see where the oil is made, and a well-kept room reads more convincingly in an ordinary photograph than in a studio shot.",
+      "Oil at the decanter outlet, before filtering: that dense, cloudy green is what an olive pressed on the day it was picked gives."
     ]
   },
   "specs": {
@@ -374,7 +378,7 @@
       },
       {
         "name": "Organic (EU 2018/848)",
-        "body": "Conversion under way on two Beni Snous parcels; certification expected for the next campaign."
+        "body": "Conversion under way on two Oued Lakhdar parcels; certification expected for the next campaign."
       }
     ]
   },

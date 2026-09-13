@@ -295,6 +295,7 @@ def gallery(c: dict) -> str:
                if (ROOT / sh["file"].replace("../", "")).exists()]
     if not present:
         return ""
+    body = "".join(f'<p class="measure sec-lede">{e(t)}</p>' for t in g.get("body", []))
     shots = ""
     for i, sh in enumerate(present):
         shots += f"""<figure class="shot reveal">
@@ -305,7 +306,10 @@ def gallery(c: dict) -> str:
 </figure>"""
     return f"""<section class="band band-stone gal gal-{len(present)}">
   <div class="shell gal-inner">
-    <h2 class="display sec-title reveal">{e(g["title"])}</h2>
+    <div class="gal-text reveal">
+      <h2 class="display sec-title">{e(g["title"])}</h2>
+      {body}
+    </div>
     <div class="shots shots-{len(present)}">{shots}</div>
   </div>
 </section>"""

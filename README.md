@@ -30,6 +30,7 @@ about a food product.
 
 | Where | What to replace |
 |---|---|
+| `gallery.body` | "before filtering" describes what the photograph appears to show; confirm it matches your actual process |
 | `variety.facts` | Yield 18–22%, elevation 420–760 m, 180 trees/ha, 45-year-old trees |
 | `process.steps[].tag` | ≤ 6 h to mill, 26 °C max, 16 °C storage, tank volumes |
 | `specs.rows` | Now shows only the published IOC limits, which are real. Measured values are promised on the certificate of analysis instead. |

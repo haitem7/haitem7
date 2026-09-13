@@ -44,7 +44,7 @@
       "La Sigoise,",
       "pressée à froid"
     ],
-    "lede": "Nous pressons les olives des coteaux de Beni Snous dans les six heures qui suivent la cueillette, sans jamais dépasser 27 °C. Ce qui sort du décanteur part en cuve inox le jour même.",
+    "lede": "Nous pressons les olives des coteaux d'Oued Lakhdar dans les six heures qui suivent la cueillette, sans jamais dépasser 27 °C. Ce qui sort du décanteur part en cuve inox le jour même.",
     "cta_primary": "Demander une cotation",
     "cta_secondary": "Voir la spécification",
     "data": [
@@ -212,6 +212,10 @@
         "alt": "Palettes de bidons chargées dans un conteneur maritime",
         "caption": "Chargement, départ Ghazaouet"
       }
+    ],
+    "body": [
+      "Nous montrons l'atelier tel qu'il est, sans mise en scène. Un acheteur qui engage un conteneur a le droit de voir où son huile est produite, et une salle bien tenue se reconnaît mieux sur une photo ordinaire que sur une image de studio.",
+      "L'huile à la sortie du décanteur, avant filtration : ce vert dense et trouble est celui d'une olive pressée le jour de sa cueillette."
     ]
   },
   "specs": {
@@ -374,7 +378,7 @@
       },
       {
         "name": "Agriculture biologique (UE 2018/848)",
-        "body": "Conversion en cours sur deux parcelles de Beni Snous, certification attendue pour la campagne suivante."
+        "body": "Conversion en cours sur deux parcelles d'Oued Lakhdar, certification attendue pour la campagne suivante."
       }
     ]
   },
