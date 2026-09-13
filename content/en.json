@@ -64,7 +64,12 @@
         "label": "Shipping",
         "value": "FOB Ghazaouet"
       }
-    ]
+    ],
+    "video": {
+      "file": "../assets/video/hero.mp4",
+      "webm": "../assets/video/hero.webm",
+      "poster": "../assets/video/hero-poster.jpg"
+    }
   },
   "variety": {
     "id": "variety",

@@ -143,8 +143,24 @@ def header(c: dict, assets: str, alts: list[dict]) -> str:
 def hero(c: dict) -> str:
     h = c["hero"]
     lines = "".join(f"<span>{e(l)}</span>" for l in h["title_lines"])
+
+    # Optional. data-src, not src: nothing is fetched until site.js decides
+    # the viewport, the connection and the motion preference all allow it.
+    v = h.get("video")
+    video = ""
+    if v and v.get("file"):
+        webm = ""
+        if v.get("webm") and (ROOT / v["webm"].lstrip("./").replace("../", "")).exists():
+            webm = f'<source data-src="{e(v["webm"])}" type="video/webm">' 
+        video = (
+            f'<video class="hero-video" data-hero-video aria-hidden="true" tabindex="-1" '
+            f'muted loop playsinline preload="none" poster="{e(v.get("poster", ""))}">'
+            f'{webm}<source data-src="{e(v["file"])}" type="video/mp4"></video>'
+        )
+
     return f"""<section class="hero on-dark grain" data-oil>
   <div class="oil-field" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  {video}
   <div class="shell hero-inner">
     <h1 class="display hero-title">{lines}</h1>
     <p class="hero-lede measure">{e(h["lede"])}</p>

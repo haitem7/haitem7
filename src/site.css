@@ -172,6 +172,12 @@
     position: absolute; inset: 0; z-index: 1;
     pointer-events: none;
     background:
+      /* Protects the header: without it the nav loses contrast over a
+         bright frame of the optional hero video. */
+      linear-gradient(to bottom,
+        rgba(21, 26, 16, 0.82) 0%,
+        rgba(21, 26, 16, 0.35) 12%,
+        transparent 24%),
       linear-gradient(to top,
         rgba(21, 26, 16, 0.97) 0%,
         rgba(21, 26, 16, 0.88) 34%,
@@ -597,4 +603,23 @@
     .shots .shot:nth-child(2) { margin-block-start: clamp(2rem, 5vw, 4.5rem); }
   }
   .shot { margin: 0; }
+}
+
+@layer components {
+  /* Optional video layer. It sits over the CSS oil field and under the
+     scrim, so a video that never loads leaves the hero exactly as it was
+     rather than leaving a hole. */
+  .hero-video {
+    position: absolute; inset: 0;
+    z-index: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1200ms var(--ease-oil);
+    pointer-events: none;
+  }
+  .hero-video.is-playing { opacity: 0.9; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; }
+  }
 }

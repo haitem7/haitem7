@@ -32,6 +32,40 @@
   }
 
   /* ---------------------------------------------------------------- *
+   * Optional hero video.
+   * Opt-in, never opt-out: the file is fetched only when the viewport is
+   * wide enough to justify it, the visitor has not asked for reduced
+   * motion, and the connection is not metered or slow. If any of that
+   * fails -- or the file is missing -- the CSS oil field simply stays.
+   * ---------------------------------------------------------------- */
+  var video = document.querySelector('[data-hero-video]');
+  if (video) {
+    var conn = navigator.connection || {};
+    var slow = conn.saveData === true ||
+               /(^|-)2g$/.test(conn.effectiveType || '') ||
+               conn.effectiveType === 'slow-2g';
+    var wide = window.matchMedia('(min-width: 62rem)').matches;
+
+    if (wide && !slow && !reduced.matches) {
+      video.querySelectorAll('source[data-src]').forEach(function (src) {
+        src.src = src.getAttribute('data-src');
+      });
+      video.load();
+      video.addEventListener('playing', function () {
+        video.classList.add('is-playing');
+      }, { once: true });
+      // Only the element's own error means every source failed. Listening
+      // in the capture phase would also catch a single <source> 404 -- a
+      // missing optional webm would then take the working mp4 down with it.
+      video.addEventListener('error', function () { video.remove(); });
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { video.remove(); });
+    } else {
+      video.remove();
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
    * Header state. Solid once the hero has scrolled past the bar.
    * ---------------------------------------------------------------- */
   var head = document.querySelector('[data-head]');
