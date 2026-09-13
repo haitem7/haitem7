@@ -73,7 +73,7 @@ no broken-image icon.
 | Path | Ratio | Suggested export | Subject |
 |---|---|---|---|
 | `assets/img/bottles-1l.jpg` | 900 × 1174 | **done** — cropped from the supplied packshot, `.webp` alongside | 1 L PET bottles, packaging section |
-| `assets/img/grove-beni-snous.jpg` | 4:5 portrait | 900 × 1125, ~180 KB | Terraced grove, Beni Snous |
+| `assets/img/oil-extraction.jpg` | 900 × 1126 | **in place** — 4:5 crop of the oil clip, `.webp` alongside | Oil pouring, "Why Sigoise" section. Replace with a real grove photograph when one exists. |
 | `assets/img/mill-floor.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Milling / malaxation line |
 | `assets/img/tanks.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Stainless storage tanks |
 | `assets/img/loading.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Pallets going into a container |
