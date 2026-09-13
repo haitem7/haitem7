@@ -12,6 +12,7 @@ from __future__ import annotations
 import html
 import json
 import re
+from urllib.parse import quote
 import pathlib
 
 ROOT = pathlib.Path(__file__).parent
@@ -418,6 +419,45 @@ def field(f: dict, lang: str) -> str:
 </div>"""
 
 
+def location(c: dict) -> str:
+    L = c["location"]
+    f = c["footer"]
+    addr_lines = [x for x in f["address"] if "TODO" not in x]
+    addr = "<br>".join(e(x) for x in addr_lines)
+
+    # Real coordinates or nothing: a pin in the wrong place sends a buyer
+    # to the wrong door, which is worse than no map. With the field empty
+    # the buttons search for the address instead of dropping a pin.
+    gps = L.get("gps", "").strip()
+    query = gps if gps else ", ".join(addr_lines)
+    maps = "https://www.google.com/maps/search/?api=1&query=" + quote(query)
+    waze = ("https://waze.com/ul?ll=" + quote(gps) + "&navigate=yes") if gps \
+        else "https://waze.com/ul?q=" + quote(query)
+    gps_value = (f'<span class="tnum" dir="ltr">{e(gps)}</span>' if gps
+                 else f'<span class="pending">{e(L["gps_pending"])}</span>')
+
+    return f"""<section class="band band-paper" id="{e(L["id"])}">
+  <div class="shell split">
+    <div class="split-text">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{e(L["title"])}</h2>
+        <p class="measure sec-lede">{e(L["lede"])}</p>
+      </div>
+      <dl class="datagrid loc-grid reveal">
+        <div><dt>{e(L["address_label"])}</dt><dd><address class="foot-addr">{addr}</address></dd></div>
+        <div><dt>{e(L["gps_label"])}</dt><dd>{gps_value}</dd></div>
+      </dl>
+      {datagrid(L["facts"], "loc-facts", c["lang"])}
+      <p class="loc-note reveal">{e(L["note"])}</p>
+    </div>
+    <div class="loc-actions reveal">
+      <a class="btn btn-quiet" href="{e(maps)}" target="_blank" rel="noopener">{e(L["maps"])}</a>
+      <a class="btn btn-quiet" href="{e(waze)}" target="_blank" rel="noopener">{e(L["waze"])}</a>
+    </div>
+  </div>
+</section>"""
+
+
 def rfq(c: dict) -> str:
     r = c["rfq"]
     fields = "".join(field(f, c["lang"]) for f in r["fields"])
@@ -497,6 +537,7 @@ def page(c: dict, alts: list[dict]) -> str:
             specs(c),
             logistics(c),
             certs(c),
+            location(c),
             rfq(c),
             "</main>",
             footer(c, alts),

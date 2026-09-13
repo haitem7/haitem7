@@ -40,7 +40,8 @@ about a food product.
 | `logistics.rows` | Units per pallet, pallets per container, net volumes — including the 1 L PET row (720/pallet is a realistic estimate, not your figure) |
 | `logistics.facts` | Lead time, minimum order, private-label threshold |
 | `certs.items` | **ISO 22000, HACCP, IOC and organic status** — only claim what you hold |
-| `footer` | Address, phone (`+213 TODO`), email |
+| `footer` | Phone (`+213 TODO`) and email. The street address (N7, Tlemcen 13000) was supplied by the client. |
+| `location.gps` | `34.8708962, -1.1253134` — supplied by the client. Not invented; verify once on the ground that the pin lands on the mill gate, not the road centre line. |
 | `assets/video/hero.mp4` | Carries a `tryveo3.ai` watermark, bottom right. The hero scrim dims it heavily but it is still there. |
 
 The COI/IOC method references and the extra-virgin limits in the right-hand

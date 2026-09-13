@@ -32,6 +32,10 @@
       "label": "Logistics"
     },
     {
+      "href": "#visit",
+      "label": "Visit"
+    },
+    {
       "href": "#quote",
       "label": "Get a quote"
     }
@@ -382,6 +386,32 @@
       }
     ]
   },
+  "location": {
+    "id": "visit",
+    "title": "Find us",
+    "lede": "The mill is in Tlemcen, in western Algeria. The usual port of loading is Ghazaouet, with Oran as the alternative.",
+    "address_label": "Address",
+    "gps_label": "GPS coordinates",
+    "gps": "34.8708962, -1.1253134",
+    "gps_pending": "To be confirmed",
+    "facts": [
+      {
+        "label": "Port of loading",
+        "value": "Ghazaouet"
+      },
+      {
+        "label": "Alternate port",
+        "value": "Oran"
+      },
+      {
+        "label": "Airport",
+        "value": "Zenata – Messali El Hadj (TLM)"
+      }
+    ],
+    "maps": "Open in Google Maps",
+    "waze": "Open in Waze",
+    "note": "Mill visits and buyer audits: ask through the quotation form and we will arrange the appointment."
+  },
   "rfq": {
     "id": "quote",
     "title": "Request a quotation",
@@ -490,7 +520,7 @@
     "address_label": "Mill",
     "address": [
       "TLEMCENYA",
-      "Industrial zone — TODO",
+      "National road N7",
       "Tlemcen 13000, Algeria"
     ],
     "phone_label": "Phone",

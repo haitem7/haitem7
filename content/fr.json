@@ -32,6 +32,10 @@
       "label": "Logistique"
     },
     {
+      "href": "#acces",
+      "label": "Accès"
+    },
+    {
       "href": "#cotation",
       "label": "Cotation"
     }
@@ -382,6 +386,32 @@
       }
     ]
   },
+  "location": {
+    "id": "acces",
+    "title": "Nous trouver",
+    "lede": "L'huilerie est à Tlemcen, dans l'ouest algérien. Le port de départ habituel est Ghazaouet ; Oran sert d'alternative.",
+    "address_label": "Adresse",
+    "gps_label": "Coordonnées GPS",
+    "gps": "34.8708962, -1.1253134",
+    "gps_pending": "À confirmer",
+    "facts": [
+      {
+        "label": "Port de départ",
+        "value": "Ghazaouet"
+      },
+      {
+        "label": "Port alternatif",
+        "value": "Oran"
+      },
+      {
+        "label": "Aéroport",
+        "value": "Zenata – Messali El Hadj (TLM)"
+      }
+    ],
+    "maps": "Ouvrir dans Google Maps",
+    "waze": "Ouvrir dans Waze",
+    "note": "Visite de l'huilerie et audit acheteur : passez par la demande de cotation, nous organisons le rendez-vous."
+  },
   "rfq": {
     "id": "cotation",
     "title": "Demander une cotation",
@@ -490,7 +520,7 @@
     "address_label": "Huilerie",
     "address": [
       "TLEMCENYA",
-      "Zone d'activité — TODO",
+      "Route nationale N7",
       "Tlemcen 13000, Algérie"
     ],
     "phone_label": "Téléphone",
