@@ -144,8 +144,10 @@ Update the domain in `sitemap.xml` and `robots.txt` before launch.
 | `assets/css/site.css` | ~12.7 KB |
 | `assets/js/site.js` | ~2.9 KB |
 
-Plus Google Fonts (Fraunces, IBM Plex Sans, IBM Plex Sans Arabic, Reem
-Kufi). To cut the third-party request and speed up first paint, self-host
+Plus Google Fonts (Fraunces, Geist, IBM Plex Sans Arabic, Reem Kufi).
+The stylesheet is loaded non-blocking, so the page paints in the fallback
+stack immediately and swaps when the webfonts arrive; with the font host
+unreachable, first paint is 208 ms rather than 12.7 s. To cut the third-party request and speed up first paint, self-host
 them: download the woff2 files into `assets/fonts/`, replace the
 `<link>` in `build.py` with local `@font-face` rules, and keep
 `font-display: swap`.
@@ -163,6 +165,16 @@ them: download the woff2 files into `assets/fonts/`, replace the
   of the wrong language, indexable per language, works with JS off.
 - **`prefers-reduced-motion`** stops the oil field, the reveals and the
   process rail, and renders every section in its final state.
+- **Geist carries no Arabic**, so the Arabic pages are pinned to IBM Plex
+  Sans Arabic rather than falling through to whatever the device has.
+- **Three layouts, not one that shrinks.** Phone (< 768px): the hero data
+  reads down as label-against-value, actions span the column, tables carry
+  a fade that shows they scroll. Tablet (768-1088px): the full navigation
+  on a row of its own, two-column splits a breakpoint earlier, no
+  hamburger. Desktop (1088px+): the navigation returns to one row.
+- **Text does not travel on entrance.** A staggered fade-and-slide-up on
+  every block is the default of every scroll library; only the
+  photographs animate, wiping up from their bottom edge.
 - **Logical CSS properties throughout** (`inset-inline-start`,
   `padding-inline`, `border-block-end`) — Arabic mirrors from the same
   stylesheet with no RTL override file.

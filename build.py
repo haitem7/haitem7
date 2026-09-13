@@ -122,8 +122,8 @@ def head_tag(c: dict, assets: str, alts: list[dict]) -> str:
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all'"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=IBM+Plex+Sans:wght@300;400;450;600&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=IBM+Plex+Sans:wght@300;400;450;600&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap"></noscript>
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Geist:wght@300..700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Geist:wght@300..700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap"></noscript>
 <link rel="icon" href="{assets}img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{assets}css/site.css">"""
 

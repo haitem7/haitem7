@@ -23,7 +23,7 @@
   --color-danger:   #8f2c1c;
 
   --font-display: "Fraunces", "Reem Kufi", Georgia, serif;
-  --font-body:    "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-body:    "Geist", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   /* Type scale: 1.25 (major third), clamped for fluid display sizes.   */
   --text-micro:  0.75rem;
@@ -64,7 +64,12 @@
   }
 
   /* Arabic: Reem Kufi for display, Plex Arabic for text. */
-  [lang="ar"] body { font-weight: 400; line-height: 1.85; }
+  /* Geist carries no Arabic, so the Arabic pages stay on Plex Arabic
+     rather than falling through to whatever the device supplies. */
+  [lang="ar"] body {
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-weight: 400; line-height: 1.85;
+  }
   [lang="ar"] .display { font-family: "Reem Kufi", var(--font-display); font-weight: 600; }
 
   .display {
@@ -105,6 +110,9 @@
 
   /* Fixed header must never cover an anchored heading. */
   section[id] { scroll-margin-block-start: 5.5rem; }
+  @media (min-width: 48rem) and (max-width: 67.99rem) {
+    section[id] { scroll-margin-block-start: 7.5rem; }
+  }
 
   .shell {
     width: 100%;
@@ -245,12 +253,22 @@
    * One mechanism for every entrance. Native scroll-driven animation
    * where the browser has it; IntersectionObserver adds .seen elsewhere.
    * -------------------------------------------------------------- */
-  .reveal { opacity: 0; transform: translateY(14px); }
+  /* Text does not travel. A fade-and-slide-up on every block, staggered
+     by sibling index, is the default entrance of every scroll library
+     ever shipped; it reads as template, and it delays reading for no
+     gain. Text simply resolves. */
+  .reveal { opacity: 0; }
   .reveal.seen,
-  .no-js .reveal { opacity: 1; transform: none; transition: opacity 620ms var(--ease-oil), transform 620ms var(--ease-oil); }
-  .reveal.seen:nth-child(2) { transition-delay: 70ms; }
-  .reveal.seen:nth-child(3) { transition-delay: 140ms; }
-  .reveal.seen:nth-child(4) { transition-delay: 210ms; }
+  .no-js .reveal { opacity: 1; transition: opacity 520ms var(--ease-oil); }
+
+  /* The one crafted entrance on the page belongs to the photographs: a
+     wipe up from the bottom edge, the way an image comes up in a tray.
+     It is a mask, so nothing moves and nothing reflows. */
+  .reveal .slot { clip-path: inset(0 0 100% 0); }
+  .reveal.seen .slot {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 950ms var(--ease-oil);
+  }
 
   /* Process rail: scrubs with scroll where supported, static otherwise. */
   .rail-fill { transform-origin: top; transform: scaleY(var(--rail, 0)); }
@@ -381,6 +399,7 @@
   .oil-field { opacity: 1 !important; transition: none; }
   .oil-field span { animation: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  .reveal .slot, .reveal.seen .slot { clip-path: none !important; transition: none !important; }
   .rail-fill { animation: none !important; transform: scaleY(1); }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
@@ -447,13 +466,14 @@
   }
   .nav-panel { display: none; }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 68rem) {
     .nav-toggle { display: none; }
-    .nav-panel { display: flex; align-items: center; gap: 2rem; }
-    .navlist { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
+    .nav-panel { display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2rem); }
+    .navlist { display: flex; gap: clamp(0.85rem, 1.6vw, 1.6rem); list-style: none; margin: 0; padding: 0; }
     .navlink {
       display: inline-flex; align-items: center;
       min-height: 2.75rem;
+      white-space: nowrap;   /* "La variété" split across two lines at 1088px */
       font-size: var(--text-fine); color: var(--color-stone);
       border-block-end: 1px solid transparent;
       transition: border-color 180ms var(--ease-oil), color 180ms var(--ease-oil);
@@ -467,7 +487,7 @@
   }
 
   /* Mobile panel: open via the toggle; always visible when JS is absent. */
-  @media (max-width: 61.99rem) {
+  @media (max-width: 47.99rem) {
     .nav-panel[data-open], .no-js .nav-panel {
       display: grid; gap: 1.25rem;
       position: absolute; inset-inline: 0; inset-block-start: 100%;
@@ -765,4 +785,104 @@
   .gal-text .sec-title { margin-block-end: 1rem; }
   .gal-text p + p { margin-block-start: 1rem; }
   .gal-text p:last-child { margin-block-end: 0; }
+}
+
+/* ================================================================== *
+ * Phone and tablet
+ * Android phones sit at 360-412 CSS px and tablets at 800-1280. Those
+ * are layout decisions, not a narrower desktop: below, the hero data
+ * becomes a read-down list, the tables gain a scroll affordance, and
+ * tablets get the full navigation they have room for.
+ * ================================================================== */
+@layer components {
+
+  /* ---- Phone ------------------------------------------------------ */
+  @media (max-width: 47.99rem) {
+    /* Five figures in two columns is a squeezed desktop grid. On a phone
+       they read down, label against value, the way a spec sheet does. */
+    .hero-data { grid-template-columns: 1fr; }
+    .hero-data > div {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1rem;
+      padding-block: 0.7rem;
+    }
+    .hero-data dt { font-size: var(--text-fine); opacity: 0.68; }
+    .hero-data dd { font-size: var(--text-base); margin: 0; text-align: end; }
+
+    .facts-grid, .lot-grid { grid-template-columns: 1fr; }
+    .facts-grid > div, .lot-grid > div {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    }
+    .facts-grid dd, .lot-grid dd { margin: 0; text-align: end; }
+
+    /* A table that scrolls must look like it scrolls. */
+    .scroll-x {
+      -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+              mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+    }
+    .scroll-x:has(table:only-child) { padding-inline-end: 0.5rem; }
+
+    /* Thumb reach: the primary action spans the column instead of
+       sitting at text width in the middle of the screen. */
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { justify-content: center; }
+
+    .product-head { flex-wrap: wrap; }
+    .steps { gap: 2.25rem; }
+  }
+
+  /* ---- Tablet ----------------------------------------------------- */
+  @media (min-width: 48rem) and (max-width: 67.99rem) {
+    /* A tablet has room for the whole navigation; hiding it behind a
+       hamburger here is a phone decision applied to a device that is
+       not a phone. */
+    .nav-toggle { display: none; }
+    /* Six links, three languages and the wordmark do not share one row at
+       800px: the labels wrapped mid-word. The navigation takes a row of
+       its own instead, which is a tablet header rather than a squeezed
+       desktop one. */
+    .head-row { flex-wrap: wrap; row-gap: 0.35rem; }
+    .brand { flex: 1 0 auto; }
+    .nav-panel {
+      flex-basis: 100%;
+      display: flex; align-items: center; gap: 1.25rem;
+      justify-content: space-between;
+    }
+    .navlist { flex: 0 1 auto; }
+    .navlink { white-space: nowrap; }
+    .navlist { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+    .navlink {
+      display: inline-flex; align-items: center; min-height: 2.75rem;
+      font-size: var(--text-micro); color: var(--color-stone);
+    }
+    .langnav ul { display: flex; gap: 0.6rem; list-style: none; margin: 0; padding: 0; }
+    .langnav a { font-size: var(--text-micro); color: color-mix(in oklab, var(--color-stone) 78%, transparent); }
+    .langnav a[aria-current] { color: var(--color-amber); }
+    .head-cta { display: none; }  /* the hero's own call sits right below */
+
+    /* Two columns arrive a breakpoint earlier: 768px carries them. */
+    .split, .logi-split, .gal-1 .gal-inner {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+    .shots-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .certs { grid-template-columns: 1fr 1fr; }
+  }
+}
+
+@layer components {
+  /* WCAG 2.2 target size (minimum): a standalone pointer target clears
+     24×24 CSS px. These four were between 14 and 21px tall — small
+     enough to miss on a phone, and the language switcher is the one
+     control an Arabic-speaking buyer reaches for first. */
+  .langnav a,
+  .foot-langs a,
+  .site-foot address ~ p a,
+  .site-foot p a,
+  .product-price a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+  }
+  .langnav a { padding-inline: 0.15rem; }
 }
