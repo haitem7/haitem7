@@ -285,11 +285,23 @@ def specs(c: dict) -> str:
 
 def logistics(c: dict) -> str:
     l = c["logistics"]
+    sl = l.get("slot")
+    media = ""
+    if sl:
+        media = f"""<figure class="split-media reveal">
+      <div class="slot" style="aspect-ratio: {e(sl["ratio"])}">
+        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 30vw, 92vw")}
+      </div>
+      <figcaption class="media-note">{e(sl["caption"])}</figcaption>
+    </figure>"""
     return f"""<section class="band band-stone" id="{e(l["id"])}">
   <div class="shell">
-    <div class="sec-head reveal">
-      <h2 class="display sec-title">{e(l["title"])}</h2>
-      <p class="measure sec-lede">{e(l["lede"])}</p>
+    <div class="split logi-split">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{e(l["title"])}</h2>
+        <p class="measure sec-lede">{e(l["lede"])}</p>
+      </div>
+      {media}
     </div>
     <div class="reveal">{table(l["head"], l["rows"], "", c["lang"])}</div>
     <div class="reveal">{datagrid(l["facts"], "logi-grid", c["lang"])}</div>

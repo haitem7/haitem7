@@ -675,3 +675,14 @@
     .hero-video { display: none; }
   }
 }
+
+@layer components {
+  /* Packaging section: the product shot sits beside the introduction,
+     and the format table runs full width underneath it. */
+  .logi-split { margin-block-end: clamp(2.5rem, 5vw, 3.5rem); }
+  .logi-split .sec-head { margin-block-end: 0; }
+  @media (min-width: 56rem) {
+    .logi-split { grid-template-columns: 1.25fr 0.75fr; align-items: end; }
+    .logi-split .split-media { margin-block-start: 0; }
+  }
+}

@@ -305,7 +305,13 @@
         "label": "Private label",
         "value": "From 3,000 units"
       }
-    ]
+    ],
+    "slot": {
+      "file": "../assets/img/bottles-1l.jpg",
+      "ratio": "900 / 1174",
+      "alt": "Three one-litre PET bottles of TLEMCENYA extra virgin olive oil, front and back",
+      "caption": "One-litre format, food-grade PET"
+    }
   },
   "certs": {
     "title": "Controls and certification",
