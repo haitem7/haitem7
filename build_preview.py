@@ -51,6 +51,17 @@ for loc in ("en", "ar"):
 for f in ("assets/css/site.css", "assets/js/site.js", "assets/img/favicon.svg"):
     shutil.copy(ROOT / f, OUT / f)
 
+# The images and video the pages reference. OUT is wiped on every run, so
+# copying them here is what keeps a rebuild from publishing broken links.
+(OUT / "assets" / "video").mkdir(parents=True, exist_ok=True)
+for src in sorted((ROOT / "assets" / "img").glob("*.*")):
+    if src.suffix.lower() in (".jpg", ".webp", ".png", ".avif"):
+        shutil.copy(src, OUT / "assets" / "img" / src.name)
+for name in ("hero.mp4", "hero-poster.jpg", "hero.webm"):
+    src = ROOT / "assets" / "video" / name
+    if src.exists():
+        shutil.copy(src, OUT / "assets" / "video" / name)
+
 # Video files placed in preview/assets/video by hand are kept, not wiped.
 _keep = ROOT / ".preview-video"
 if _keep.is_dir():
