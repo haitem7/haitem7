@@ -6,7 +6,7 @@
   "path": "",
   "meta": {
     "title": "TLEMCENYA — Huile d'olive extra vierge de Sigoise, Tlemcen",
-    "description": "Huilerie à Tlemcen, Algérie. Sigoise extraite à froid, acidité 0,28 %, lots tracés. Vrac, flexitank, fer-blanc et verre, départ FOB Ghazaouet.",
+    "description": "Huilerie à Tlemcen, Algérie. Sigoise extraite à froid, acidité ≤ 0,8 %, lots tracés. Vrac, flexitank, fer-blanc et verre, départ FOB Ghazaouet.",
     "og_locale": "fr_DZ"
   },
   "skip": "Aller au contenu principal",
@@ -21,7 +21,7 @@
     },
     {
       "href": "#analyse",
-      "label": "Analyse"
+      "label": "Spécification"
     },
     {
       "href": "#logistique",
@@ -42,19 +42,19 @@
     ],
     "lede": "Nous pressons les olives des coteaux de Beni Snous dans les six heures qui suivent la cueillette, sans jamais dépasser 27 °C. Ce qui sort du décanteur part en cuve inox le jour même.",
     "cta_primary": "Demander une cotation",
-    "cta_secondary": "Voir l'analyse du lot",
+    "cta_secondary": "Voir la spécification",
     "data": [
       {
+        "label": "Catégorie",
+        "value": "Vierge extra"
+      },
+      {
         "label": "Acidité libre",
-        "value": "0,28 %"
+        "value": "≤ 0,8 %"
       },
       {
-        "label": "Indice de peroxyde",
-        "value": "7,2 meq O₂/kg"
-      },
-      {
-        "label": "Polyphénols totaux",
-        "value": "412 mg/kg"
+        "label": "Variété",
+        "value": "Sigoise"
       },
       {
         "label": "Récolte",
@@ -162,72 +162,61 @@
   },
   "specs": {
     "id": "analyse",
-    "title": "Analyse du lot",
-    "lede": "Valeurs du lot courant, mesurées par un laboratoire tiers accrédité selon les méthodes du Conseil oléicole international. Un certificat d'analyse accompagne chaque expédition.",
-    "lot_label": "Lot",
-    "lot_value": "TLM-25-114",
-    "campaign_label": "Campagne",
-    "campaign_value": "2025 / 26",
-    "caption": "Extra vierge — limites réglementaires COI pour la catégorie.",
+    "title": "Spécification",
+    "lede": "Les limites que nous garantissons pour la catégorie vierge extra, selon les méthodes du Conseil oléicole international. Les valeurs mesurées de chaque lot figurent sur le certificat d'analyse qui accompagne l'expédition.",
+    "lot_label": "Catégorie",
+    "lot_value": "Vierge extra",
+    "campaign_label": "Variété",
+    "campaign_value": "Sigoise",
+    "caption": "Limites réglementaires COI pour la catégorie vierge extra.",
     "head": [
       "Paramètre",
-      "Résultat",
-      "Méthode",
-      "Limite extra vierge"
+      "Limite vierge extra",
+      "Méthode"
     ],
     "rows": [
       [
         "Acidité libre (% acide oléique)",
-        "0,28",
-        "COI/T.20/Doc. nº 34",
-        "≤ 0,80"
+        "≤ 0,80",
+        "COI/T.20/Doc. nº 34"
       ],
       [
         "Indice de peroxyde (meq O₂/kg)",
-        "7,2",
-        "COI/T.20/Doc. nº 35",
-        "≤ 20,0"
+        "≤ 20,0",
+        "COI/T.20/Doc. nº 35"
       ],
       [
         "Extinction K232",
-        "1,94",
-        "COI/T.20/Doc. nº 19",
-        "≤ 2,50"
+        "≤ 2,50",
+        "COI/T.20/Doc. nº 19"
       ],
       [
         "Extinction K270",
-        "0,14",
-        "COI/T.20/Doc. nº 19",
-        "≤ 0,22"
+        "≤ 0,22",
+        "COI/T.20/Doc. nº 19"
       ],
       [
         "Delta-K",
-        "0,00",
-        "COI/T.20/Doc. nº 19",
-        "≤ 0,01"
+        "≤ 0,01",
+        "COI/T.20/Doc. nº 19"
       ],
       [
         "Polyphénols totaux (mg/kg)",
-        "412",
-        "COI/T.20/Doc. nº 29",
-        "non plafonné"
+        "non plafonné",
+        "COI/T.20/Doc. nº 29"
       ],
       [
         "Teneur en cires (mg/kg)",
-        "98",
-        "COI/T.20/Doc. nº 28",
-        "≤ 150"
+        "≤ 150",
+        "COI/T.20/Doc. nº 28"
       ],
       [
         "Médiane du défaut (organoleptique)",
-        "0,0",
-        "COI/T.20/Doc. nº 15",
-        "= 0"
+        "= 0",
+        "COI/T.20/Doc. nº 15"
       ]
     ],
-    "cta": "Télécharger le certificat d'analyse (PDF)",
-    "cta_file": "assets/doc/coa-tlm-25-114.pdf",
-    "cta_note": "Déposez le certificat signé à cet emplacement."
+    "cta": "Demander le certificat d'analyse du lot en cours"
   },
   "logistics": {
     "id": "logistique",

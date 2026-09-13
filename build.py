@@ -277,7 +277,7 @@ def specs(c: dict) -> str:
     </div>
     <div class="reveal">{table(s["head"], s["rows"], s["caption"], c["lang"])}</div>
     <p class="reveal coa">
-      <a class="btn btn-quiet" href="{e(s["cta_file"])}" download>{icon("download")}<span>{e(s["cta"])}</span></a>
+      <a class="btn btn-quiet" href="#{e(c["rfq"]["id"])}">{icon("download")}<span>{e(s["cta"])}</span></a>
     </p>
   </div>
 </section>"""

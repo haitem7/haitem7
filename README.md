@@ -25,11 +25,10 @@ about a food product.
 
 | Where | What to replace |
 |---|---|
-| `hero.data` | Free acidity 0.28%, peroxide 7.2, polyphenols 412 mg/kg — **the bottle label says < 0.8%; see below** |
 | `variety.facts` | Yield 18–22%, elevation 420–760 m, 180 trees/ha, 45-year-old trees |
 | `process.steps[].tag` | ≤ 6 h to mill, 26 °C max, 16 °C storage, tank volumes |
-| `specs.rows` | **The entire analysis table** — all eight parameters and results |
-| `specs.lot_value` | Lot number `TLM-25-114` and campaign `2025/26` |
+| `specs.rows` | Now shows only the published IOC limits, which are real. Measured values are promised on the certificate of analysis instead. |
+
 | `logistics.rows` | Units per pallet, pallets per container, net volumes — including the 1 L PET row (720/pallet is a realistic estimate, not your figure) |
 | `logistics.facts` | Lead time, minimum order, private-label threshold |
 | `certs.items` | **ISO 22000, HACCP, IOC and organic status** — only claim what you hold |
@@ -39,11 +38,14 @@ about a food product.
 The COI/IOC method references and the extra-virgin limits in the right-hand
 column are real published standards; your measured results are not.
 
-**The acidity conflict.** The retail label reads `ACIDITÉ < 0,8 %`. That is
-the legal ceiling for the extra virgin category, not a measured value. The
-site currently claims 0.28%. Both cannot be the claim you stand behind: if
-the oil actually runs near 0.8%, every acidity figure on this site is
-false, and an importer's own lab test is where that surfaces.
+**The acidity is now settled** at `≤ 0.8 %`, matching the label. The
+invented 0.28% is gone from every page and from the meta descriptions.
+
+But `≤ 0.8 %` is the definition of the extra virgin grade, not an
+achievement: every extra virgin oil on earth meets it. As a headline
+figure it tells a buyer nothing. Get a real measured value from a lab and
+it becomes the strongest number on the site — a genuine 0.2% is a
+sales argument, 0.8% is a category label.
 
 ---
 

@@ -6,7 +6,7 @@
   "path": "en/",
   "meta": {
     "title": "TLEMCENYA — Cold-extracted Sigoise olive oil, Tlemcen, Algeria",
-    "description": "Olive mill in Tlemcen, Algeria. Cold-extracted Sigoise extra virgin olive oil, 0.28% free acidity, traceable lots. Bulk, flexitank, tin and glass, FOB Ghazaouet.",
+    "description": "Olive mill in Tlemcen, Algeria. Cold-extracted Sigoise extra virgin olive oil, ≤ 0.8% free acidity, traceable lots. Bulk, flexitank, tin and glass, FOB Ghazaouet.",
     "og_locale": "en_GB"
   },
   "skip": "Skip to main content",
@@ -21,7 +21,7 @@
     },
     {
       "href": "#analysis",
-      "label": "Analysis"
+      "label": "Specification"
     },
     {
       "href": "#logistics",
@@ -42,19 +42,19 @@
     ],
     "lede": "We press fruit from the Beni Snous hillsides within six hours of picking, and never above 27 °C. What leaves the decanter goes into stainless tanks the same day.",
     "cta_primary": "Request a quotation",
-    "cta_secondary": "Read the lot analysis",
+    "cta_secondary": "Read the specification",
     "data": [
       {
+        "label": "Grade",
+        "value": "Extra virgin"
+      },
+      {
         "label": "Free acidity",
-        "value": "0.28%"
+        "value": "≤ 0.8%"
       },
       {
-        "label": "Peroxide value",
-        "value": "7.2 meq O₂/kg"
-      },
-      {
-        "label": "Total polyphenols",
-        "value": "412 mg/kg"
+        "label": "Variety",
+        "value": "Sigoise"
       },
       {
         "label": "Harvest",
@@ -162,72 +162,61 @@
   },
   "specs": {
     "id": "analysis",
-    "title": "Lot analysis",
-    "lede": "Current lot, measured by an accredited third-party laboratory using International Olive Council methods. A certificate of analysis travels with every shipment.",
-    "lot_label": "Lot",
-    "lot_value": "TLM-25-114",
-    "campaign_label": "Campaign",
-    "campaign_value": "2025 / 26",
-    "caption": "Extra virgin — regulatory IOC limits for the category.",
+    "title": "Specification",
+    "lede": "The limits we guarantee for the extra virgin grade, following International Olive Council methods. Measured values for each lot appear on the certificate of analysis that travels with the shipment.",
+    "lot_label": "Grade",
+    "lot_value": "Extra virgin",
+    "campaign_label": "Variety",
+    "campaign_value": "Sigoise",
+    "caption": "IOC regulatory limits for the extra virgin grade.",
     "head": [
       "Parameter",
-      "Result",
-      "Method",
-      "Extra virgin limit"
+      "Extra virgin limit",
+      "Method"
     ],
     "rows": [
       [
         "Free acidity (% oleic acid)",
-        "0.28",
-        "COI/T.20/Doc. No. 34",
-        "≤ 0.80"
+        "≤ 0.80",
+        "COI/T.20/Doc. No. 34"
       ],
       [
         "Peroxide value (meq O₂/kg)",
-        "7.2",
-        "COI/T.20/Doc. No. 35",
-        "≤ 20.0"
+        "≤ 20.0",
+        "COI/T.20/Doc. No. 35"
       ],
       [
         "K232 extinction",
-        "1.94",
-        "COI/T.20/Doc. No. 19",
-        "≤ 2.50"
+        "≤ 2.50",
+        "COI/T.20/Doc. No. 19"
       ],
       [
         "K270 extinction",
-        "0.14",
-        "COI/T.20/Doc. No. 19",
-        "≤ 0.22"
+        "≤ 0.22",
+        "COI/T.20/Doc. No. 19"
       ],
       [
         "Delta-K",
-        "0.00",
-        "COI/T.20/Doc. No. 19",
-        "≤ 0.01"
+        "≤ 0.01",
+        "COI/T.20/Doc. No. 19"
       ],
       [
         "Total polyphenols (mg/kg)",
-        "412",
-        "COI/T.20/Doc. No. 29",
-        "no ceiling"
+        "no ceiling",
+        "COI/T.20/Doc. No. 29"
       ],
       [
         "Wax content (mg/kg)",
-        "98",
-        "COI/T.20/Doc. No. 28",
-        "≤ 150"
+        "≤ 150",
+        "COI/T.20/Doc. No. 28"
       ],
       [
         "Defect median (sensory)",
-        "0.0",
-        "COI/T.20/Doc. No. 15",
-        "= 0"
+        "= 0",
+        "COI/T.20/Doc. No. 15"
       ]
     ],
-    "cta": "Download the certificate of analysis (PDF)",
-    "cta_file": "../assets/doc/coa-tlm-25-114.pdf",
-    "cta_note": "Drop the signed certificate at this path."
+    "cta": "Request the certificate of analysis for the current lot"
   },
   "logistics": {
     "id": "logistics",
