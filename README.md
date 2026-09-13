@@ -72,6 +72,18 @@ Export as WebP if you can (`.webp`, and update the filename in the JSON) —
 roughly 30% smaller at the same quality. The alt text is in the JSON; keep
 it descriptive if you change the photo.
 
+Drop an `.avif` or `.webp` next to the `.jpg` under the same base name and
+the build picks it up automatically as a `<source>`, with the JPEG left as
+the fallback. A format is only offered when its file is actually on disk:
+a `<source>` is chosen on format support, not on the file existing, so
+listing an AVIF that 404s would break the image entirely.
+
+Every photograph is graded into the palette on the way in — a soft-light
+wash toward the oil greens and golds, a vignette, and a slow settle from
+1.04 to 1.0 on hover that resolves to full colour. A photograph that keeps
+its own colour cast sits on a design; one that is graded belongs to it.
+Nothing needs doing to opt in: drop the file and it happens.
+
 `assets/doc/coa-tlm-25-114.pdf` — the signed certificate of analysis the
 Analysis section links to. Until it exists, the link 404s; either add the
 file or remove the `cta` key from `specs`.

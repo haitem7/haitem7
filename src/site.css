@@ -299,22 +299,73 @@
   .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   /* ---- Image slots ----------------------------------------------- *
-   * Every slot reserves its aspect ratio so dropping a photo in later
-   * cannot shift layout (CLS stays 0). See README for the photo map.
+   * Two jobs. First, reserve the aspect ratio so dropping a photograph
+   * in later cannot shift the layout. Second, grade whatever arrives
+   * into the page's palette: a photograph that keeps its own colour cast
+   * sits on a design, one that is graded belongs to it.
    * -------------------------------------------------------------- */
   .slot {
     position: relative;
     display: block;
     overflow: hidden;
-    background: linear-gradient(148deg, #2a3318 0%, #4d5a1f 46%, #8c9a2b 100%);
+    isolation: isolate;
+    /* Empty state: a considered panel rather than a flat green block,
+       so an unfinished page still reads as designed. */
+    background:
+      radial-gradient(120% 90% at 18% 8%, rgba(182, 196, 74, 0.22), transparent 60%),
+      radial-gradient(90% 80% at 86% 96%, rgba(212, 166, 42, 0.18), transparent 62%),
+      linear-gradient(152deg, #202a12 0%, #33401a 48%, #46561f 100%);
   }
-  .slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .slot img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Slightly oversized at rest, so the slow settle on hover has room
+       to move without ever revealing an edge. */
+    transform: scale(1.045);
+    filter: saturate(1.06) contrast(1.03);
+    transition: transform 1100ms var(--ease-oil), filter 600ms var(--ease-oil);
+  }
+
+  /* The grade. soft-light keeps the photograph's own tonality and only
+     bends its hue toward the oil greens and golds. */
+  .slot::after {
+    content: "";
+    position: absolute; inset: 0; z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    background:
+      linear-gradient(158deg,
+        rgba(21, 26, 16, 0.42) 0%,
+        rgba(140, 154, 43, 0.20) 52%,
+        rgba(212, 166, 42, 0.20) 100%);
+    transition: opacity 600ms var(--ease-oil);
+  }
+
+  /* Vignette: holds the eye inside the frame and keeps a caption legible
+     over any photograph, light or dark. */
+  .slot::before {
+    content: "";
+    position: absolute; inset: 0; z-index: 3;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 100% at 50% 40%, transparent 52%, rgba(21, 26, 16, 0.26) 100%),
+      linear-gradient(to top, rgba(21, 26, 16, 0.34) 0%, transparent 34%);
+  }
+
+  /* Hover resolves the grade: full colour, as a reward for attention. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .slot:hover img { transform: scale(1); filter: saturate(1.16) contrast(1.05); }
+    .slot:hover::after { opacity: 0.35; }
+  }
+
   .slot figcaption {
     position: absolute; inset-inline: 0; inset-block-end: 0;
+    z-index: 4;
     padding: 0.7rem 0.9rem;
     font-size: var(--text-micro);
     color: #f4f4ef;
-    background: linear-gradient(to top, rgba(21,26,16,0.82), transparent);
   }
 }
 

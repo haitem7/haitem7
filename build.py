@@ -84,6 +84,26 @@ def table(head: list[str], rows: list[list[str]], caption: str, lang: str = "fr"
 
 # ---------------------------------------------------------------- sections
 
+def picture(src: str, alt: str, w: int, h: int, sizes: str) -> str:
+    """An <img>, upgraded to <picture> only for formats that exist on disk.
+
+    A <source> is chosen on format support, not on the file being there:
+    listing an AVIF that 404s makes the whole picture fail, exactly as a
+    missing webm once killed the hero video.
+    """
+    local = ROOT / src.replace("../", "")
+    alts = ""
+    for ext, mime in (("avif", "image/avif"), ("webp", "image/webp")):
+        cand = local.with_suffix("." + ext)
+        if cand.exists():
+            alts += f'<source type="{mime}" srcset="{e(src.rsplit(".", 1)[0])}.{ext}" sizes="{e(sizes)}">'
+    img = (
+        f'<img src="{e(src)}" alt="{e(alt)}" width="{w}" height="{h}" sizes="{e(sizes)}" '
+        f'loading="lazy" decoding="async" onerror="this.closest(\'picture\')?.remove?.()||this.remove()">'
+    )
+    return f"<picture>{alts}{img}</picture>" if alts else img
+
+
 def head_tag(c: dict, assets: str, alts: list[dict]) -> str:
     m = c["meta"]
     hreflang = "".join(
@@ -186,8 +206,7 @@ def variety(c: dict) -> str:
     </div>
     <figure class="split-media reveal">
       <div class="slot" style="aspect-ratio: {e(s["ratio"])}">
-        <img src="{e(s["file"])}" alt="{e(s["alt"])}" width="900" height="1125"
-             loading="lazy" decoding="async" onerror="this.remove()">
+        {picture(s["file"], s["alt"], 900, 1125, "(min-width: 56rem) 34vw, 92vw")}
       </div>
       <figcaption class="media-note">{e(s["caption"])}</figcaption>
     </figure>
@@ -227,8 +246,7 @@ def gallery(c: dict) -> str:
     for i, sh in enumerate(g["shots"]):
         shots += f"""<figure class="shot reveal">
   <div class="slot" style="aspect-ratio: 4 / 5">
-    <img src="{e(sh["file"])}" alt="{e(sh["alt"])}" width="800" height="1000"
-         loading="lazy" decoding="async" onerror="this.remove()">
+    {picture(sh["file"], sh["alt"], 800, 1000, "(min-width: 46rem) 30vw, 92vw")}
   </div>
   <figcaption class="media-note">{e(sh["caption"])}</figcaption>
 </figure>"""
