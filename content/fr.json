@@ -138,7 +138,11 @@
         "body": "Cuves inox de 12 000 l inertées à l'azote, à 16 °C et à l'obscurité. Le conditionnement se fait à la commande, jamais à l'avance.",
         "tag": "16 °C, sous azote"
       }
-    ]
+    ],
+    "mark": {
+      "file": "assets/img/mark.jpg",
+      "alt": "Sceau TLEMCENYA, huile d'olive extra vierge, héritage de Tlemcen"
+    }
   },
   "gallery": {
     "title": "L'huilerie",
@@ -435,10 +439,6 @@
     "hours_label": "Heures d'ouverture",
     "hours": "Dimanche – jeudi, 8 h – 17 h (UTC+1)",
     "lang_label": "Langue",
-    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie.",
-    "mark": {
-      "file": "assets/img/mark.jpg",
-      "alt": "Sceau TLEMCENYA, huile d'olive extra vierge, héritage de Tlemcen"
-    }
+    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie."
   }
 }

@@ -226,16 +226,25 @@ def process(c: dict) -> str:
     <p class="step-tag tnum">{e(s["tag"])}</p>
   </div>
 </li>"""
+    mk = p.get("mark")
+    mark = ""
+    if mk:
+        mark = f"""<div class="proc-mark reveal">
+      {picture(mk["file"], mk["alt"], 320, 320, "(min-width: 62rem) 220px, 140px")}
+    </div>"""
     return f"""<section class="band band-ink on-dark" id="{e(p["id"])}">
-  <div class="shell">
-    <div class="sec-head reveal">
-      <h2 class="display sec-title">{e(p["title"])}</h2>
-      <p class="measure sec-lede">{e(p["lede"])}</p>
+  <div class="shell proc-split">
+    <div class="proc-main">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{e(p["title"])}</h2>
+        <p class="measure sec-lede">{e(p["lede"])}</p>
+      </div>
+      <div class="rail-wrap">
+        <div class="rail" aria-hidden="true"><div class="rail-fill"></div></div>
+        <ol class="steps">{steps}</ol>
+      </div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" aria-hidden="true"><div class="rail-fill"></div></div>
-      <ol class="steps">{steps}</ol>
-    </div>
+    {mark}
   </div>
 </section>"""
 
@@ -398,14 +407,7 @@ def footer(c: dict, alts: list[dict]) -> str:
         + f'>{e(a["label"])}</a></li>'
         for a in alts
     )
-    mark = ""
-    if f.get("mark"):
-        m = f["mark"]
-        mark = f"""<div class="foot-mark">
-      {picture(m["file"], m["alt"], 320, 320, "160px")}
-    </div>"""
     return f"""<footer class="site-foot band-paper">
-  <div class="shell">{mark}</div>
   <div class="shell foot-grid">
     <div>
       <p class="foot-label">{e(f["address_label"])}</p>

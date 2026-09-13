@@ -690,14 +690,22 @@
 @layer components {
   /* The seal keeps its own cream field rather than being cut out: a
      circular mask reads as the mark's own disc, where a rough key would
-     have eaten the light areas inside the engraving. */
-  .foot-mark { margin-block-end: clamp(2rem, 4vw, 3rem); }
-  .foot-mark img,
-  .foot-mark picture {
+     have eaten the light areas inside the engraving. On the dark band it
+     reads as a stamp, which is what it is. */
+  .proc-split { display: grid; gap: clamp(2.5rem, 5vw, 4rem); }
+  @media (min-width: 62rem) {
+    .proc-split { grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+    /* The steps column runs past 2000px; a mark pinned at its top would
+       sit alone above a very tall emptiness, so it travels with them. */
+    .proc-mark { position: sticky; inset-block-start: 8rem; }
+  }
+  .proc-mark { justify-self: center; }
+  .proc-mark img,
+  .proc-mark picture {
     display: block;
-    width: clamp(96px, 12vw, 132px);
+    width: clamp(132px, 18vw, 220px);
     aspect-ratio: 1;
     border-radius: 50%;
   }
-  .foot-mark img { width: 100%; height: 100%; object-fit: cover; }
+  .proc-mark img { width: 100%; height: 100%; object-fit: cover; }
 }

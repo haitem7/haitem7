@@ -138,7 +138,11 @@
         "body": "Nitrogen-blanketed 12,000 l stainless tanks at 16 °C, in the dark. Packing happens against an order, never in advance.",
         "tag": "16 °C, under nitrogen"
       }
-    ]
+    ],
+    "mark": {
+      "file": "../assets/img/mark.jpg",
+      "alt": "TLEMCENYA seal, extra virgin olive oil, heritage of Tlemcen"
+    }
   },
   "gallery": {
     "title": "The mill",
@@ -435,10 +439,6 @@
     "hours_label": "Opening hours",
     "hours": "Sunday – Thursday, 08:00 – 17:00 (UTC+1)",
     "lang_label": "Language",
-    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria.",
-    "mark": {
-      "file": "../assets/img/mark.jpg",
-      "alt": "TLEMCENYA seal, extra virgin olive oil, heritage of Tlemcen"
-    }
+    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria."
   }
 }
