@@ -651,8 +651,24 @@
      reads as a sequence of moments rather than a card rack. */
   .shots { display: grid; gap: 1.5rem; margin-block-start: 2.5rem; }
   @media (min-width: 46rem) {
-    .shots { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; align-items: start; }
-    .shots .shot:nth-child(2) { margin-block-start: clamp(2rem, 5vw, 4.5rem); }
+    .shots { gap: 1.75rem; align-items: start; }
+    /* The band adapts to how many photographs exist, so one real image
+       reads as a deliberate choice rather than a gap where two others
+       should have been. */
+    .shots-1 { grid-template-columns: minmax(0, 24rem); }
+    /* A single photograph under a full-width heading leaves most of the
+       row empty. Set the heading beside it instead, which uses the width
+       and keeps the page's established two-column rhythm. */
+    .gal-1 .gal-inner {
+      display: grid;
+      grid-template-columns: 1fr minmax(0, 24rem);
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+    .gal-1 .shots { margin-block-start: 0; }
+    .shots-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 44rem; }
+    .shots-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .shots-3 .shot:nth-child(2) { margin-block-start: clamp(2rem, 5vw, 4.5rem); }
   }
   .shot { margin: 0; }
 }

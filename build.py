@@ -287,18 +287,26 @@ def process(c: dict) -> str:
 
 def gallery(c: dict) -> str:
     g = c["gallery"]
+    # Only render a slot whose file is actually on disk. An empty frame
+    # advertises what is missing; three of them make a finished section
+    # look abandoned. Drop a photograph in and its slot reappears with no
+    # edit to the content files.
+    present = [sh for sh in g["shots"]
+               if (ROOT / sh["file"].replace("../", "")).exists()]
+    if not present:
+        return ""
     shots = ""
-    for i, sh in enumerate(g["shots"]):
+    for i, sh in enumerate(present):
         shots += f"""<figure class="shot reveal">
   <div class="slot" style="aspect-ratio: 4 / 5">
     {picture(sh["file"], sh["alt"], 800, 1000, "(min-width: 46rem) 30vw, 92vw")}
   </div>
   <figcaption class="media-note">{e(sh["caption"])}</figcaption>
 </figure>"""
-    return f"""<section class="band band-stone">
-  <div class="shell">
+    return f"""<section class="band band-stone gal gal-{len(present)}">
+  <div class="shell gal-inner">
     <h2 class="display sec-title reveal">{e(g["title"])}</h2>
-    <div class="shots">{shots}</div>
+    <div class="shots shots-{len(present)}">{shots}</div>
   </div>
 </section>"""
 
