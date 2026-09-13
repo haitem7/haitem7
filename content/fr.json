@@ -97,10 +97,10 @@
       }
     ],
     "slot": {
-      "file": "assets/img/oil-extraction.jpg",
-      "alt": "Filet d'huile d'olive vert-doré s'écoulant dans un récipient en acier",
-      "caption": "Extraction à froid",
-      "ratio": "900 / 1126"
+      "file": "assets/img/harvest-tlemcen.jpg",
+      "alt": "Deux mains cueillant des olives vertes sur la branche, un couffin en alfa rempli d'olives au premier plan",
+      "caption": "Cueillette à la main, olives vertes",
+      "ratio": "1200 / 1600"
     }
   },
   "process": {
@@ -144,9 +144,9 @@
     "title": "L'huilerie",
     "shots": [
       {
-        "file": "assets/img/mill-floor.jpg",
-        "alt": "Ligne de broyage et de malaxage dans l'huilerie",
-        "caption": "Salle de broyage, ligne continue"
+        "file": "assets/img/mill-extraction.jpg",
+        "alt": "Filet d'huile verte s'écoulant d'un bec en inox dans une cuve de décantation",
+        "caption": "Sortie d'huile, salle d'extraction"
       },
       {
         "file": "assets/img/tanks.jpg",
@@ -435,6 +435,10 @@
     "hours_label": "Heures d'ouverture",
     "hours": "Dimanche – jeudi, 8 h – 17 h (UTC+1)",
     "lang_label": "Langue",
-    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie."
+    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie.",
+    "mark": {
+      "file": "assets/img/mark.jpg",
+      "alt": "Sceau TLEMCENYA, huile d'olive extra vierge, héritage de Tlemcen"
+    }
   }
 }

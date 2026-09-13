@@ -398,7 +398,14 @@ def footer(c: dict, alts: list[dict]) -> str:
         + f'>{e(a["label"])}</a></li>'
         for a in alts
     )
+    mark = ""
+    if f.get("mark"):
+        m = f["mark"]
+        mark = f"""<div class="foot-mark">
+      {picture(m["file"], m["alt"], 320, 320, "160px")}
+    </div>"""
     return f"""<footer class="site-foot band-paper">
+  <div class="shell">{mark}</div>
   <div class="shell foot-grid">
     <div>
       <p class="foot-label">{e(f["address_label"])}</p>

@@ -18,6 +18,11 @@ assets/             compiled css, js, images, documents
 
 ## ⚠️ Read this before the site goes live
 
+**Photograph rights are unverified.** `harvest-tlemcen.jpg` looks like
+professional work. If it was not shot for you or licensed by you, it must
+come out: a stock agency finding it on a commercial site is a far more
+concrete liability than anything else on this list.
+
 **Every figure on this site is a plausible placeholder, not your data.**
 They were written so the design could be judged against realistic
 content. Replace all of them, or you will be publishing false claims
@@ -73,10 +78,12 @@ no broken-image icon.
 | Path | Ratio | Suggested export | Subject |
 |---|---|---|---|
 | `assets/img/bottles-1l.jpg` | 900 × 1174 | **done** — cropped from the supplied packshot, `.webp` alongside | 1 L PET bottles, packaging section |
-| `assets/img/oil-extraction.jpg` | 900 × 1126 | **in place** — 4:5 crop of the oil clip, `.webp` alongside | Oil pouring, "Why Sigoise" section. Replace with a real grove photograph when one exists. |
-| `assets/img/mill-floor.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Milling / malaxation line |
-| `assets/img/tanks.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Stainless storage tanks |
-| `assets/img/loading.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Pallets going into a container |
+| `assets/img/harvest-tlemcen.jpg` | 1200 × 1600 | **in place** | Hand picking, "Why Sigoise" section |
+| `assets/img/mill-extraction.jpg` | 800 × 1070 | **in place** | Oil at the outlet, mill band |
+| `assets/img/mark.jpg` | 320 × 320 | **in place** | The seal, footer |
+
+| `assets/img/tanks.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Stainless storage tanks — still missing |
+| `assets/img/loading.jpg` | 4:5 portrait | 800 × 1000, ~160 KB | Pallets going into a container — still missing |
 
 Export as WebP if you can (`.webp`, and update the filename in the JSON) —
 roughly 30% smaller at the same quality. The alt text is in the JSON; keep

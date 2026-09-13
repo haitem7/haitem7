@@ -97,10 +97,10 @@
       }
     ],
     "slot": {
-      "file": "../assets/img/oil-extraction.jpg",
-      "alt": "A green-gold stream of olive oil falling into a steel vessel",
-      "caption": "Cold extraction",
-      "ratio": "900 / 1126"
+      "file": "../assets/img/harvest-tlemcen.jpg",
+      "alt": "Two hands picking green olives from the branch, a woven esparto basket of olives in the foreground",
+      "caption": "Hand picking, green olives",
+      "ratio": "1200 / 1600"
     }
   },
   "process": {
@@ -144,9 +144,9 @@
     "title": "The mill",
     "shots": [
       {
-        "file": "../assets/img/mill-floor.jpg",
-        "alt": "Milling and malaxation line inside the mill",
-        "caption": "Milling floor, continuous line"
+        "file": "../assets/img/mill-extraction.jpg",
+        "alt": "A stream of green oil running from a stainless spout into a settling vessel",
+        "caption": "Oil outlet, extraction room"
       },
       {
         "file": "../assets/img/tanks.jpg",
@@ -435,6 +435,10 @@
     "hours_label": "Opening hours",
     "hours": "Sunday – Thursday, 08:00 – 17:00 (UTC+1)",
     "lang_label": "Language",
-    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria."
+    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria.",
+    "mark": {
+      "file": "../assets/img/mark.jpg",
+      "alt": "TLEMCENYA seal, extra virgin olive oil, heritage of Tlemcen"
+    }
   }
 }
