@@ -32,116 +32,36 @@
   }
 
   /* ---------------------------------------------------------------- *
-   * Scroll-scrubbed hero.
-   * Frames are drawn to a canvas rather than seeking a video: seeking a
-   * compressed stream on scroll stutters, and iOS Safari refuses to seek
-   * smoothly at all. Opt-in on the same three conditions as any other
-   * heavy enhancement -- wide viewport, unmetered connection, motion
-   * allowed -- so a phone downloads nothing.
+   * Optional hero video.
+   * Opt-in, never opt-out: the file is fetched only when the viewport is
+   * wide enough to justify it, the visitor has not asked for reduced
+   * motion, and the connection is not metered or slow. If any of that
+   * fails -- or the file is missing -- the CSS oil field simply stays.
    * ---------------------------------------------------------------- */
-  var stage = document.querySelector('[data-hero-scroll]');
-  var canvas = document.querySelector('[data-hero-canvas]');
-
-  if (stage && canvas) {
-    var count = parseInt(stage.getAttribute('data-frame-count'), 10) || 0;
+  var video = document.querySelector('[data-hero-video]');
+  if (video) {
     var conn = navigator.connection || {};
-    var metered = conn.saveData === true ||
-                  /(^|-)2g$/.test(conn.effectiveType || '') ||
-                  conn.effectiveType === 'slow-2g';
-    var roomy = window.matchMedia('(min-width: 62rem)').matches;
+    var slow = conn.saveData === true ||
+               /(^|-)2g$/.test(conn.effectiveType || '') ||
+               conn.effectiveType === 'slow-2g';
+    var wide = window.matchMedia('(min-width: 62rem)').matches;
 
-    if (count && roomy && !metered && !reduced.matches) {
-      var base = stage.getAttribute('data-frame-base');
-      var ext = stage.getAttribute('data-frame-ext') || '.webp';
-      var pad = parseInt(stage.getAttribute('data-frame-pad'), 10) || 3;
-      var ctx = canvas.getContext('2d', { alpha: false });
-      var frames = new Array(count);
-      var current = -1;
-      var failed = 0;
-
-      var name = function (i) {
-        var s = String(i + 1);
-        while (s.length < pad) s = '0' + s;
-        return base + s + ext;
-      };
-
-      var paint = function (i) {
-        var img = frames[i];
-        if (!img || !img.complete || !img.naturalWidth) return;
-        var cw = canvas.width, ch = canvas.height;
-        var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-        var w = img.naturalWidth * scale, h = img.naturalHeight * scale;
-        ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-        current = i;
-      };
-
-      var size = function () {
-        var r = canvas.getBoundingClientRect();
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.round(r.width * dpr);
-        canvas.height = Math.round(r.height * dpr);
-        var i = current;
-        current = -1;
-        paint(i < 0 ? 0 : i);
-      };
-
-      var frameFor = function () {
-        var r = stage.getBoundingClientRect();
-        var travel = stage.offsetHeight - window.innerHeight;
-        if (travel <= 0) return 0;
-        var p = Math.min(1, Math.max(0, -r.top / travel));
-        return Math.round(p * (count - 1));
-      };
-
-      // Distinct names on purpose: `var` is function scoped, and the
-      // header below declares its own ticking/onScroll in this same
-      // function. Sharing them makes the two handlers steal each other's
-      // guard flag, and the scrub silently stops repainting.
-      var scrubTicking = false;
-      var onScrubScroll = function () {
-        if (scrubTicking) return;
-        scrubTicking = true;
-        requestAnimationFrame(function () {
-          var i = frameFor();
-          if (i !== current) paint(i);
-          scrubTicking = false;
-        });
-      };
-
-      // The section takes its full height immediately, so the page never
-      // reflows under the reader once the frames arrive.
-      stage.classList.add('is-scrubbing');
-      size();
-
-      for (var i = 0; i < count; i++) {
-        (function (i) {
-          var img = new Image();
-          img.decoding = 'async';
-          img.onload = function () {
-            if (i === 0) {
-              size();
-              canvas.classList.add('is-ready');
-              window.addEventListener('scroll', onScrubScroll, { passive: true });
-              onScrubScroll();
-            }
-          };
-          img.onerror = function () {
-            failed++;
-            // Every frame missing means the sequence was never deployed:
-            // give the height back and let the CSS oil field stand alone.
-            if (failed >= count) {
-              stage.classList.remove('is-scrubbing');
-              canvas.remove();
-            }
-          };
-          img.src = name(i);
-          frames[i] = img;
-        })(i);
-      }
-
-      window.addEventListener('resize', size, { passive: true });
+    if (wide && !slow && !reduced.matches) {
+      video.querySelectorAll('source[data-src]').forEach(function (src) {
+        src.src = src.getAttribute('data-src');
+      });
+      video.load();
+      video.addEventListener('playing', function () {
+        video.classList.add('is-playing');
+      }, { once: true });
+      // Only the element's own error means every source failed. Listening
+      // in the capture phase would also catch a single <source> 404 -- a
+      // missing optional webm would then take the working mp4 down with it.
+      video.addEventListener('error', function () { video.remove(); });
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { video.remove(); });
     } else {
-      canvas.remove();
+      video.remove();
     }
   }
 

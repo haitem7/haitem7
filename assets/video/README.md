@@ -54,20 +54,18 @@ garder ici que le poster.
 |---|---|
 | `iron1-watermarked.mp4` | **Non utilisable en production.** Filigrane `tryveo3.ai` incrusté sur les 8 secondes, export en palier gratuit, licence commerciale non acquise. Conservé comme référence de direction artistique : macro d'huile qui coule, contre-jour, fond sombre. 1280×720, piste audio inutile. |
 
-## Hero scrubbé au défilement
+## Hero scrubbé au défilement — disponible, non activé
 
-Le hero n'est plus une vidéo en lecture automatique : les images avancent
-au fur et à mesure du défilement. Elles sont dessinées dans un `<canvas>`
-à partir d'une séquence WebP, et non en déplaçant la tête de lecture
-d'une vidéo — le `seek` sur un flux compressé saccade, et iOS Safari
-refuse tout simplement de le faire correctement.
+Une variante où les images avancent au fil du défilement (canvas + séquence
+WebP, la méthode d'Apple) a été construite puis retirée sur demande. Le
+hero actuel lit la vidéo en boucle, tout seul.
 
-Pour régénérer la séquence après avoir changé de vidéo :
+Le code complet est dans l'historique Git, commit `a55c453`. Pour le
+remettre : `git revert` ce commit, puis régénérer la séquence avec
 
 ```bash
 tools/hero_frames.sh assets/video/hero.mp4
 ```
 
 48 images à 1280 px pèsent environ 1,5 Mo, soit moins que le même plan en
-vidéo. Si le nombre d'images change, mettez à jour `hero.frames.count`
-dans les trois fichiers `content/*.json`.
+vidéo (5,7 Mo). Le script reste fourni, il est utile tel quel.
