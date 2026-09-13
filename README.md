@@ -34,6 +34,7 @@ about a food product.
 | `logistics.facts` | Lead time, minimum order, private-label threshold |
 | `certs.items` | **ISO 22000, HACCP, IOC and organic status** — only claim what you hold |
 | `footer` | Address, phone (`+213 TODO`), email |
+| `assets/video/hero.mp4` | Carries a `tryveo3.ai` watermark, bottom right. The hero scrim dims it heavily but it is still there. |
 
 The COI/IOC method references and the extra-virgin limits in the right-hand
 column are real published standards; your measured results are not.

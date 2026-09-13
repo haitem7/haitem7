@@ -50,6 +50,18 @@ garder ici que le poster.
 
 ## Fichiers présents
 
+| Fichier | Rôle |
+|---|---|
+| `hero-source.mp4` | Source d'origine, 1920×1080, 8,6 Mo. Conservée pour ré-encoder sans repasser par la génération. |
+| `hero.mp4` | Ce que le site sert : 3,86 Mo, sans piste audio, `faststart`. |
+| `hero-poster.jpg` | Première image, affichée avant la vidéo. |
+
+> **Avant la mise en ligne publique :** la vidéo actuelle porte le
+> filigrane `tryveo3.ai` en bas à droite. Le voile du hero l'atténue
+> fortement, mais il reste visible. Remplacer par un export payant sans
+> filigrane, puis relancer l'encodage ci-dessus.
+
+
 | Fichier | État |
 |---|---|
 | `iron1-watermarked.mp4` | **Non utilisable en production.** Filigrane `tryveo3.ai` incrusté sur les 8 secondes, export en palier gratuit, licence commerciale non acquise. Conservé comme référence de direction artistique : macro d'huile qui coule, contre-jour, fond sombre. 1280×720, piste audio inutile. |
