@@ -18,10 +18,10 @@ assets/             compiled css, js, images, documents
 
 ## ⚠️ Read this before the site goes live
 
-**Photograph rights are unverified.** `harvest-tlemcen.jpg` looks like
-professional work. If it was not shot for you or licensed by you, it must
-come out: a stock agency finding it on a commercial site is a far more
-concrete liability than anything else on this list.
+**`harvest-placeholder.jpg` is not ours and must not go live.** The client
+confirmed it will be replaced with their own footage. The filename says so
+on purpose, so it cannot ship by accident. See `assets/img/SHOTLIST.md`
+for what still needs photographing.
 
 **Every figure on this site is a plausible placeholder, not your data.**
 They were written so the design could be judged against realistic
@@ -78,7 +78,7 @@ no broken-image icon.
 | Path | Ratio | Suggested export | Subject |
 |---|---|---|---|
 | `assets/img/bottles-1l.jpg` | 900 × 1174 | **done** — cropped from the supplied packshot, `.webp` alongside | 1 L PET bottles, packaging section |
-| `assets/img/harvest-tlemcen.jpg` | 1200 × 1600 | **in place** | Hand picking, "Why Sigoise" section |
+| `assets/img/harvest-placeholder.jpg` | 1200 × 1600 | **placeholder, unlicensed** | Hand picking, "Why Sigoise" section — replace before launch |
 | `assets/img/mill-extraction.jpg` | 800 × 1070 | **in place** | Oil at the outlet, mill band |
 | `assets/img/mark.jpg` | 320 × 320 | **in place** | The seal, footer |
 
