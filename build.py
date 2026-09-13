@@ -144,23 +144,24 @@ def hero(c: dict) -> str:
     h = c["hero"]
     lines = "".join(f"<span>{e(l)}</span>" for l in h["title_lines"])
 
-    # Optional. data-src, not src: nothing is fetched until site.js decides
-    # the viewport, the connection and the motion preference all allow it.
-    v = h.get("video")
-    video = ""
-    if v and v.get("file"):
-        webm = ""
-        if v.get("webm") and (ROOT / v["webm"].lstrip("./").replace("../", "")).exists():
-            webm = f'<source data-src="{e(v["webm"])}" type="video/webm">' 
-        video = (
-            f'<video class="hero-video" data-hero-video aria-hidden="true" tabindex="-1" '
-            f'muted loop playsinline preload="none" poster="{e(v.get("poster", ""))}">'
-            f'{webm}<source data-src="{e(v["file"])}" type="video/mp4"></video>'
+    # Optional scroll-scrubbed frame sequence. Nothing is fetched until
+    # site.js decides the viewport, connection and motion preference allow
+    # it, and the section only grows tall once scrubbing is actually on.
+    fr = h.get("frames")
+    canvas = ""
+    scroll_attrs = ""
+    if fr and fr.get("count"):
+        canvas = '<canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>'
+        scroll_attrs = (
+            f' data-hero-scroll data-frame-base="{e(fr["base"])}"'
+            f' data-frame-ext="{e(fr["ext"])}" data-frame-count="{fr["count"]}"'
+            f' data-frame-pad="{fr.get("pad", 3)}"'
         )
 
-    return f"""<section class="hero on-dark grain" data-oil>
+    return f"""<div class="hero-scroll"{scroll_attrs}>
+<section class="hero on-dark grain" data-oil>
   <div class="oil-field" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-  {video}
+  {canvas}
   <div class="shell hero-inner">
     <h1 class="display hero-title">{lines}</h1>
     <p class="hero-lede measure">{e(h["lede"])}</p>
@@ -170,7 +171,8 @@ def hero(c: dict) -> str:
     </div>
     {datagrid(h["data"], "hero-data", c["lang"])}
   </div>
-</section>"""
+</section>
+</div>"""
 
 
 def variety(c: dict) -> str:

@@ -66,10 +66,11 @@
         "value": "FOB الغزوات"
       }
     ],
-    "video": {
-      "file": "../assets/video/hero.mp4",
-      "webm": "../assets/video/hero.webm",
-      "poster": "../assets/video/hero-poster.jpg"
+    "frames": {
+      "base": "../assets/hero-frames/f-",
+      "ext": ".webp",
+      "count": 48,
+      "pad": 3
     }
   },
   "variety": {

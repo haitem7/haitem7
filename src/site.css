@@ -607,6 +607,51 @@
 }
 
 @layer components {
+  /* ---- Scroll-scrubbed hero ------------------------------------- *
+   * The section only becomes tall once site.js has decided to scrub, so
+   * a phone, a metered connection or reduced motion never get a screen
+   * and a half of empty scroll with nothing to show in it.
+   * -------------------------------------------------------------- */
+  .hero-scroll { position: relative; }
+  .hero-scroll.is-scrubbing { height: calc(100svh + 180vh); }
+  .hero-scroll.is-scrubbing > .hero {
+    position: sticky;
+    inset-block-start: 0;
+    height: 100svh;
+  }
+
+  .hero-canvas {
+    position: absolute; inset: 0;
+    z-index: 0;
+    width: 100%; height: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 900ms var(--ease-oil);
+    pointer-events: none;
+  }
+  .hero-canvas.is-ready { opacity: 0.92; }
+
+  /* A scrub is motion bound to scroll. Under reduced motion the section
+     stays one screen tall and the canvas never appears. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll.is-scrubbing { height: auto; }
+    .hero-scroll.is-scrubbing > .hero { position: relative; height: auto; }
+    .hero-canvas { display: none; }
+  }
+}
+
+@layer components {
+  /* Mill band: three portrait slots, the middle one dropped so the row
+     reads as a sequence of moments rather than a card rack. */
+  .shots { display: grid; gap: 1.5rem; margin-block-start: 2.5rem; }
+  @media (min-width: 46rem) {
+    .shots { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; align-items: start; }
+    .shots .shot:nth-child(2) { margin-block-start: clamp(2rem, 5vw, 4.5rem); }
+  }
+  .shot { margin: 0; }
+}
+
+@layer components {
   /* Optional video layer. It sits over the CSS oil field and under the
      scrim, so a video that never loads leaves the hero exactly as it was
      rather than leaving a hole. */
