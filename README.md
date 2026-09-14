@@ -120,6 +120,67 @@ un numéro inexistant coûte plus de confiance qu'il n'en rapporte.
 Formspree, EmailJS ou un endpoint maison.
 
 
+
+## Deux publics, deux pages
+
+Le site rend **six pages** : trois langues × deux publics.
+
+| URL | Public | Contenu |
+|---|---|---|
+| `/`, `/en/`, `/ar/` | Particuliers | Boutique, panier, livraison, commande |
+| `/export/`, `/en/export/`, `/ar/export/` | Professionnels | Variété, procédé, spécification, logistique, cotation |
+
+Un acheteur qui cherche « huile d'olive Tlemcen » arrive sur la boutique ;
+un importateur qui cherche des spécifications arrive sur `/export/`. Chaque
+page porte un lien vers l'autre dans son menu, et le sélecteur de langue
+reste **sur la même page** : passer de l'arabe au français depuis la boutique
+mène à la boutique française, pas à la page export.
+
+Le contenu vit dans `content/{fr,en,ar}.json`. La clé `shop` porte la page
+grand public, le reste porte la page export. **Les formats du catalogue sont
+copiés depuis `products.items` par position** : les deux pages ne peuvent pas
+diverger sur ce qui est vendu.
+
+### Le panier
+
+Entièrement côté client : `localStorage`, clé `tly.cart.v1`. Il survit à un
+rechargement et à un changement de langue sans serveur, sans cookie et sans
+compte. Seule la commande finalisée quitte le navigateur.
+
+**Chaque prix vient du balisage**, que `build.py` écrit depuis les fichiers de
+contenu. Rien n'est inventé, arrondi ni converti dans le JavaScript, et un
+format sans prix n'a pas de bouton « Ajouter » : personne ne peut mettre au
+panier un article dont il découvrira le prix plus tard.
+
+Vérifié dans Chromium : ajout, incrément, retrait, persistance après
+rechargement, fermeture par Échap, piège de focus dans le tiroir, bascule
+« retrait sur place » qui masque et dé-obligatoirise les champs d'adresse,
+et le tiroir qui s'ouvre à gauche en arabe.
+
+### Les 58 wilayas
+
+`content/wilayas.json` — code, nom latin, nom arabe, zone. Généré avec une
+assertion sur la continuité des codes 1 à 58 et l'unicité des noms.
+
+Les **zones sont un découpage géographique de départ** (Ouest / Centre / Est /
+Sud), pas votre grille de transport : ajustez l'appartenance des wilayas et
+les quatre tarifs dans `shop.delivery.zones` selon ce que votre transporteur
+vous facture réellement.
+
+### Ce que le panier ne fait pas
+
+Il ne **stocke** pas les commandes. À l'envoi, la commande part vers
+`shop.checkout.endpoint` s'il est renseigné, sinon vers `mailto:`. Pour un
+véritable historique de commandes il faut une fonction serveur (Netlify
+Functions, Cloudflare Workers) et une base — ce n'est plus un site statique.
+
+### Le paiement
+
+**Paiement à la livraison, en espèces.** Aucun paiement en ligne : encaisser
+par carte en Algérie passe par SATIM (CIB / Edahabia), ce qui exige un contrat
+marchand et une intégration serveur.
+
+
 ## Editing content
 
 All text and numbers live in `content/fr.json`, `content/en.json` and

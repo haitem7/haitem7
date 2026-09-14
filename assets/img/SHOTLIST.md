@@ -48,3 +48,26 @@ git add assets/img/ && git commit -m "Add mill photographs" && git push
 Envoie les fichiers **originaux**, pas des captures d'écran ni des images
 passées par WhatsApp : la compression y détruit le détail, et je ne peux
 pas le récupérer.
+
+
+## Depuis l'ouverture de la boutique
+
+La page boutique affiche cinq formats et **une seule photo** : le 1 litre.
+Les quatre autres cartes sont typographiques. Ça tient, mais une carte
+produit sans photo se vend moins bien qu'une carte avec.
+
+| Fichier attendu | Sujet |
+|---|---|
+| `bottles-250.jpg` | La bouteille 250 ml, seule, de face |
+| `bottles-500.jpg` | La bouteille 500 ml, seule, de face |
+| `bottles-750.jpg` | La bouteille 750 ml, seule, de face |
+| `bottles-5l.jpg` | Le bidon 5 litres, seul, de face |
+
+**Même lumière, même fond, même distance pour les cinq.** Posées côte à côte
+sur la grille, cinq photos prises dans cinq conditions différentes se voient
+immédiatement et font amateur. Une table près d'une fenêtre, un drap blanc
+derrière, le téléphone sur une pile de livres : ça suffit.
+
+Le cadrage est vertical (4/5), la bouteille centrée, un peu d'air au-dessus
+et en dessous. Envoie-les, je les recadre et je les intègre — il suffit
+ensuite de renseigner `img` dans `shop.catalog.items`.

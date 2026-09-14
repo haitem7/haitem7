@@ -1,0 +1,408 @@
+[
+ {
+  "code": "01",
+  "fr": "Adrar",
+  "en": "Adrar",
+  "ar": "أدرار",
+  "zone": 4
+ },
+ {
+  "code": "02",
+  "fr": "Chlef",
+  "en": "Chlef",
+  "ar": "الشلف",
+  "zone": 1
+ },
+ {
+  "code": "03",
+  "fr": "Laghouat",
+  "en": "Laghouat",
+  "ar": "الأغواط",
+  "zone": 2
+ },
+ {
+  "code": "04",
+  "fr": "Oum El Bouaghi",
+  "en": "Oum El Bouaghi",
+  "ar": "أم البواقي",
+  "zone": 3
+ },
+ {
+  "code": "05",
+  "fr": "Batna",
+  "en": "Batna",
+  "ar": "باتنة",
+  "zone": 3
+ },
+ {
+  "code": "06",
+  "fr": "Béjaïa",
+  "en": "Béjaïa",
+  "ar": "بجاية",
+  "zone": 2
+ },
+ {
+  "code": "07",
+  "fr": "Biskra",
+  "en": "Biskra",
+  "ar": "بسكرة",
+  "zone": 3
+ },
+ {
+  "code": "08",
+  "fr": "Béchar",
+  "en": "Béchar",
+  "ar": "بشار",
+  "zone": 4
+ },
+ {
+  "code": "09",
+  "fr": "Blida",
+  "en": "Blida",
+  "ar": "البليدة",
+  "zone": 2
+ },
+ {
+  "code": "10",
+  "fr": "Bouira",
+  "en": "Bouira",
+  "ar": "البويرة",
+  "zone": 2
+ },
+ {
+  "code": "11",
+  "fr": "Tamanrasset",
+  "en": "Tamanrasset",
+  "ar": "تمنراست",
+  "zone": 4
+ },
+ {
+  "code": "12",
+  "fr": "Tébessa",
+  "en": "Tébessa",
+  "ar": "تبسة",
+  "zone": 3
+ },
+ {
+  "code": "13",
+  "fr": "Tlemcen",
+  "en": "Tlemcen",
+  "ar": "تلمسان",
+  "zone": 1
+ },
+ {
+  "code": "14",
+  "fr": "Tiaret",
+  "en": "Tiaret",
+  "ar": "تيارت",
+  "zone": 1
+ },
+ {
+  "code": "15",
+  "fr": "Tizi Ouzou",
+  "en": "Tizi Ouzou",
+  "ar": "تيزي وزو",
+  "zone": 2
+ },
+ {
+  "code": "16",
+  "fr": "Alger",
+  "en": "Alger",
+  "ar": "الجزائر",
+  "zone": 2
+ },
+ {
+  "code": "17",
+  "fr": "Djelfa",
+  "en": "Djelfa",
+  "ar": "الجلفة",
+  "zone": 2
+ },
+ {
+  "code": "18",
+  "fr": "Jijel",
+  "en": "Jijel",
+  "ar": "جيجل",
+  "zone": 3
+ },
+ {
+  "code": "19",
+  "fr": "Sétif",
+  "en": "Sétif",
+  "ar": "سطيف",
+  "zone": 3
+ },
+ {
+  "code": "20",
+  "fr": "Saïda",
+  "en": "Saïda",
+  "ar": "سعيدة",
+  "zone": 1
+ },
+ {
+  "code": "21",
+  "fr": "Skikda",
+  "en": "Skikda",
+  "ar": "سكيكدة",
+  "zone": 3
+ },
+ {
+  "code": "22",
+  "fr": "Sidi Bel Abbès",
+  "en": "Sidi Bel Abbès",
+  "ar": "سيدي بلعباس",
+  "zone": 1
+ },
+ {
+  "code": "23",
+  "fr": "Annaba",
+  "en": "Annaba",
+  "ar": "عنابة",
+  "zone": 3
+ },
+ {
+  "code": "24",
+  "fr": "Guelma",
+  "en": "Guelma",
+  "ar": "قالمة",
+  "zone": 3
+ },
+ {
+  "code": "25",
+  "fr": "Constantine",
+  "en": "Constantine",
+  "ar": "قسنطينة",
+  "zone": 3
+ },
+ {
+  "code": "26",
+  "fr": "Médéa",
+  "en": "Médéa",
+  "ar": "المدية",
+  "zone": 2
+ },
+ {
+  "code": "27",
+  "fr": "Mostaganem",
+  "en": "Mostaganem",
+  "ar": "مستغانم",
+  "zone": 1
+ },
+ {
+  "code": "28",
+  "fr": "M'Sila",
+  "en": "M'Sila",
+  "ar": "المسيلة",
+  "zone": 2
+ },
+ {
+  "code": "29",
+  "fr": "Mascara",
+  "en": "Mascara",
+  "ar": "معسكر",
+  "zone": 1
+ },
+ {
+  "code": "30",
+  "fr": "Ouargla",
+  "en": "Ouargla",
+  "ar": "ورقلة",
+  "zone": 4
+ },
+ {
+  "code": "31",
+  "fr": "Oran",
+  "en": "Oran",
+  "ar": "وهران",
+  "zone": 1
+ },
+ {
+  "code": "32",
+  "fr": "El Bayadh",
+  "en": "El Bayadh",
+  "ar": "البيض",
+  "zone": 1
+ },
+ {
+  "code": "33",
+  "fr": "Illizi",
+  "en": "Illizi",
+  "ar": "إليزي",
+  "zone": 4
+ },
+ {
+  "code": "34",
+  "fr": "Bordj Bou Arréridj",
+  "en": "Bordj Bou Arréridj",
+  "ar": "برج بوعريريج",
+  "zone": 2
+ },
+ {
+  "code": "35",
+  "fr": "Boumerdès",
+  "en": "Boumerdès",
+  "ar": "بومرداس",
+  "zone": 2
+ },
+ {
+  "code": "36",
+  "fr": "El Tarf",
+  "en": "El Tarf",
+  "ar": "الطارف",
+  "zone": 3
+ },
+ {
+  "code": "37",
+  "fr": "Tindouf",
+  "en": "Tindouf",
+  "ar": "تندوف",
+  "zone": 4
+ },
+ {
+  "code": "38",
+  "fr": "Tissemsilt",
+  "en": "Tissemsilt",
+  "ar": "تيسمسيلت",
+  "zone": 1
+ },
+ {
+  "code": "39",
+  "fr": "El Oued",
+  "en": "El Oued",
+  "ar": "الوادي",
+  "zone": 4
+ },
+ {
+  "code": "40",
+  "fr": "Khenchela",
+  "en": "Khenchela",
+  "ar": "خنشلة",
+  "zone": 3
+ },
+ {
+  "code": "41",
+  "fr": "Souk Ahras",
+  "en": "Souk Ahras",
+  "ar": "سوق أهراس",
+  "zone": 3
+ },
+ {
+  "code": "42",
+  "fr": "Tipaza",
+  "en": "Tipaza",
+  "ar": "تيبازة",
+  "zone": 2
+ },
+ {
+  "code": "43",
+  "fr": "Mila",
+  "en": "Mila",
+  "ar": "ميلة",
+  "zone": 3
+ },
+ {
+  "code": "44",
+  "fr": "Aïn Defla",
+  "en": "Aïn Defla",
+  "ar": "عين الدفلى",
+  "zone": 2
+ },
+ {
+  "code": "45",
+  "fr": "Naâma",
+  "en": "Naâma",
+  "ar": "النعامة",
+  "zone": 1
+ },
+ {
+  "code": "46",
+  "fr": "Aïn Témouchent",
+  "en": "Aïn Témouchent",
+  "ar": "عين تموشنت",
+  "zone": 1
+ },
+ {
+  "code": "47",
+  "fr": "Ghardaïa",
+  "en": "Ghardaïa",
+  "ar": "غرداية",
+  "zone": 4
+ },
+ {
+  "code": "48",
+  "fr": "Relizane",
+  "en": "Relizane",
+  "ar": "غليزان",
+  "zone": 1
+ },
+ {
+  "code": "49",
+  "fr": "Timimoun",
+  "en": "Timimoun",
+  "ar": "تيميمون",
+  "zone": 4
+ },
+ {
+  "code": "50",
+  "fr": "Bordj Badji Mokhtar",
+  "en": "Bordj Badji Mokhtar",
+  "ar": "برج باجي مختار",
+  "zone": 4
+ },
+ {
+  "code": "51",
+  "fr": "Ouled Djellal",
+  "en": "Ouled Djellal",
+  "ar": "أولاد جلال",
+  "zone": 4
+ },
+ {
+  "code": "52",
+  "fr": "Béni Abbès",
+  "en": "Béni Abbès",
+  "ar": "بني عباس",
+  "zone": 4
+ },
+ {
+  "code": "53",
+  "fr": "In Salah",
+  "en": "In Salah",
+  "ar": "عين صالح",
+  "zone": 4
+ },
+ {
+  "code": "54",
+  "fr": "In Guezzam",
+  "en": "In Guezzam",
+  "ar": "عين قزام",
+  "zone": 4
+ },
+ {
+  "code": "55",
+  "fr": "Touggourt",
+  "en": "Touggourt",
+  "ar": "تقرت",
+  "zone": 4
+ },
+ {
+  "code": "56",
+  "fr": "Djanet",
+  "en": "Djanet",
+  "ar": "جانت",
+  "zone": 4
+ },
+ {
+  "code": "57",
+  "fr": "El M'Ghair",
+  "en": "El M'Ghair",
+  "ar": "المغير",
+  "zone": 4
+ },
+ {
+  "code": "58",
+  "fr": "El Meniaa",
+  "en": "El Meniaa",
+  "ar": "المنيعة",
+  "zone": 4
+ }
+]

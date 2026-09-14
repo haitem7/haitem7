@@ -91,6 +91,7 @@ def icon(name: str, size: int = 20) -> str:
         "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
         "close": '<path d="M6 6l12 12M18 6 6 18"/>',
         "seal": '<path d="M12 3.2 14.3 5l2.8-.3 1 2.6 2.4 1.5-.8 2.7.8 2.7-2.4 1.5-1 2.6-2.8-.3L12 20.8 9.7 19l-2.8.3-1-2.6L3.5 15.2l.8-2.7-.8-2.7 2.4-1.5 1-2.6 2.8.3z"/><path d="M9 12.2l2.1 2.1L15.3 10"/>',
+        "basket": '<path d="M5.2 8.5h13.6l-1.2 9a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7z"/><path d="M9 8.5 12 3.5l3 5"/><path d="M10 12v3.5M14 12v3.5"/>',
         "drop": '<path d="M12 3.5c3.2 4 5.2 6.6 5.2 9.2a5.2 5.2 0 0 1-10.4 0c0-2.6 2-5.2 5.2-9.2z"/>',
         # WhatsApp is a filled mark, not a stroked one: drawn at 1.6 stroke
         # weight beside our own icons it reads as a different family.
@@ -126,7 +127,20 @@ def table(head: list[str], rows: list[list[str]], caption: str, lang: str = "fr"
 
 # ---------------------------------------------------------------- sections
 
-def picture(src: str, alt: str, w: int, h: int, sizes: str) -> str:
+def rel(src: str, assets: str) -> str:
+    """Content stores one canonical path ("assets/img/x.jpg"); each page
+    needs it relative to its own depth.
+
+    Before this, the depth was baked into the content files — fr said
+    "assets/...", en and ar said "../assets/..." — which held only while
+    every page sat at the depth its language file assumed. Adding /export/
+    broke it, and /en/export/ broke it twice over.
+    """
+    s = src.replace("../", "").lstrip("/")
+    return assets + (s[len("assets/"):] if s.startswith("assets/") else s)
+
+
+def picture(src: str, alt: str, w: int, h: int, sizes: str, assets: str = "") -> str:
     """An <img>, upgraded to <picture> only for formats that exist on disk.
 
     A <source> is chosen on format support, not on the file being there:
@@ -134,13 +148,14 @@ def picture(src: str, alt: str, w: int, h: int, sizes: str) -> str:
     missing webm once killed the hero video.
     """
     local = ROOT / src.replace("../", "")
+    url = rel(src, assets)
     alts = ""
     for ext, mime in (("avif", "image/avif"), ("webp", "image/webp")):
         cand = local.with_suffix("." + ext)
         if cand.exists():
-            alts += f'<source type="{mime}" srcset="{e(src.rsplit(".", 1)[0])}.{ext}" sizes="{e(sizes)}">'
+            alts += f'<source type="{mime}" srcset="{e(url.rsplit(".", 1)[0])}.{ext}" sizes="{e(sizes)}">'
     img = (
-        f'<img src="{e(src)}" alt="{e(alt)}" width="{w}" height="{h}" sizes="{e(sizes)}" '
+        f'<img src="{e(url)}" alt="{e(alt)}" width="{w}" height="{h}" sizes="{e(sizes)}" '
         f'loading="lazy" decoding="async" onerror="{e(JS_IMG_FALLBACK)}">'
     )
     return f"<picture>{alts}{img}</picture>" if alts else img
@@ -149,10 +164,10 @@ def picture(src: str, alt: str, w: int, h: int, sizes: str) -> str:
 def head_tag(c: dict, assets: str, alts: list[dict]) -> str:
     m = c["meta"]
     base = SITE_URL
-    page_url = f"{base}/{c['path']}" if base else "/" + c["path"]
+    page_url = (base or "") + "/" + (c["path"] + "/" if c["path"] else "")
     hreflang = "".join(
         f'<link rel="alternate" hreflang="{a["lang"]}" '
-        f'href="{(base + "/" + a["path"]) if base else "/" + a["path"]}">'
+        f'href="{(base or "") + "/" + (a["path"] + "/" if a["path"] else "")}">'
         for a in alts
     )
     # og:image must be absolute — a relative one is silently dropped by every
@@ -191,16 +206,17 @@ def header(c: dict, assets: str, alts: list[dict]) -> str:
         f'<li><a class="navlink" href="{e(l["href"])}">{e(l["label"])}</a></li>' for l in c["nav"]
     )
     langs = "".join(
-        f'<li><a href="/{a["path"]}" lang="{a["lang"]}" hreflang="{a["lang"]}"'
+        f'<li><a href="/{a["path"] + "/" if a["path"] else ""}" lang="{a["lang"]}" hreflang="{a["lang"]}"'
         + (' aria-current="true"' if a["lang"] == c["lang"] else "")
         + f'>{e(a["label"])}</a></li>'
         for a in alts
     )
     brand = e(c.get("brand", BRAND_DEFAULT))
+    cta_id = e(c["checkout"]["id"] if c["kind"] == "shop" else c["rfq"]["id"])
     return f"""<a class="skip" href="#main">{e(c["skip"])}</a>
 <header class="site-head on-dark" data-head>
   <div class="shell head-row">
-    <a class="brand display" href="/{c["path"]}">{brand}</a>
+    <a class="brand display" href="/{c["path"] + "/" if c["path"] else ""}">{brand}</a>
     <button class="nav-toggle btn btn-quiet" type="button" data-nav-toggle
             aria-expanded="false" aria-controls="nav-panel"
             data-label-close="{e(c["nav_menu_close"])}">
@@ -208,13 +224,14 @@ def header(c: dict, assets: str, alts: list[dict]) -> str:
       <span data-nav-icon>{icon("menu")}</span>
     </button>
     <div class="nav-panel" id="nav-panel" data-nav-panel>
-      <nav aria-label="{e(c["nav"][0]["label"])}">
+      <nav aria-label="{e(c["nav_label"])}">
         <ul class="navlist">{links}</ul>
       </nav>
       <nav class="langnav" aria-label="{e(c["footer"]["lang_label"])}">
         <ul>{langs}</ul>
       </nav>
-      <a class="btn btn-primary head-cta" href="#{e(c["rfq"]["id"])}">{e(c["nav_cta"])}</a>
+      <a class="crosslink" href="{e(c["cross"]["href"])}">{e(c["cross"]["label"])}</a>
+      <a class="btn btn-primary head-cta" href="#{cta_id}">{e(c["nav_cta"])}</a>
     </div>
   </div>
 </header>"""
@@ -231,11 +248,11 @@ def hero(c: dict) -> str:
     if v and v.get("file"):
         webm = ""
         if v.get("webm") and (ROOT / v["webm"].lstrip("./").replace("../", "")).exists():
-            webm = f'<source data-src="{e(v["webm"])}" type="video/webm">' 
+            webm = f'<source data-src="{e(rel(v["webm"], c["assets"]))}" type="video/webm">' 
         video = (
             f'<video class="hero-video" data-hero-video aria-hidden="true" tabindex="-1" '
-            f'muted loop playsinline preload="none" poster="{e(v.get("poster", ""))}">'
-            f'{webm}<source data-src="{e(v["file"])}" type="video/mp4"></video>'
+            f'muted loop playsinline preload="none" poster="{e(rel(v["poster"], c["assets"])) if v.get("poster") else ""}">'
+            f'{webm}<source data-src="{e(rel(v["file"], c["assets"]))}" type="video/mp4"></video>'
         )
 
     return f"""<section class="hero on-dark grain" data-oil>
@@ -245,8 +262,8 @@ def hero(c: dict) -> str:
     <h1 class="display hero-title">{lines}</h1>
     <p class="hero-lede measure">{e(h["lede"])}</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#{e(c["rfq"]["id"])}">{e(h["cta_primary"])}</a>
-      <a class="btn btn-quiet" href="#{e(c["specs"]["id"])}">{e(h["cta_secondary"])}</a>
+      <a class="btn btn-primary" href="{e(h["cta_primary_href"])}">{e(h["cta_primary"])}</a>
+      <a class="btn btn-quiet" href="{e(h["cta_secondary_href"])}">{e(h["cta_secondary"])}</a>
     </div>
     {datagrid(h["data"], "hero-data", c["lang"])}
   </div>
@@ -266,7 +283,7 @@ def variety(c: dict) -> str:
     </div>
     <figure class="split-media reveal">
       <div class="slot {ratio_class(s["ratio"])}">
-        {picture(s["file"], s["alt"], 900, 1125, "(min-width: 56rem) 34vw, 92vw")}
+        {picture(s["file"], s["alt"], 900, 1125, "(min-width: 56rem) 34vw, 92vw", c["assets"])}
       </div>
       <figcaption class="media-note">{e(s["caption"])}</figcaption>
     </figure>
@@ -302,7 +319,7 @@ def products(c: dict) -> str:
     </div>
     <figure class="split-media reveal">
       <div class="slot {ratio_class(sl["ratio"])}">
-        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 32vw, 92vw")}
+        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 32vw, 92vw", c["assets"])}
       </div>
       <figcaption class="media-note">{e(sl["caption"])}</figcaption>
     </figure>
@@ -326,7 +343,7 @@ def process(c: dict) -> str:
     mark = ""
     if mk:
         mark = f"""<div class="proc-mark reveal">
-      {picture(mk["file"], mk["alt"], 320, 320, "(min-width: 62rem) 220px, 140px")}
+      {picture(mk["file"], mk["alt"], 320, 320, "(min-width: 62rem) 220px, 140px", c["assets"])}
     </div>"""
     return f"""<section class="band band-ink on-dark" id="{e(p["id"])}">
   <div class="shell proc-split">
@@ -360,11 +377,11 @@ def gallery(c: dict) -> str:
     for i, sh in enumerate(present):
         shots += f"""<figure class="shot reveal">
   <div class="slot {ratio_class("4 / 5")}">
-    {picture(sh["file"], sh["alt"], 800, 1000, "(min-width: 46rem) 30vw, 92vw")}
+    {picture(sh["file"], sh["alt"], 800, 1000, "(min-width: 46rem) 30vw, 92vw", c["assets"])}
   </div>
   <figcaption class="media-note">{e(sh["caption"])}</figcaption>
 </figure>"""
-    return f"""<section class="band band-stone gal gal-{len(present)}">
+    return f"""<section class="band band-stone gal gal-{len(present)}" id="{e(g["id"])}">
   <div class="shell gal-inner">
     <div class="gal-text reveal">
       <h2 class="display sec-title">{e(g["title"])}</h2>
@@ -407,7 +424,7 @@ def logistics(c: dict) -> str:
     if sl:
         media = f"""<figure class="split-media reveal">
       <div class="slot {ratio_class(sl["ratio"])}">
-        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 30vw, 92vw")}
+        {picture(sl["file"], sl["alt"], 900, 1174, "(min-width: 56rem) 30vw, 92vw", c["assets"])}
       </div>
       <figcaption class="media-note">{e(sl["caption"])}</figcaption>
     </figure>"""
@@ -524,9 +541,12 @@ def jsonld(c: dict) -> str:
     offers until content/*.json carries real prices — an offer is a public
     commercial commitment, and a wrong one is quoted back at you.
     """
-    f, L, P, m = c["footer"], c["location"], c["products"], c["meta"]
+    f, L, m = c["footer"], c["location"], c["meta"]
     S = c["schema"]
-    page_url = f"{SITE_URL}/{c['path']}" if SITE_URL else "/" + c["path"]
+    page_url = (SITE_URL or "") + "/" + (c["path"] + "/" if c["path"] else "")
+    # The company and the mill are one entity across all six pages, so their
+    # @id is pinned to the site root. Only the Product differs per page.
+    root = (SITE_URL or "") + "/"
     brand_name = c.get("brand", BRAND_DEFAULT)
 
     street = [x for x in f["address"][1:] if "TODO" not in x]
@@ -540,20 +560,20 @@ def jsonld(c: dict) -> str:
 
     org = {
         "@type": "Organization",
-        "@id": page_url + "#org",
+        "@id": root + "#org",
         "name": brand_name,
-        "url": page_url,
+        "url": root,
         "description": m["description"],
         "email": f["email"],
         "address": postal,
-        "location": {"@id": page_url + "#mill"},
+        "location": {"@id": root + "#mill"},
     }
     if "TODO" not in f["phone"]:
         org["telephone"] = f["phone"].replace(" ", "")
 
     mill = {
         "@type": "Place",
-        "@id": page_url + "#mill",
+        "@id": root + "#mill",
         "name": S["mill_name"],
         "address": postal,
     }
@@ -568,6 +588,7 @@ def jsonld(c: dict) -> str:
         mill["hasMap"] = ("https://www.google.com/maps/search/?api=1&query="
                           + quote(gps))
 
+    P = c["catalog"] if c["kind"] == "shop" else c["products"]
     product = {
         "@type": "Product",
         "@id": page_url + "#oil",
@@ -587,7 +608,7 @@ def jsonld(c: dict) -> str:
             "@type": "Offer",
             "name": i["size"],
             "price": price,
-            "priceCurrency": P.get("currency", "DZD"),
+            "priceCurrency": "DZD",
             "availability": "https://schema.org/InStock",
         })
     if offers:
@@ -617,6 +638,202 @@ def wa_link(c: dict) -> str:
         f' aria-label="{e(label)}"><span class="wa-mark">{icon("whatsapp", 22)}</span>'
         f'<span class="wa-text">{e(label)}</span></a>'
     )
+
+
+# ---------------------------------------------------------------- shop
+
+def money(v: str, currency: str, lang: str) -> str:
+    """A price, or nothing. Never a guess."""
+    v = str(v).strip()
+    return f"{num(v, lang)}&nbsp;{e(currency)}" if v else ""
+
+
+def catalog(c: dict) -> str:
+    k = c["catalog"]
+    cur = k["currency"]
+    cards = ""
+    for it in k["items"]:
+        price = str(it.get("price", "")).strip()
+        # A shop without prices is not a shop, but an invented price is a
+        # commercial commitment. Until the real figure is in the content
+        # file the card says so and the button stays disabled: nobody can
+        # add an unpriced item to a basket and discover the cost later.
+        if price:
+            price_html = f'<p class="card-price tnum">{money(price, cur, c["lang"])}</p>'
+            btn = (f'<button class="btn btn-primary card-add" type="button" data-add'
+                   f' data-sku="{e(it["sku"])}" data-size="{e(it["size"])}"'
+                   f' data-price="{e(price)}">{e(k["add"])}</button>')
+        else:
+            price_html = f'<p class="card-price pending">{e(k["price_pending"])}</p>'
+            btn = (f'<button class="btn btn-quiet card-add" type="button" disabled'
+                   f' aria-disabled="true">{e(k["add"])}</button>')
+        media = ""
+        if it.get("img"):
+            media = (f'<div class="card-media {ratio_class("4 / 5")}">'
+                     f'{picture("assets/img/" + it["img"] + ".jpg", it.get("alt", it["size"]), 800, 1000, "(min-width: 60rem) 22vw, 45vw", c["assets"])}'
+                     f'</div>')
+        cards += f"""<li class="card reveal">
+      {media}
+      <div class="card-body">
+        <p class="card-head"><span class="card-name tnum">{e(it["size"])}</span>
+          <span class="card-material">{e(it["material"])}</span></p>
+        <p class="card-note">{e(it["body"])}</p>
+      </div>
+      <div class="card-foot">{price_html}{btn}</div>
+    </li>"""
+    return f"""<section class="band band-paper" id="{e(k["id"])}">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <h2 class="display sec-title">{e(k["title"])}</h2>
+      <p class="measure sec-lede">{e(k["lede"])}</p>
+    </div>
+    <ul class="cards">{cards}</ul>
+    <p class="price-note reveal">{e(k["note"])}</p>
+  </div>
+</section>"""
+
+
+def delivery(c: dict) -> str:
+    d = c["delivery"]
+    wil = json.loads((ROOT / "content" / "wilayas.json").read_text("utf-8"))
+    lang = c["lang"]
+    rows = ""
+    for z in d["zones"]:
+        names = ", ".join(w[lang] for w in wil if w["zone"] == z["id"])
+        price = money(z.get("price", ""), c["catalog"]["currency"], lang)
+        cell = price if price else f'<span class="pending">{e(d["pending"])}</span>'
+        rows += (f'<tr><th scope="row">{e(z["name"])}</th>'
+                 f'<td class="tnum">{cell}</td>'
+                 f'<td class="zone-w">{e(names)}</td></tr>')
+    head = "".join(f'<th scope="col">{e(h)}</th>'
+                   for h in (d["zone_label"], d["price_label"], d["wilayas_label"]))
+    return f"""<section class="band band-stone" id="{e(d["id"])}">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <h2 class="display sec-title">{e(d["title"])}</h2>
+      <p class="measure sec-lede">{e(d["lede"])}</p>
+    </div>
+    {datagrid(d["facts"], "facts-grid", lang)}
+    <h3 class="sub-title reveal">{e(d["zones_title"])}</h3>
+    <div class="scroll-x reveal"><table class="spec zones">
+      <thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="pickup reveal">
+      <h3 class="sub-title">{e(d["pickup_title"])}</h3>
+      <p class="measure">{e(d["pickup_body"])}</p>
+    </div>
+    <p class="price-note reveal">{e(d["note"])}</p>
+  </div>
+</section>"""
+
+
+def wilaya_select(c: dict, f: dict) -> str:
+    wil = json.loads((ROOT / "content" / "wilayas.json").read_text("utf-8"))
+    lang = c["lang"]
+    opts = f'<option value="" selected disabled>{e(f["placeholder"])}</option>'
+    for w in wil:
+        # The code is part of every Algerian address, so it is carried in the
+        # value as well as shown: "16 — Alger" is how people say it.
+        opts += (f'<option value="{e(w["code"] + " " + w[lang])}" '
+                 f'data-zone="{w["zone"]}">{num(w["code"], lang)} — {e(w[lang])}</option>')
+    return opts
+
+
+def checkout(c: dict) -> str:
+    ch = c["checkout"]
+    cart = c["cart"]
+    fields = ""
+    for f in ch["fields"]:
+        fid = "co-" + f["name"]
+        req = " required" if f.get("required") else ""
+        star = '<span class="req" aria-hidden="true">*</span>' if f.get("required") else ""
+        hint = (f'<span class="hint" id="{fid}-hint">{e(f["hint"])}</span>'
+                if f.get("hint") else "")
+        described = f' aria-describedby="{fid}-hint"' if f.get("hint") else ""
+        auto = f' autocomplete="{e(f["autocomplete"])}"' if f.get("autocomplete") else ""
+        if f["type"] == "wilaya":
+            control = (f'<select id="{fid}" name="{e(f["name"])}"{req} data-zone-source>'
+                       f'{wilaya_select(c, f)}</select>')
+        elif f["type"] == "textarea":
+            control = f'<textarea id="{fid}" name="{e(f["name"])}" rows="3"{req}{auto}{described}></textarea>'
+        else:
+            control = f'<input id="{fid}" type="{e(f["type"])}" name="{e(f["name"])}"{req}{auto}{described}>'
+        fields += (f'<p class="field field-{e(f["name"])}">'
+                   f'<label for="{fid}">{e(f["label"])}{star}</label>'
+                   f'{hint}{control}'
+                   f'<span class="err" data-err="{fid}" hidden>{e(f.get("error", ""))}</span></p>')
+
+    wa_digits = re.sub(r"\D", "", c["footer"]["phone"])
+    wa = ""
+    if "TODO" not in c["footer"]["phone"] and len(wa_digits) >= 9:
+        wa = (f'<p class="co-wa"><a href="https://wa.me/{wa_digits}" target="_blank"'
+              f' rel="noopener" data-wa-order>{e(ch["whatsapp"])}</a></p>')
+
+    return f"""<section class="band band-ink on-dark" id="{e(ch["id"])}">
+  <div class="shell rfq-grid">
+    <div class="rfq-intro reveal">
+      <h2 class="display sec-title">{e(ch["title"])}</h2>
+      <p class="measure sec-lede">{e(ch["lede"])}</p>
+      <div class="co-summary" data-order-summary>
+        <h3 class="sub-title">{e(ch["summary_title"])}</h3>
+        <ul data-summary-lines></ul>
+        <p class="co-total"><span>{e(cart["total"])}</span>
+          <span class="tnum" data-summary-total></span></p>
+      </div>
+      <p class="req-note">{e(ch["required_note"])}</p>
+    </div>
+    <form class="rfq-form co-form reveal" data-order novalidate
+          data-endpoint="{e(ch.get("endpoint", ""))}"
+          data-mailto="{e(c["footer"]["email"])}"
+          data-empty-warning="{e(ch["empty_warning"])}">
+      <div class="summary" data-summary hidden tabindex="-1" role="alert">
+        <p class="summary-title">{icon("alert", 18)}<span>{e(ch["error_summary_title"])}</span></p>
+        <ul data-summary-list></ul>
+      </div>
+      <fieldset class="modes">
+        <legend>{e(ch["mode_label"])}</legend>
+        <p class="mode"><input type="radio" id="mode-d" name="mode" value="delivery" checked>
+          <label for="mode-d">{e(ch["mode_delivery"])}</label></p>
+        <p class="mode"><input type="radio" id="mode-p" name="mode" value="pickup">
+          <label for="mode-p">{e(ch["mode_pickup"])}</label></p>
+      </fieldset>
+      <div class="fields">{fields}</div>
+      <button class="btn btn-primary submit" type="submit" data-submit
+              data-idle="{e(ch["submit"])}" data-busy="{e(ch["submitting"])}">{e(ch["submit"])}</button>
+      {wa}
+      <div class="done" data-done hidden tabindex="-1">
+        <p class="done-title">{icon("check", 18)}<span>{e(ch["success_title"])}</span></p>
+        <p>{e(ch["success_body"])}</p>
+      </div>
+    </form>
+  </div>
+</section>"""
+
+
+def cart_drawer(c: dict) -> str:
+    t = c["cart"]
+    k = c["catalog"]
+    return f"""<button class="cart-fab" type="button" data-cart-open hidden>
+  {icon("basket", 20)}<span>{e(t["open"])}</span>
+  <span class="cart-count tnum" data-cart-count>0</span>
+</button>
+<div class="cart-veil" data-cart-veil hidden></div>
+<aside class="cart" data-cart hidden aria-labelledby="cart-title" role="dialog" aria-modal="true"
+       data-labels="{e(json.dumps({k: t[k] for k in ("qty","inc","dec","remove","removed","added_live")}, ensure_ascii=False))}">
+  <div class="cart-head">
+    <h2 class="sub-title" id="cart-title">{e(t["title"])}</h2>
+    <button class="icon-btn" type="button" data-cart-close aria-label="{e(t["close"])}">{icon("close", 20)}</button>
+  </div>
+  <p class="cart-empty" data-cart-empty>{e(t["empty"])}
+    <a href="#{e(k["id"])}" data-cart-close>{e(t["empty_cta"])}</a></p>
+  <ul class="cart-lines" data-cart-lines></ul>
+  <div class="cart-foot" data-cart-foot hidden>
+    <p class="cart-row"><span>{e(t["subtotal"])}</span><span class="tnum" data-cart-subtotal></span></p>
+    <p class="cart-row cart-ship"><span>{e(t["shipping"])}</span><span>{e(t["shipping_pending"])}</span></p>
+    <a class="btn btn-primary cart-go" href="#{e(c["checkout"]["id"])}" data-cart-checkout>{e(t["checkout"])}</a>
+  </div>
+</aside>
+<div class="sr-live" role="status" aria-live="polite" data-cart-live></div>"""
+
 
 
 def rfq(c: dict) -> str:
@@ -653,7 +870,7 @@ def footer(c: dict, alts: list[dict]) -> str:
     f = c["footer"]
     addr = "<br>".join(e(l) for l in f["address"])
     langs = "".join(
-        f'<li><a href="/{a["path"]}" lang="{a["lang"]}" hreflang="{a["lang"]}"'
+        f'<li><a href="/{a["path"] + "/" if a["path"] else ""}" lang="{a["lang"]}" hreflang="{a["lang"]}"'
         + (' aria-current="true"' if a["lang"] == c["lang"] else "")
         + f'>{e(a["label"])}</a></li>'
         for a in alts
@@ -682,30 +899,50 @@ def footer(c: dict, alts: list[dict]) -> str:
   <div class="shell foot-legal"><p>{e(f["legal"])}</p></div>
 </footer>"""
 
+
+# ---------------------------------------------------------------- views
+
+def shop_view(c: dict) -> dict:
+    """The retail page: shared blocks (footer, location, gallery, brand)
+    overlaid with everything under "shop"."""
+    v = dict(c)
+    v.update(c["shop"])
+    v["kind"] = "shop"
+    return v
+
+
+def export_view(c: dict) -> dict:
+    """The trade page: the site as it was, moved off the root."""
+    v = dict(c)
+    v["path"] = c["export_path"]
+    v["kind"] = "export"
+    return v
+
+
+def assets_prefix(path: str) -> str:
+    return "assets/" if not path else "../" * (path.count("/") + 1) + "assets/"
+
 # ---------------------------------------------------------------- page
 
 def page(c: dict, alts: list[dict]) -> str:
-    assets = "assets/" if c["path"] == "" else "../assets/"
+    assets = assets_prefix(c["path"])
+    c = dict(c, assets=assets)
+    if c["kind"] == "shop":
+        parts = [hero(c), catalog(c), delivery(c), gallery(c),
+                 location(c), checkout(c)]
+        tail = cart_drawer(c)
+    else:
+        parts = [hero(c), variety(c), products(c), process(c), gallery(c),
+                 specs(c), logistics(c), certs(c), location(c), rfq(c)]
+        tail = ""
     body = "\n".join(
-        [
-            header(c, assets, alts),
-            '<main id="main">',
-            hero(c),
-            variety(c),
-            products(c),
-            process(c),
-            gallery(c),
-            specs(c),
-            logistics(c),
-            certs(c),
-            location(c),
-            rfq(c),
-            "</main>",
-            footer(c, alts),
-        ]
+        [header(c, assets, alts), '<main id="main">', *parts, "</main>",
+         footer(c, alts), tail]
     )
+    currency = (f' data-currency="{e(c["catalog"]["currency"])}"'
+                if c["kind"] == "shop" else "")
     return f"""<!doctype html>
-<html lang="{c["lang"]}" dir="{c["dir"]}" class="no-js">
+<html lang="{c["lang"]}" dir="{c["dir"]}" class="no-js"{currency}>
 <head>
 {head_tag(c, assets, alts)}
 <script>{JS_NOJS}</script>
@@ -733,7 +970,7 @@ def write_site_files(data: dict) -> None:
     from, so a new inline handler can never silently break the policy: change
     the handler, rebuild, and _headers follows.
     """
-    paths = [c["path"] for c in data.values()]
+    paths = data["_pages"]
 
     # -- robots.txt --------------------------------------------------------
     robots = ["User-agent: *", "Allow: /", ""]
@@ -750,9 +987,15 @@ def write_site_files(data: dict) -> None:
         urls = ""
         for path in paths:
             loc = f"{SITE_URL}/{path}"
+            # hreflang siblings are the same page in the other languages,
+            # which for /en/export/ is /export/ and /ar/export/ — not /en/.
+            stem = path.split("/")[-1] if "/" in path else ("" if path in ("", "en", "ar") else path)
+            sibs = [p for p in paths
+                    if (p.split("/")[-1] if "/" in p else ("" if p in ("", "en", "ar") else p)) == stem]
             alts = "".join(
-                f'<xhtml:link rel="alternate" hreflang="{c["lang"]}" '
-                f'href="{SITE_URL}/{c["path"]}"/>' for c in data.values()
+                f'<xhtml:link rel="alternate" '
+                f'hreflang="{"fr" if q in ("", "export") else q.split("/")[0]}" '
+                f'href="{SITE_URL}/{q}"/>' for q in sibs
             )
             urls += (f"<url><loc>{loc}</loc>{alts}"
                      f'<xhtml:link rel="alternate" hreflang="x-default" '
@@ -768,7 +1011,12 @@ def write_site_files(data: dict) -> None:
     # If the quotation form posts to a third party (Formspree, EmailJS…),
     # that origin has to be allowed or the browser blocks the submission and
     # the buyer sees a silent failure. Derived, never hand-maintained.
-    endpoints = {c["rfq"].get("endpoint", "").strip() for c in data.values()}
+    endpoints = set()
+    for key, c in data.items():
+        if key == "_pages":
+            continue
+        endpoints.add(c["rfq"].get("endpoint", "").strip())
+        endpoints.add(c["shop"]["checkout"].get("endpoint", "").strip())
     origins = sorted({
         f"{(u := urlsplit(url)).scheme}://{u.netloc}"
         for url in endpoints if url.startswith("http")
@@ -826,14 +1074,21 @@ def write_site_files(data: dict) -> None:
 
 def main() -> None:
     data = {l: json.loads((ROOT / "content" / f"{l}.json").read_text("utf-8")) for l in LOCALES}
-    alts = [
-        {"lang": d["lang"], "path": d["path"], "label": d["label"]} for d in data.values()
-    ]
-    for l, c in data.items():
-        out = ROOT / "index.html" if c["path"] == "" else ROOT / c["path"] / "index.html"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(page(c, alts), "utf-8")
-        print(f"  {out.relative_to(ROOT)}  ({len(out.read_text('utf-8')):,} bytes)")
+    # Two pages per language. The language switcher must stay on the page
+    # the reader is already on: a shopper sent from the Arabic shop to the
+    # French export page has lost their place, not changed language.
+    views = {"shop": [shop_view(d) for d in data.values()],
+             "export": [export_view(d) for d in data.values()]}
+    pages = []
+    for kind, vs in views.items():
+        alts = [{"lang": v["lang"], "path": v["path"], "label": v["label"]} for v in vs]
+        for v in vs:
+            out = ROOT / (v["path"] + "/" if v["path"] else "") / "index.html"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(page(v, alts), "utf-8")
+            pages.append(v["path"])
+            print(f"  {out.relative_to(ROOT)}  ({len(out.read_text('utf-8')):,} bytes)")
+    data["_pages"] = pages
     write_ratio_css()
     write_site_files(data)
     extra = ["robots.txt", "_headers", ".htaccess"] + (["sitemap.xml"] if SITE_URL else [])

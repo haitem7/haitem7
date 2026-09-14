@@ -75,10 +75,12 @@
       }
     ],
     "video": {
-      "file": "../assets/video/hero.mp4",
-      "webm": "../assets/video/hero.webm",
-      "poster": "../assets/video/hero-poster.jpg"
-    }
+      "file": "assets/video/hero.mp4",
+      "webm": "assets/video/hero.webm",
+      "poster": "assets/video/hero-poster.jpg"
+    },
+    "cta_primary_href": "#quote",
+    "cta_secondary_href": "#analysis"
   },
   "variety": {
     "id": "variety",
@@ -106,7 +108,7 @@
       }
     ],
     "slot": {
-      "file": "../assets/img/harvest-placeholder.jpg",
+      "file": "assets/img/harvest-placeholder.jpg",
       "alt": "يدان تقطفان زيتونًا أخضر من الغصن، وقفة من الحلفاء مملوءة بالزيتون في المقدمة",
       "caption": "جني يدوي، زيتون أخضر",
       "ratio": "1200 / 1600"
@@ -152,7 +154,7 @@
     "price_pending": "عند الطلب",
     "price_note": "السعر يتوقف على الكمية وشرط التسليم والحملة. نقدّمه ضمن عرض السعر، في غضون 48 ساعة عمل.",
     "slot": {
-      "file": "../assets/img/bottles-1l.jpg",
+      "file": "assets/img/bottles-1l.jpg",
       "ratio": "900 / 1174",
       "alt": "ثلاث قوارير PET سعة لتر من زيت زيتون تلمسانية البكر الممتاز، من الأمام والخلف",
       "caption": "عبوة لتر واحد، PET غذائي"
@@ -195,7 +197,7 @@
       }
     ],
     "mark": {
-      "file": "../assets/img/mark.jpg",
+      "file": "assets/img/mark.jpg",
       "alt": "ختم تلمسانية، زيت زيتون بكر ممتاز، تراث تلمسان"
     }
   },
@@ -203,17 +205,17 @@
     "title": "المعصرة",
     "shots": [
       {
-        "file": "../assets/img/mill-extraction.jpg",
+        "file": "assets/img/mill-extraction.jpg",
         "alt": "خيط من الزيت الأخضر ينساب من فوهة فولاذية إلى حوض الترسيب",
         "caption": "مخرج الزيت، قاعة الاستخلاص"
       },
       {
-        "file": "../assets/img/tanks.jpg",
+        "file": "assets/img/tanks.jpg",
         "alt": "خزانات تخزين فولاذية تحت غلاف نيتروجيني",
         "caption": "خزانات فولاذية، غلاف نيتروجيني"
       },
       {
-        "file": "../assets/img/loading.jpg",
+        "file": "assets/img/loading.jpg",
         "alt": "منصات علب محمّلة داخل حاوية بحرية",
         "caption": "الشحن، انطلاقًا من الغزوات"
       }
@@ -221,7 +223,8 @@
     "body": [
       "نعرض الورشة كما هي، بلا إخراج. من يلتزم بحاوية كاملة من حقه أن يرى أين يُنتَج زيته، والقاعة المرتّبة تُقرأ في صورة عادية أفضل مما تُقرأ في صورة استوديو.",
       "الزيت عند مخرج جهاز الفصل، قبل الترشيح: هذا الأخضر الكثيف والعَكِر هو ما تعطيه زيتونة عُصرت يوم جنيها."
-    ]
+    ],
+    "id": "huilerie"
   },
   "specs": {
     "id": "analysis",
@@ -538,5 +541,260 @@
   "schema": {
     "product_name": "زيت زيتون بكر ممتاز من صنف سيغواز — تلمسانية",
     "mill_name": "معصرة تلمسانية"
-  }
+  },
+  "export_path": "ar/export",
+  "shop": {
+    "path": "ar",
+    "kind": "shop",
+    "meta": {
+      "title": "تلمسانية — زيت زيتون من تلمسان، يُوصَّل عبر الجزائر",
+      "description": "زيت زيتون بكر ممتاز من صنف سيغواز، مستخلَص على البارد بتلمسان. من 250 مل إلى 5 ل، توصيل إلى 58 ولاية، الدفع عند الاستلام.",
+      "og_locale": "ar_DZ"
+    },
+    "nav": [
+      {
+        "href": "#boutique",
+        "label": "المتجر"
+      },
+      {
+        "href": "#livraison",
+        "label": "التوصيل"
+      },
+      {
+        "href": "#huilerie",
+        "label": "المعصرة"
+      },
+      {
+        "href": "#acces",
+        "label": "موقعنا"
+      }
+    ],
+    "nav_cta": "اطلب الآن",
+    "cross": {
+      "label": "المشترون المحترفون والتصدير",
+      "href": "export/"
+    },
+    "hero": {
+      "eyebrow": "معصرة عائلية — تلمسان",
+      "title_lines": [
+        "زيتنا،",
+        "على مائدتك"
+      ],
+      "lede": "سيغواز من مرتفعات وادي الأخضر، معصور على البارد في ساعات من الجني. نفس الدفعة التي تُصدَّر إلى الخارج.",
+      "cta_primary": "شاهد العبوات",
+      "cta_primary_href": "#boutique",
+      "cta_secondary": "التوصيل والدفع",
+      "cta_secondary_href": "#livraison",
+      "data": [
+        {
+          "label": "الحموضة",
+          "value": "≤ 0,8 ٪"
+        },
+        {
+          "label": "الاستخلاص",
+          "value": "على البارد"
+        },
+        {
+          "label": "التوصيل",
+          "value": "58 ولاية"
+        }
+      ]
+    },
+    "catalog": {
+      "id": "boutique",
+      "title": "المتجر",
+      "lede": "زيت واحد، خمس عبوات. المحتوى واحد؛ الفرق في الشكل فقط.",
+      "currency": "دج",
+      "unit_label": "السعر",
+      "price_pending": "السعر قيد التحديد",
+      "add": "أضف إلى السلة",
+      "added": "أُضيف",
+      "sold_out": "غير متوفر",
+      "note": "الأسعار تشمل الرسوم ولا تشمل التوصيل.",
+      "items": [
+        {
+          "sku": "tly-250",
+          "size": "250 مل",
+          "material": "زجاج",
+          "body": "عبوة التذوّق والعلبة الهدية.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-500",
+          "size": "500 مل",
+          "material": "زجاج",
+          "body": "عبوة الهدية، والعيّنة قبل الطلب.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-750",
+          "size": "750 مل",
+          "material": "زجاج",
+          "body": "عبوة المائدة.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-1000",
+          "size": "1 لتر",
+          "material": "PET",
+          "body": "العبوة الشائعة. مقبض حمل مدمج، وملصق على الوجهين مع الجدول الغذائي ورمز الباركود.",
+          "price": "",
+          "img": "bottles-1l",
+          "alt": "ثلاث قوارير PET سعة لتر من زيت زيتون تلمسانية البكر الممتاز، من الأمام والخلف"
+        },
+        {
+          "sku": "tly-5000",
+          "size": "5 لترات",
+          "material": "PET",
+          "body": "عبوة العائلة والمطاعم. مقبض مصبوب، وغطاء بحلقة أمان.",
+          "price": "",
+          "img": ""
+        }
+      ]
+    },
+    "cart": {
+      "title": "سلتك",
+      "open": "السلة",
+      "close": "إغلاق السلة",
+      "empty": "سلتك فارغة.",
+      "empty_cta": "شاهد العبوات",
+      "qty": "الكمية",
+      "inc": "زيادة الكمية",
+      "dec": "إنقاص الكمية",
+      "remove": "إزالة",
+      "removed": "أُزيل المنتج من السلة.",
+      "subtotal": "المجموع الفرعي",
+      "shipping": "التوصيل",
+      "total": "الإجمالي",
+      "shipping_pending": "يُحتسب في الخطوة التالية",
+      "shipping_pickup": "الاستلام من المعصرة — مجاني",
+      "checkout": "إتمام الطلب",
+      "added_live": "أُضيف إلى السلة."
+    },
+    "delivery": {
+      "id": "livraison",
+      "title": "التوصيل والدفع",
+      "lede": "نوصّل إلى 58 ولاية. تدفع لعامل التوصيل نقدًا عند الاستلام — دون أي دفع مسبق.",
+      "zones_title": "رسوم التوصيل",
+      "zone_label": "المنطقة",
+      "price_label": "الرسوم",
+      "wilayas_label": "الولايات",
+      "pending": "قيد التحديد",
+      "zones": [
+        {
+          "id": 1,
+          "name": "الغرب",
+          "price": ""
+        },
+        {
+          "id": 2,
+          "name": "الوسط",
+          "price": ""
+        },
+        {
+          "id": 3,
+          "name": "الشرق",
+          "price": ""
+        },
+        {
+          "id": 4,
+          "name": "الجنوب",
+          "price": ""
+        }
+      ],
+      "pickup_title": "الاستلام من المعصرة",
+      "pickup_body": "يمكنك استلام طلبك من المعصرة على الطريق الوطني رقم 7. مجانًا، وترى بنفسك من أين يأتي الزيت.",
+      "facts": [
+        {
+          "label": "الدفع",
+          "value": "نقدًا عند الاستلام"
+        },
+        {
+          "label": "المهلة",
+          "value": "قيد التأكيد"
+        },
+        {
+          "label": "الاستلام من المكان",
+          "value": "مجاني"
+        }
+      ],
+      "note": "تُؤكَّد المهلة والرسوم بدقة عبر الهاتف قبل الإرسال."
+    },
+    "checkout": {
+      "id": "commande",
+      "title": "إتمام الطلب",
+      "lede": "اترك لنا بياناتك: نتصل بك لتأكيد الطلب والمهلة ورسوم التوصيل قبل الإرسال.",
+      "required_note": "الحقول المعلَّمة بنجمة إلزامية.",
+      "empty_warning": "أضف عبوة إلى سلتك أولًا.",
+      "summary_title": "طلبك",
+      "error_summary_title": "تعذّر إرسال طلبك:",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "label": "الاسم واللقب",
+          "required": true,
+          "autocomplete": "name",
+          "error": "اذكر اسمك ولقبك."
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "label": "الهاتف",
+          "required": true,
+          "autocomplete": "tel",
+          "error": "اذكر رقمًا يمكننا الاتصال بك عليه."
+        },
+        {
+          "name": "wilaya",
+          "type": "wilaya",
+          "label": "الولاية",
+          "required": true,
+          "placeholder": "اختر ولايتك",
+          "error": "اختر ولايتك."
+        },
+        {
+          "name": "commune",
+          "type": "text",
+          "label": "البلدية",
+          "required": true,
+          "autocomplete": "address-level2",
+          "error": "اذكر بلديتك."
+        },
+        {
+          "name": "address",
+          "type": "textarea",
+          "label": "عنوان التوصيل",
+          "required": true,
+          "autocomplete": "street-address",
+          "error": "اذكر العنوان الكامل لعامل التوصيل."
+        },
+        {
+          "name": "note",
+          "type": "textarea",
+          "label": "ملاحظة",
+          "required": false,
+          "hint": "اختياري: معلم قريب، أو وقت يناسبك."
+        }
+      ],
+      "mode_label": "طريقة الاستلام",
+      "mode_delivery": "التوصيل إلى المنزل",
+      "mode_pickup": "الاستلام من المعصرة",
+      "submit": "إرسال الطلب",
+      "submitting": "جارٍ الإرسال…",
+      "success_title": "تم استلام الطلب",
+      "success_body": "شكرًا لك. سنتصل بك لتأكيد المهلة ورسوم التوصيل.",
+      "whatsapp": "أو أرسل طلبك عبر واتساب",
+      "endpoint": ""
+    },
+    "nav_label": "التنقل الرئيسي"
+  },
+  "cross": {
+    "label": "للأفراد — المتجر",
+    "href": "../"
+  },
+  "nav_label": "التنقل الرئيسي"
 }

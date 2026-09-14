@@ -74,10 +74,12 @@
       }
     ],
     "video": {
-      "file": "../assets/video/hero.mp4",
-      "webm": "../assets/video/hero.webm",
-      "poster": "../assets/video/hero-poster.jpg"
-    }
+      "file": "assets/video/hero.mp4",
+      "webm": "assets/video/hero.webm",
+      "poster": "assets/video/hero-poster.jpg"
+    },
+    "cta_primary_href": "#quote",
+    "cta_secondary_href": "#analysis"
   },
   "variety": {
     "id": "variety",
@@ -105,7 +107,7 @@
       }
     ],
     "slot": {
-      "file": "../assets/img/harvest-placeholder.jpg",
+      "file": "assets/img/harvest-placeholder.jpg",
       "alt": "Two hands picking green olives from the branch, a woven esparto basket of olives in the foreground",
       "caption": "Hand picking, green olives",
       "ratio": "1200 / 1600"
@@ -151,7 +153,7 @@
     "price_pending": "On request",
     "price_note": "Price depends on volume, Incoterm and the campaign. We give it in the quotation, within 48 working hours.",
     "slot": {
-      "file": "../assets/img/bottles-1l.jpg",
+      "file": "assets/img/bottles-1l.jpg",
       "ratio": "900 / 1174",
       "alt": "Three one-litre PET bottles of TLEMCENYA extra virgin olive oil, front and back",
       "caption": "One-litre format, food-grade PET"
@@ -194,7 +196,7 @@
       }
     ],
     "mark": {
-      "file": "../assets/img/mark.jpg",
+      "file": "assets/img/mark.jpg",
       "alt": "TLEMCENYA seal, extra virgin olive oil, heritage of Tlemcen"
     }
   },
@@ -202,17 +204,17 @@
     "title": "The mill",
     "shots": [
       {
-        "file": "../assets/img/mill-extraction.jpg",
+        "file": "assets/img/mill-extraction.jpg",
         "alt": "A stream of green oil running from a stainless spout into a settling vessel",
         "caption": "Oil outlet, extraction room"
       },
       {
-        "file": "../assets/img/tanks.jpg",
+        "file": "assets/img/tanks.jpg",
         "alt": "Nitrogen-blanketed stainless steel storage tanks",
         "caption": "Stainless tanks, nitrogen blanket"
       },
       {
-        "file": "../assets/img/loading.jpg",
+        "file": "assets/img/loading.jpg",
         "alt": "Pallets of tins loaded into a shipping container",
         "caption": "Loading, outbound Ghazaouet"
       }
@@ -220,7 +222,8 @@
     "body": [
       "We show the room as it is, unstaged. A buyer committing to a container has a right to see where the oil is made, and a well-kept room reads more convincingly in an ordinary photograph than in a studio shot.",
       "Oil at the decanter outlet, before filtering: that dense, cloudy green is what an olive pressed on the day it was picked gives."
-    ]
+    ],
+    "id": "huilerie"
   },
   "specs": {
     "id": "analysis",
@@ -537,5 +540,260 @@
   "schema": {
     "product_name": "Sigoise extra virgin olive oil — TLEMCENYA",
     "mill_name": "TLEMCENYA olive mill"
-  }
+  },
+  "export_path": "en/export",
+  "shop": {
+    "path": "en",
+    "kind": "shop",
+    "meta": {
+      "title": "TLEMCENYA — Olive oil from Tlemcen, delivered across Algeria",
+      "description": "Sigoise extra virgin olive oil, cold-extracted in Tlemcen. 250 ml to 5 L, delivered to all 58 wilayas, cash on delivery.",
+      "og_locale": "en"
+    },
+    "nav": [
+      {
+        "href": "#boutique",
+        "label": "Shop"
+      },
+      {
+        "href": "#livraison",
+        "label": "Delivery"
+      },
+      {
+        "href": "#huilerie",
+        "label": "The mill"
+      },
+      {
+        "href": "#acces",
+        "label": "Find us"
+      }
+    ],
+    "nav_cta": "Order",
+    "cross": {
+      "label": "Trade & export buyers",
+      "href": "export/"
+    },
+    "hero": {
+      "eyebrow": "Family mill — Tlemcen",
+      "title_lines": [
+        "Our oil,",
+        "on your table"
+      ],
+      "lede": "Sigoise from the Oued Lakhdar hillsides, cold-pressed within hours of picking. The same lot that leaves for export.",
+      "cta_primary": "See the formats",
+      "cta_primary_href": "#boutique",
+      "cta_secondary": "Delivery & payment",
+      "cta_secondary_href": "#livraison",
+      "data": [
+        {
+          "label": "Acidity",
+          "value": "≤ 0.8 %"
+        },
+        {
+          "label": "Extraction",
+          "value": "Cold"
+        },
+        {
+          "label": "Delivery",
+          "value": "58 wilayas"
+        }
+      ]
+    },
+    "catalog": {
+      "id": "boutique",
+      "title": "The shop",
+      "lede": "One oil, five formats. The contents are identical: only the container changes.",
+      "currency": "DA",
+      "unit_label": "Price",
+      "price_pending": "Price to be set",
+      "add": "Add to basket",
+      "added": "Added",
+      "sold_out": "Unavailable",
+      "note": "Prices include tax and exclude delivery.",
+      "items": [
+        {
+          "sku": "tly-250",
+          "size": "250 ml",
+          "material": "Glass",
+          "body": "Tasting and gift-box format.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-500",
+          "size": "500 ml",
+          "material": "Glass",
+          "body": "Gift format, and the sample before an order.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-750",
+          "size": "750 ml",
+          "material": "Glass",
+          "body": "Table format.",
+          "price": "",
+          "img": ""
+        },
+        {
+          "sku": "tly-1000",
+          "size": "1 litre",
+          "material": "PET",
+          "body": "The everyday format. Moulded carry loop, front and back labels with nutrition panel and barcode.",
+          "price": "",
+          "img": "bottles-1l",
+          "alt": "Three one-litre PET bottles of TLEMCENYA extra virgin olive oil, front and back"
+        },
+        {
+          "sku": "tly-5000",
+          "size": "5 litres",
+          "material": "PET",
+          "body": "Family and catering format. Moulded handle, tamper-evident cap.",
+          "price": "",
+          "img": ""
+        }
+      ]
+    },
+    "cart": {
+      "title": "Your basket",
+      "open": "Basket",
+      "close": "Close basket",
+      "empty": "Your basket is empty.",
+      "empty_cta": "See the formats",
+      "qty": "Quantity",
+      "inc": "Increase quantity",
+      "dec": "Decrease quantity",
+      "remove": "Remove",
+      "removed": "Item removed from basket.",
+      "subtotal": "Subtotal",
+      "shipping": "Delivery",
+      "total": "Total",
+      "shipping_pending": "Calculated at the next step",
+      "shipping_pickup": "Collection at the mill — free",
+      "checkout": "Place the order",
+      "added_live": "Added to basket."
+    },
+    "delivery": {
+      "id": "livraison",
+      "title": "Delivery and payment",
+      "lede": "We deliver to all 58 wilayas. You pay the courier in cash on arrival — nothing up front.",
+      "zones_title": "Delivery charges",
+      "zone_label": "Zone",
+      "price_label": "Charge",
+      "wilayas_label": "Wilayas",
+      "pending": "To be set",
+      "zones": [
+        {
+          "id": 1,
+          "name": "West",
+          "price": ""
+        },
+        {
+          "id": 2,
+          "name": "Centre",
+          "price": ""
+        },
+        {
+          "id": 3,
+          "name": "East",
+          "price": ""
+        },
+        {
+          "id": 4,
+          "name": "South",
+          "price": ""
+        }
+      ],
+      "pickup_title": "Collection at the mill",
+      "pickup_body": "You can collect your order at the mill on national road N7. It costs nothing, and you see where the oil comes from.",
+      "facts": [
+        {
+          "label": "Payment",
+          "value": "Cash on delivery"
+        },
+        {
+          "label": "Lead time",
+          "value": "To be confirmed"
+        },
+        {
+          "label": "Collection",
+          "value": "Free"
+        }
+      ],
+      "note": "Exact lead time and charges are confirmed by phone before dispatch."
+    },
+    "checkout": {
+      "id": "commande",
+      "title": "Complete your order",
+      "lede": "Leave us your details and we will call you to confirm the order, the lead time and the delivery charge before dispatch.",
+      "required_note": "Fields marked with an asterisk are required.",
+      "empty_warning": "Add a format to your basket first.",
+      "summary_title": "Your order",
+      "error_summary_title": "Your order could not be sent:",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "label": "Full name",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Please give your full name."
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "label": "Phone",
+          "required": true,
+          "autocomplete": "tel",
+          "error": "Please give a number we can reach you on."
+        },
+        {
+          "name": "wilaya",
+          "type": "wilaya",
+          "label": "Wilaya",
+          "required": true,
+          "placeholder": "Choose your wilaya",
+          "error": "Please choose your wilaya."
+        },
+        {
+          "name": "commune",
+          "type": "text",
+          "label": "Commune",
+          "required": true,
+          "autocomplete": "address-level2",
+          "error": "Please give your commune."
+        },
+        {
+          "name": "address",
+          "type": "textarea",
+          "label": "Delivery address",
+          "required": true,
+          "autocomplete": "street-address",
+          "error": "Please give the full address for the courier."
+        },
+        {
+          "name": "note",
+          "type": "textarea",
+          "label": "Note",
+          "required": false,
+          "hint": "Optional: a landmark, a time that suits you."
+        }
+      ],
+      "mode_label": "How you receive it",
+      "mode_delivery": "Home delivery",
+      "mode_pickup": "Collection at the mill",
+      "submit": "Send the order",
+      "submitting": "Sending…",
+      "success_title": "Order received",
+      "success_body": "Thank you. We will call you to confirm the lead time and the delivery charge.",
+      "whatsapp": "Or send your order on WhatsApp",
+      "endpoint": ""
+    },
+    "nav_label": "Main navigation"
+  },
+  "cross": {
+    "label": "Retail — the shop",
+    "href": "../"
+  },
+  "nav_label": "Main navigation"
 }
