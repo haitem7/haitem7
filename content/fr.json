@@ -514,7 +514,8 @@
         "required": false,
         "hint": "Étiquetage, échéance, exigences de certification."
       }
-    ]
+    ],
+    "endpoint": ""
   },
   "footer": {
     "address_label": "Huilerie",
@@ -530,6 +531,11 @@
     "hours_label": "Heures d'ouverture",
     "hours": "Dimanche – jeudi, 8 h – 17 h (UTC+1)",
     "lang_label": "Langue",
-    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie."
+    "legal": "TLEMCENYA — huilerie, Tlemcen, Algérie.",
+    "whatsapp": "Nous écrire sur WhatsApp"
+  },
+  "schema": {
+    "product_name": "Huile d'olive extra vierge de Sigoise — TLEMCENYA",
+    "mill_name": "Huilerie TLEMCENYA"
   }
 }

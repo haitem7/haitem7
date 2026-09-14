@@ -514,7 +514,8 @@
         "required": false,
         "hint": "Labelling, timing, certification requirements."
       }
-    ]
+    ],
+    "endpoint": ""
   },
   "footer": {
     "address_label": "Mill",
@@ -530,6 +531,11 @@
     "hours_label": "Opening hours",
     "hours": "Sunday – Thursday, 08:00 – 17:00 (UTC+1)",
     "lang_label": "Language",
-    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria."
+    "legal": "TLEMCENYA — olive mill, Tlemcen, Algeria.",
+    "whatsapp": "Message us on WhatsApp"
+  },
+  "schema": {
+    "product_name": "Sigoise extra virgin olive oil — TLEMCENYA",
+    "mill_name": "TLEMCENYA olive mill"
   }
 }

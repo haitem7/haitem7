@@ -58,6 +58,68 @@ sales argument, 0.8% is a category label.
 
 ---
 
+
+## Sécurité, SEO technique et déploiement
+
+Tout ce qui suit est **généré par `build.py`** : ne pas éditer à la main, les
+fichiers sont réécrits à chaque `python3 build.py`.
+
+| Fichier | Rôle |
+|---|---|
+| `_headers` | En-têtes pour Netlify / Cloudflare Pages |
+| `.htaccess` | Les mêmes pour Apache / cPanel, + redirection HTTPS forcée |
+| `robots.txt` | Autorise tout ; pointe vers le sitemap dès que `SITE_URL` existe |
+| `sitemap.xml` | Écrit uniquement si `SITE_URL` est défini (un sitemap en URLs relatives est rejeté) |
+| `src/_ratios.css` | Les `aspect-ratio` en classes CSS, pour qu'aucune page ne porte de `style=""` |
+
+### Le domaine
+
+Canonical, hreflang, `og:image` et `sitemap.xml` ont besoin d'URLs absolues.
+Tant que le domaine n'existe pas, `SITE_URL` reste vide et ces éléments sont
+soit relatifs, soit omis — une URL qui pointe vers un domaine qu'on ne possède
+pas est pire que pas d'URL. Une fois le domaine acheté :
+
+```sh
+SITE_URL=https://tlemcenya.dz python3 build.py
+```
+
+### Content-Security-Policy
+
+La politique est calculée depuis les constantes `JS_NOJS`, `JS_FONT_SWAP` et
+`JS_IMG_FALLBACK` de `build.py` : les hachages SHA-256 ne peuvent pas se
+désynchroniser des pages. Pas de `'unsafe-inline'`, ni pour les scripts ni
+pour les styles. Vérifié dans Chromium sous les en-têtes réels : zéro
+violation sur les trois langues.
+
+Si `rfq.endpoint` reçoit une URL tierce (Formspree, EmailJS…), son origine est
+ajoutée automatiquement à `connect-src` et `form-action` — sinon le navigateur
+bloquerait l'envoi et l'acheteur verrait un échec silencieux.
+
+### Données structurées (JSON-LD)
+
+Un graphe `Organization` + `Place` + `Product` dans chaque page, avec les
+coordonnées GPS réelles. Deux absences volontaires :
+
+- **Pas d'`aggregateRating`.** Google interdit le balisage d'avis qui ne sont
+  pas affichés sur la page. Inventer des étoiles fait perdre les rich results,
+  définitivement.
+- **Pas d'`offers` tant que `products.items[].price` est vide.** Une offre est
+  un engagement commercial public. Dès qu'un prix réel est saisi, l'offre est
+  émise automatiquement — rien d'autre à faire.
+
+### Bouton WhatsApp
+
+Rendu uniquement quand `footer.phone` est un vrai numéro. Tant qu'il vaut
+`+213 TODO`, le bouton n'existe pas : un bouton qui ouvre une discussion avec
+un numéro inexistant coûte plus de confiance qu'il n'en rapporte.
+
+### Réception des demandes de cotation
+
+`rfq.endpoint` est vide : le formulaire retombe sur `mailto:`. C'est un
+**vrai trou** — le client doit avoir un client mail configuré. À brancher sur
+Formspree, EmailJS ou un endpoint maison.
+
+
 ## Editing content
 
 All text and numbers live in `content/fr.json`, `content/en.json` and

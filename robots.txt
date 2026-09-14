@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tlemcenya.dz/sitemap.xml
+# Sitemap: set SITE_URL and rebuild to emit sitemap.xml
