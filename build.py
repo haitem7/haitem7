@@ -32,7 +32,6 @@ SITE_URL = os.environ.get("SITE_URL", "").rstrip("/")
 # the Content-Security-Policy hashes written to _headers cannot drift away
 # from what the pages actually contain.
 JS_NOJS = "document.documentElement.classList.remove('no-js')"
-JS_FONT_SWAP = "this.media='all'"
 JS_IMG_FALLBACK = "this.closest('picture')?.remove?.()||this.remove()"
 
 # ---------------------------------------------------------------- helpers
@@ -163,6 +162,10 @@ def picture(src: str, alt: str, w: int, h: int, sizes: str, assets: str = "") ->
 
 def head_tag(c: dict, assets: str, alts: list[dict]) -> str:
     m = c["meta"]
+    # One preload only, for the face that paints body copy on this page.
+    # Preloading all four would fetch three files no visitor will see.
+    preload = ("ibm-plex-sans-arabic-arabic-400.woff2" if c["lang"] == "ar"
+               else "geist-latin.woff2")
     base = SITE_URL
     page_url = (base or "") + "/" + (c["path"] + "/" if c["path"] else "")
     hreflang = "".join(
@@ -192,18 +195,16 @@ def head_tag(c: dict, assets: str, alts: list[dict]) -> str:
 {og_image}
 <link rel="canonical" href="{e(page_url)}">
 {hreflang}<link rel="alternate" hreflang="x-default" href="{e(base + "/" if base else "/")}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" media="print" onload="{e(JS_FONT_SWAP)}"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Geist:wght@300..700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Geist:wght@300..700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@400..700&display=swap"></noscript>
+<link rel="preload" href="{assets}fonts/{preload}" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="{assets}img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{assets}css/site.css">"""
 
 
 def header(c: dict, assets: str, alts: list[dict]) -> str:
+    up = c["cross"]["href"] if c["kind"] == "legal" else ""
     links = "".join(
-        f'<li><a class="navlink" href="{e(l["href"])}">{e(l["label"])}</a></li>' for l in c["nav"]
+        f'<li><a class="navlink" href="{e(up + l["href"])}">{e(l["label"])}</a></li>'
+        for l in c["nav"]
     )
     langs = "".join(
         f'<li><a href="/{a["path"] + "/" if a["path"] else ""}" lang="{a["lang"]}" hreflang="{a["lang"]}"'
@@ -212,7 +213,9 @@ def header(c: dict, assets: str, alts: list[dict]) -> str:
         for a in alts
     )
     brand = e(c.get("brand", BRAND_DEFAULT))
-    cta_id = e(c["checkout"]["id"] if c["kind"] == "shop" else c["rfq"]["id"])
+    cta_id = e(c["checkout"]["id"] if c["kind"] == "shop"
+               else c["rfq"]["id"] if c["kind"] == "export"
+               else c["shop"]["checkout"]["id"])
     return f"""<a class="skip" href="#main">{e(c["skip"])}</a>
 <header class="site-head on-dark" data-head>
   <div class="shell head-row">
@@ -231,7 +234,7 @@ def header(c: dict, assets: str, alts: list[dict]) -> str:
         <ul>{langs}</ul>
       </nav>
       <a class="crosslink" href="{e(c["cross"]["href"])}">{e(c["cross"]["label"])}</a>
-      <a class="btn btn-primary head-cta" href="#{cta_id}">{e(c["nav_cta"])}</a>
+      <a class="btn btn-primary head-cta" href="{up}#{cta_id}">{e(c["nav_cta"])}</a>
     </div>
   </div>
 </header>"""
@@ -867,6 +870,10 @@ def rfq(c: dict) -> str:
 
 
 def footer(c: dict, alts: list[dict]) -> str:
+    docs = c["legal_docs"]["legal"]
+    doclinks = "".join(
+        f'<a href="{e(rel_doc(c, k))}">{e(docs["docs"][k])}</a>'
+        for k in ("legal", "privacy", "terms"))
     f = c["footer"]
     addr = "<br>".join(e(l) for l in f["address"])
     langs = "".join(
@@ -896,8 +903,79 @@ def footer(c: dict, alts: list[dict]) -> str:
       <ul class="foot-langs">{langs}</ul>
     </div>
   </div>
-  <div class="shell foot-legal"><p>{e(f["legal"])}</p></div>
+  <div class="shell foot-legal">
+    <p>{e(f["legal"])}</p>
+    <nav class="foot-docs" aria-label="{e(docs["nav"])}">{doclinks}</nav>
+  </div>
 </footer>"""
+
+
+# ---------------------------------------------------------------- legal
+
+def inline(t: str) -> str:
+    """Escape, then re-enable the only two marks the documents use:
+    **bold** for the lead-in of a clause, and `code` for a storage key."""
+    t = e(t)
+    t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
+    return re.sub(r"`(.+?)`", r"<code>\1</code>", t)
+
+
+def value_cell(v: str, todo_label: str) -> str:
+    """A value the client still owes renders as a visible gap, not as a
+    plausible-looking number. A fabricated commercial register entry is
+    not a placeholder, it is a false statement on a legal page."""
+    if v.startswith("@"):
+        return f'<span class="pending">{e(todo_label)} — {e(v[1:])}</span>'
+    return e(v)
+
+
+def legal_page(c: dict) -> str:
+    L = c["doc"]
+    todo = L["todo"]
+    out = ""
+    for sec in L["sections"]:
+        out += f'<section class="doc-sec reveal"><h2>{e(sec["h"])}</h2>'
+        for t in sec.get("p", []):
+            out += f'<p class="measure">{inline(t)}</p>'
+        if sec.get("dl"):
+            rows = "".join(
+                f'<div><dt>{e(i["label"])}</dt>'
+                f'<dd>{value_cell(i["value"], todo)}</dd></div>'
+                for i in sec["dl"])
+            out += f'<dl class="datagrid doc-dl">{rows}</dl>'
+        if sec.get("ul"):
+            items = "".join(f"<li>{inline(t)}</li>" for t in sec["ul"])
+            out += f'<ul class="doc-list measure">{items}</ul>'
+        for t in sec.get("after", []):
+            out += f'<p class="measure doc-note">{value_cell(t, todo) if t.startswith("@") else inline(t)}</p>'
+        out += "</section>"
+
+    others = "".join(
+        f'<a href="{e(rel_doc(c, k))}"'
+        + (' aria-current="page"' if k == L["slug"] else "")
+        + f'>{e(L["docs"][k])}</a>'
+        for k in ("legal", "privacy", "terms"))
+
+    return f"""<section class="band band-paper doc">
+  <div class="shell doc-shell">
+    <nav class="doc-nav" aria-label="{e(L["nav"])}">{others}</nav>
+    <header class="doc-head">
+      <h1 class="display sec-title">{e(L["title"])}</h1>
+      <p class="measure sec-lede">{e(L["intro"])}</p>
+      <p class="doc-date tnum">{e(L["updated"])} : {num(L["updated_date"], c["lang"])}</p>
+    </header>
+    {out}
+    <p class="doc-disclaimer measure">{e(L["disclaimer"])}</p>
+  </div>
+</section>"""
+
+
+def rel_doc(c: dict, slug: str) -> str:
+    """A document link, relative to wherever the current page sits."""
+    depth = c["path"].count("/") + (1 if c["path"] else 0)
+    lang_prefix = "" if c["lang"] == "fr" else c["lang"] + "/"
+    return "../" * depth + lang_prefix + slug + "/"
+
 
 
 # ---------------------------------------------------------------- views
@@ -919,6 +997,23 @@ def export_view(c: dict) -> dict:
     return v
 
 
+def legal_view(c: dict, slug: str) -> dict:
+    """A legal document page: shared header, footer and brand, one document."""
+    v = dict(c)
+    doc = dict(c["legal_docs"][slug])
+    v["doc"] = doc
+    v["meta"] = dict(c["meta"], **doc["meta"])
+    v["path"] = (("" if c["lang"] == "fr" else c["lang"] + "/") + slug).strip("/")
+    v["kind"] = "legal"
+    v["nav"] = c["shop"]["nav"]
+    v["nav_cta"] = c["shop"]["nav_cta"]
+    # One level up from /ar/terms/ is /ar/, which is the shop page in the
+    # reader's own language. Climbing to the site root would switch them
+    # back to French.
+    v["cross"] = {"label": doc["back"], "href": "../"}
+    return v
+
+
 def assets_prefix(path: str) -> str:
     return "assets/" if not path else "../" * (path.count("/") + 1) + "assets/"
 
@@ -927,7 +1022,10 @@ def assets_prefix(path: str) -> str:
 def page(c: dict, alts: list[dict]) -> str:
     assets = assets_prefix(c["path"])
     c = dict(c, assets=assets)
-    if c["kind"] == "shop":
+    if c["kind"] == "legal":
+        parts = [legal_page(c)]
+        tail = ""
+    elif c["kind"] == "shop":
         parts = [hero(c), catalog(c), delivery(c), gallery(c),
                  location(c), checkout(c)]
         tail = cart_drawer(c)
@@ -985,17 +1083,14 @@ def write_site_files(data: dict) -> None:
     # outright, so it is written only once the domain is known.
     if SITE_URL:
         urls = ""
-        for path in paths:
-            loc = f"{SITE_URL}/{path}"
-            # hreflang siblings are the same page in the other languages,
-            # which for /en/export/ is /export/ and /ar/export/ — not /en/.
-            stem = path.split("/")[-1] if "/" in path else ("" if path in ("", "en", "ar") else path)
-            sibs = [p for p in paths
-                    if (p.split("/")[-1] if "/" in p else ("" if p in ("", "en", "ar") else p)) == stem]
+        for pg in paths:
+            loc = f"{SITE_URL}/{pg['path']}/".replace("//", "/").replace(":/", "://")
+            # hreflang siblings are the same page in the other languages:
+            # for /en/export/ that is /export/ and /ar/export/, not /en/.
             alts = "".join(
-                f'<xhtml:link rel="alternate" '
-                f'hreflang="{"fr" if q in ("", "export") else q.split("/")[0]}" '
-                f'href="{SITE_URL}/{q}"/>' for q in sibs
+                f'<xhtml:link rel="alternate" hreflang="{q["lang"]}" '
+                f'href="{SITE_URL}/{q["path"]}/"/>'.replace("//\"", "/\"")
+                for q in paths if q["kind"] == pg["kind"]
             )
             urls += (f"<url><loc>{loc}</loc>{alts}"
                      f'<xhtml:link rel="alternate" hreflang="x-default" '
@@ -1024,12 +1119,14 @@ def write_site_files(data: dict) -> None:
     extra_src = (" " + " ".join(origins)) if origins else ""
 
     inline = sha256_csp(JS_NOJS)
-    handlers = " ".join(sorted({sha256_csp(JS_FONT_SWAP), sha256_csp(JS_IMG_FALLBACK)}))
+    handlers = sha256_csp(JS_IMG_FALLBACK)
     csp = (
         "default-src 'self'; "
         f"script-src 'self' {inline} 'unsafe-hashes' {handlers}; "
-        "style-src 'self' https://fonts.googleapis.com; "
-        "font-src 'self' https://fonts.gstatic.com; "
+        # Both were third-party until the fonts were self-hosted. Nothing
+        # the browser fetches to render a page now leaves this origin.
+        "style-src 'self'; "
+        "font-src 'self'; "
         "img-src 'self' data:; "
         "media-src 'self'; "
         f"connect-src 'self'{extra_src}; "
@@ -1079,6 +1176,8 @@ def main() -> None:
     # French export page has lost their place, not changed language.
     views = {"shop": [shop_view(d) for d in data.values()],
              "export": [export_view(d) for d in data.values()]}
+    for slug in ("legal", "privacy", "terms"):
+        views[slug] = [legal_view(d, slug) for d in data.values()]
     pages = []
     for kind, vs in views.items():
         alts = [{"lang": v["lang"], "path": v["path"], "label": v["label"]} for v in vs]
@@ -1086,7 +1185,7 @@ def main() -> None:
             out = ROOT / (v["path"] + "/" if v["path"] else "") / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(page(v, alts), "utf-8")
-            pages.append(v["path"])
+            pages.append({"path": v["path"], "lang": v["lang"], "kind": kind})
             print(f"  {out.relative_to(ROOT)}  ({len(out.read_text('utf-8')):,} bytes)")
     data["_pages"] = pages
     write_ratio_css()

@@ -85,7 +85,7 @@ SITE_URL=https://tlemcenya.dz python3 build.py
 
 ### Content-Security-Policy
 
-La politique est calculée depuis les constantes `JS_NOJS`, `JS_FONT_SWAP` et
+La politique est calculée depuis les constantes `JS_NOJS` et
 `JS_IMG_FALLBACK` de `build.py` : les hachages SHA-256 ne peuvent pas se
 désynchroniser des pages. Pas de `'unsafe-inline'`, ni pour les scripts ni
 pour les styles. Vérifié dans Chromium sous les en-têtes réels : zéro
@@ -119,6 +119,73 @@ un numéro inexistant coûte plus de confiance qu'il n'en rapporte.
 **vrai trou** — le client doit avoir un client mail configuré. À brancher sur
 Formspree, EmailJS ou un endpoint maison.
 
+
+
+
+## Conformité juridique
+
+### Ce que le site fait, et ne fait pas
+
+| | État |
+|---|---|
+| Cookies | **Aucun.** Ni mesure d'audience, ni publicité, ni réseau social |
+| Traqueurs tiers | **Aucun** |
+| Requêtes vers un tiers à l'affichage | **Aucune** — vérifié dans Chromium sur les 15 pages |
+| Stockage local | Une entrée, `tly.cart.v1`, le panier, expirée à 30 jours |
+| Base de données | Aucune. Le site est composé de fichiers statiques |
+| Compte utilisateur / espace admin | Aucun |
+| Coordonnées bancaires | Jamais demandées — paiement en espèces à la livraison |
+
+### Pas de bandeau cookies, et c'est volontaire
+
+Un bandeau de consentement pour un site qui ne dépose rien est du théâtre :
+il habitue le visiteur à cliquer sans lire, et il n'a aucune valeur juridique
+puisqu'il n'y a rien à consentir. Le panier en `localStorage` est **strictement
+nécessaire** au service demandé par l'utilisateur, ce qui l'exonère du
+consentement.
+
+**Le jour où un outil de mesure d'audience est ajouté** (Google Analytics,
+Meta Pixel, une carte intégrée, une vidéo YouTube), un bandeau devient
+obligatoire *avant* tout dépôt. La politique de confidentialité l'annonce
+déjà ; il faudra alors la mettre à jour et construire le bandeau.
+
+### Google Fonts a été supprimé
+
+C'était la seule fuite réelle du site : `fonts.gstatic.com` recevait
+l'adresse IP de chaque visiteur à chaque affichage de page. Les quatre
+familles sont maintenant servies depuis `assets/fonts/` — voir
+`assets/fonts/LICENSE.md`, toutes sont sous SIL Open Font License 1.1, qui
+autorise explicitement l'auto-hébergement commercial.
+
+Effet secondaire : `style-src` et `font-src` sont passés à `'self'`, et le
+hachage CSP du chargement asynchrone des polices a disparu avec lui.
+
+### Les documents
+
+Neuf pages : `legal`, `privacy`, `terms` × trois langues. Le contenu vit
+dans `legal_docs` de chaque fichier de langue, et `legal_page()` le rend.
+
+Une valeur préfixée par `@` s'affiche comme un **trou visible** (« à
+compléter — … ») plutôt que comme un chiffre plausible. **Un numéro de
+registre du commerce inventé n'est pas un remplissage, c'est une fausse
+déclaration sur une page légale.** Dix valeurs attendent dans les mentions
+légales :
+
+forme juridique · capital social · RC · NIF · NIS · téléphone · directeur de
+la publication · hébergeur (raison sociale, adresse, contact)
+
+### Ce que je ne peux pas faire à votre place
+
+- **Faire relire les documents par un juriste.** Ils sont rédigés à partir du
+  fonctionnement réel du site, ce qui est le bon point de départ, mais seul un
+  professionnel confirme qu'ils couvrent vos obligations.
+- **La loi 18-05 sur le commerce électronique** impose au e-fournisseur
+  algérien un domaine en `.dz` **hébergé en Algérie**, et l'inscription au
+  registre du commerce en qualité de e-fournisseur. À vérifier avant
+  d'acheter un domaine.
+- **Sécuriser une base de données** : il n'y en a pas. Le point faible n'est
+  pas le site, c'est la boîte mail qui reçoit les commandes — mot de passe
+  unique et double authentification.
 
 
 ## Deux publics, deux pages

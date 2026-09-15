@@ -795,5 +795,329 @@
     "label": "Retail — the shop",
     "href": "../"
   },
-  "nav_label": "Main navigation"
+  "nav_label": "Main navigation",
+  "legal_docs": {
+    "legal": {
+      "slug": "legal",
+      "meta": {
+        "title": "Legal notice — TLEMCENYA",
+        "description": "Publisher, hosting, intellectual property and governing law of the TLEMCENYA site."
+      },
+      "title": "Legal notice",
+      "intro": "The information below identifies the publisher of this site and the terms on which it is published.",
+      "sections": [
+        {
+          "h": "Publisher",
+          "dl": [
+            {
+              "label": "Name",
+              "value": "TLEMCENYA"
+            },
+            {
+              "label": "Legal form",
+              "value": "@SARL, EURL, sole trader…"
+            },
+            {
+              "label": "Share capital",
+              "value": "@amount in DA"
+            },
+            {
+              "label": "Commercial register (RC)",
+              "value": "@number"
+            },
+            {
+              "label": "Tax identifier (NIF)",
+              "value": "@number"
+            },
+            {
+              "label": "Statistical identifier (NIS)",
+              "value": "@number"
+            },
+            {
+              "label": "Registered office",
+              "value": "National road N7, Tlemcen 13000, Algeria"
+            },
+            {
+              "label": "Telephone",
+              "value": "@number"
+            },
+            {
+              "label": "Email",
+              "value": "export@tlemcenya.dz"
+            },
+            {
+              "label": "Publication director",
+              "value": "@name of the manager"
+            }
+          ]
+        },
+        {
+          "h": "Hosting",
+          "p": [
+            "This site is hosted by:"
+          ],
+          "dl": [
+            {
+              "label": "Host",
+              "value": "@company name"
+            },
+            {
+              "label": "Address",
+              "value": "@full address"
+            },
+            {
+              "label": "Contact",
+              "value": "@phone or email"
+            }
+          ],
+          "after": [
+            "Algerian law no. 18-05 of 10 May 2018 on electronic commerce requires an e-supplier to use a « .dz » domain name hosted in Algeria. Confirm this point with your legal adviser before choosing a host."
+          ]
+        },
+        {
+          "h": "Intellectual property",
+          "p": [
+            "The text, visual identity, photographs and code of this site are the property of TLEMCENYA, with the exception of the typefaces, distributed under the SIL Open Font License 1.1.",
+            "Reproduction or representation, in whole or in part, without prior written permission is prohibited."
+          ]
+        },
+        {
+          "h": "Liability",
+          "p": [
+            "Published information is indicative and may change without notice. The characteristics of a lot — analysis, packaging, availability — are those confirmed in writing at the time of order, and only those bind TLEMCENYA.",
+            "Product photographs are not a contractual document."
+          ]
+        },
+        {
+          "h": "Links to third-party services",
+          "p": [
+            "The « Find us » section offers two links to Google Maps and Waze. These links activate only if you tap them: no data reaches those services merely by displaying the page. Following them takes you off this site and into those publishers' terms and privacy policies."
+          ]
+        },
+        {
+          "h": "Governing law",
+          "p": [
+            "This site is governed by Algerian law. Any dispute relating to its consultation falls within the jurisdiction of the courts of Tlemcen, save for any mandatory legal provision to the contrary."
+          ]
+        }
+      ],
+      "updated": "Last updated",
+      "todo": "to be completed",
+      "nav": "Legal information",
+      "back": "Back to the site",
+      "docs": {
+        "legal": "Legal notice",
+        "privacy": "Privacy",
+        "terms": "Terms of sale"
+      },
+      "disclaimer": "This document was drafted from how the site actually works. It does not replace review by a lawyer, who alone can confirm that the obligations of law 18-05 on electronic commerce are covered.",
+      "updated_date": "2026-09-15"
+    },
+    "privacy": {
+      "slug": "privacy",
+      "meta": {
+        "title": "Privacy policy — TLEMCENYA",
+        "description": "What TLEMCENYA collects, why, for how long, and how to exercise your rights."
+      },
+      "title": "Privacy policy",
+      "intro": "This document describes exactly what this site does with your data. It is short because the site collects little.",
+      "sections": [
+        {
+          "h": "Data controller",
+          "p": [
+            "TLEMCENYA, National road N7, Tlemcen 13000, Algeria. For any question about your data: export@tlemcenya.dz."
+          ],
+          "after": [
+            "Processing is governed by Algerian law no. 18-07 of 10 June 2018 on the protection of natural persons in the processing of personal data. If you write to us from the European Union, the GDPR applies to this processing as well."
+          ]
+        },
+        {
+          "h": "What we collect, and nothing else",
+          "p": [
+            "**If you place an order** (shop page): full name, phone, wilaya, commune, delivery address, and the optional note you add. Plus the contents of your order.",
+            "**If you request a quotation** (export page): company, contact name, email, phone, country, format, volume, Incoterm and your message.",
+            "That is all. The site asks for no date of birth, no identity document and no bank details — payment is in cash to the courier."
+          ]
+        },
+        {
+          "h": "Why",
+          "ul": [
+            "To call you back and confirm the order, the lead time and the delivery charge.",
+            "To prepare and deliver the order.",
+            "To answer a quotation request and draw up an offer.",
+            "To keep a record of a transaction, as commercial law requires."
+          ],
+          "after": [
+            "Your data is **never** sold, rented or used for advertising. We will not send you a commercial message without your explicit agreement."
+          ]
+        },
+        {
+          "h": "How long we keep it",
+          "dl": [
+            {
+              "label": "Unconfirmed order",
+              "value": "3 months, then deleted"
+            },
+            {
+              "label": "Delivered order",
+              "value": "10 years — the statutory retention period for commercial records"
+            },
+            {
+              "label": "Quotation request with no follow-up",
+              "value": "2 years, then deleted"
+            },
+            {
+              "label": "Basket in your browser",
+              "value": "30 days, then cleared automatically"
+            }
+          ],
+          "after": [
+            "The basket is not kept by us: it stays in your own browser and you can clear it at any time by clearing the site's data."
+          ]
+        },
+        {
+          "h": "Cookies",
+          "p": [
+            "**This site sets no cookies.** None for analytics, none for advertising, none for social networks.",
+            "It uses a single local-storage entry (`tly.cart.v1`) to remember your basket between pages. That entry never leaves your device, is never transmitted to us, and cannot identify you: it is strictly necessary for the service you asked for.",
+            "If an analytics tool is ever added, this page will be updated and a consent banner will appear before anything is stored."
+          ]
+        },
+        {
+          "h": "Who else has access",
+          "p": [
+            "No data is sent to a third party to display a page: the typefaces are hosted on our own server, and there is no embedded map, no external video and no social network button."
+          ],
+          "ul": [
+            "**The courier**, who receives only the name, phone and address needed for the delivery.",
+            "**The site host**, which keeps technical connection logs.",
+            "**The form delivery service**, where applicable — @to be named once the provider is chosen."
+          ]
+        },
+        {
+          "h": "Transfers outside Algeria",
+          "p": [
+            "If the form is carried by a provider established abroad, your data passes through its servers. The chosen provider and its country of establishment will be named here. While no provider is configured, requests leave through your own mail software and pass through no intermediary."
+          ]
+        },
+        {
+          "h": "Security",
+          "p": [
+            "The site is served over HTTPS, which encrypts everything you type between your device and the server. There is no public database: the site is made of static files, with no administration area and no user account to compromise.",
+            "Orders received are kept in an email account protected by a password and two-factor authentication."
+          ]
+        },
+        {
+          "h": "Your rights",
+          "p": [
+            "You may ask to access your data, have it corrected, have it erased, or object to its processing. Write to export@tlemcenya.dz: we answer within thirty days.",
+            "In Algeria you may refer the matter to the national personal data protection authority. If you live in the European Union, you may refer it to your country's supervisory authority."
+          ]
+        }
+      ],
+      "updated": "Last updated",
+      "todo": "to be completed",
+      "nav": "Legal information",
+      "back": "Back to the site",
+      "docs": {
+        "legal": "Legal notice",
+        "privacy": "Privacy",
+        "terms": "Terms of sale"
+      },
+      "disclaimer": "This document was drafted from how the site actually works. It does not replace review by a lawyer, who alone can confirm that the obligations of law 18-05 on electronic commerce are covered.",
+      "updated_date": "2026-09-15"
+    },
+    "terms": {
+      "slug": "terms",
+      "meta": {
+        "title": "Terms of sale — TLEMCENYA",
+        "description": "Ordering, prices, cash on delivery, lead times, collection at the mill and claims."
+      },
+      "title": "Terms of sale",
+      "intro": "These terms govern retail sales placed through the shop on this site. Export sales are the subject of a separate written offer and are not governed by this document.",
+      "sections": [
+        {
+          "h": "Products",
+          "p": [
+            "TLEMCENYA sells extra virgin olive oil from its own production, packed in five formats. The contents are identical across formats; only the container changes.",
+            "Photographs are illustrative. The label on the delivered product governs as to volume, composition and best-before date."
+          ]
+        },
+        {
+          "h": "Prices",
+          "p": [
+            "Prices are shown in Algerian dinars, tax included, excluding delivery. Delivery charges are shown separately and confirmed before dispatch.",
+            "TLEMCENYA may change its prices at any time; the applicable price is the one confirmed during the call confirming your order."
+          ]
+        },
+        {
+          "h": "Ordering",
+          "p": [
+            "You build your basket, then send us your details. **Sending the form is not a firm sale.** The sale is formed when we call you to confirm availability, lead time and total amount, and you accept it.",
+            "We may refuse or cancel an order in case of unavailability, an obviously incorrect address, or an abusive order."
+          ]
+        },
+        {
+          "h": "Payment",
+          "p": [
+            "Payment is made **in cash, to the courier, on arrival**. No online payment is requested, and no bank details will ever be asked of you on this site or by telephone.",
+            "You are invited to check the condition of the parcel in front of the courier before paying."
+          ]
+        },
+        {
+          "h": "Delivery",
+          "p": [
+            "We deliver to all 58 wilayas. Charges depend on the zone and are shown on the « Delivery and payment » section.",
+            "Stated lead times run from the confirmation call. They are indicative: a delay attributable to the courier gives no right to compensation, but you may cancel an order not yet dispatched at no cost."
+          ],
+          "after": [
+            "@Lead time to be filled in once the courier is chosen."
+          ]
+        },
+        {
+          "h": "Collection at the mill",
+          "p": [
+            "You may collect your order at the mill, on national road N7 in Tlemcen, free of charge. We tell you the collection window by phone. Payment is made on site."
+          ]
+        },
+        {
+          "h": "Conformity and claims",
+          "p": [
+            "Olive oil is a foodstuff: an opened bottle can be neither returned nor exchanged, except for a defect of conformity.",
+            "If the product delivered is damaged, does not match your order, or is defective, report it within **forty-eight hours** of receipt, by telephone or to export@tlemcenya.dz, with photographs. We will replace the product or refund the sum paid, at our option and after verification."
+          ]
+        },
+        {
+          "h": "Keeping the product",
+          "p": [
+            "Keep the oil away from light and heat, with the cap closed. TLEMCENYA is not liable for deterioration resulting from unsuitable storage conditions after delivery."
+          ]
+        },
+        {
+          "h": "Personal data",
+          "p": [
+            "The processing of your data is described in the privacy policy, which forms an integral part of these terms."
+          ]
+        },
+        {
+          "h": "Governing law and disputes",
+          "p": [
+            "These terms are governed by Algerian law, in particular law no. 18-05 of 10 May 2018 on electronic commerce and law no. 09-03 of 25 February 2009 on consumer protection and the suppression of fraud.",
+            "In the event of a disagreement we first seek an amicable solution. Failing that, the courts of Tlemcen have jurisdiction."
+          ]
+        }
+      ],
+      "updated": "Last updated",
+      "todo": "to be completed",
+      "nav": "Legal information",
+      "back": "Back to the site",
+      "docs": {
+        "legal": "Legal notice",
+        "privacy": "Privacy",
+        "terms": "Terms of sale"
+      },
+      "disclaimer": "This document was drafted from how the site actually works. It does not replace review by a lawyer, who alone can confirm that the obligations of law 18-05 on electronic commerce are covered.",
+      "updated_date": "2026-09-15"
+    }
+  }
 }

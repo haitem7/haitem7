@@ -295,17 +295,33 @@
   var labels = JSON.parse(drawer.getAttribute('data-labels') || '{}');
   var lastFocus = null;
 
+  /* A basket is not a record to keep. Thirty days, then it clears itself,
+   * which is what the privacy policy promises and what a retention rule
+   * looks like when there is no database to run a purge against. */
+  var TTL = 30 * 24 * 60 * 60 * 1000;
+
   function read() {
     try {
-      var v = JSON.parse(localStorage.getItem(KEY));
-      return Array.isArray(v) ? v.filter(valid) : [];
+      var raw = JSON.parse(localStorage.getItem(KEY));
+      /* v1 stored a bare array; keep reading it rather than dropping a
+       * basket somebody built before the expiry existed. */
+      var box = Array.isArray(raw) ? { at: Date.now(), items: raw } : raw;
+      if (!box || !Array.isArray(box.items)) return [];
+      if (!isFinite(box.at) || Date.now() - box.at > TTL) {
+        localStorage.removeItem(KEY);
+        return [];
+      }
+      return box.items.filter(valid);
     } catch (e) { return []; }
   }
   function valid(l) {
     return l && typeof l.sku === 'string' && isFinite(l.price) && l.qty > 0;
   }
   function write(items) {
-    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* private mode */ }
+    try {
+      if (!items.length) localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), items: items }));
+    } catch (e) { /* private mode */ }
   }
   function fmt(n) {
     /* Integer dinars. Grouped with a narrow no-break space, which is the

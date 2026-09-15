@@ -795,5 +795,329 @@
     "label": "Particuliers — la boutique",
     "href": "../"
   },
-  "nav_label": "Navigation principale"
+  "nav_label": "Navigation principale",
+  "legal_docs": {
+    "legal": {
+      "slug": "legal",
+      "meta": {
+        "title": "Mentions légales — TLEMCENYA",
+        "description": "Éditeur, hébergement, propriété intellectuelle et droit applicable du site TLEMCENYA."
+      },
+      "title": "Mentions légales",
+      "intro": "Les informations ci-dessous identifient l'éditeur de ce site et les conditions dans lesquelles il est publié.",
+      "sections": [
+        {
+          "h": "Éditeur du site",
+          "dl": [
+            {
+              "label": "Dénomination",
+              "value": "TLEMCENYA"
+            },
+            {
+              "label": "Forme juridique",
+              "value": "@SARL, EURL, personne physique…"
+            },
+            {
+              "label": "Capital social",
+              "value": "@montant en DA"
+            },
+            {
+              "label": "Registre du commerce (RC)",
+              "value": "@numéro"
+            },
+            {
+              "label": "Identifiant fiscal (NIF)",
+              "value": "@numéro"
+            },
+            {
+              "label": "Numéro d'identification statistique (NIS)",
+              "value": "@numéro"
+            },
+            {
+              "label": "Siège social",
+              "value": "Route nationale N7, Tlemcen 13000, Algérie"
+            },
+            {
+              "label": "Téléphone",
+              "value": "@numéro"
+            },
+            {
+              "label": "Courriel",
+              "value": "export@tlemcenya.dz"
+            },
+            {
+              "label": "Directeur de la publication",
+              "value": "@nom du gérant"
+            }
+          ]
+        },
+        {
+          "h": "Hébergement",
+          "p": [
+            "Le site est hébergé par :"
+          ],
+          "dl": [
+            {
+              "label": "Hébergeur",
+              "value": "@raison sociale"
+            },
+            {
+              "label": "Adresse",
+              "value": "@adresse complète"
+            },
+            {
+              "label": "Contact",
+              "value": "@téléphone ou courriel"
+            }
+          ],
+          "after": [
+            "La loi algérienne n° 18-05 du 10 mai 2018 relative au commerce électronique impose au e-fournisseur un nom de domaine en « .dz » hébergé en Algérie. Vérifiez ce point avec votre conseil avant de choisir un hébergeur."
+          ]
+        },
+        {
+          "h": "Propriété intellectuelle",
+          "p": [
+            "Les textes, la charte graphique, les photographies et le code de ce site sont la propriété de TLEMCENYA, à l'exception des polices de caractères, distribuées sous licence SIL Open Font License 1.1.",
+            "Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite."
+          ]
+        },
+        {
+          "h": "Responsabilité",
+          "p": [
+            "Les informations publiées sont données à titre indicatif et peuvent être modifiées sans préavis. Les caractéristiques d'un lot — analyse, conditionnement, disponibilité — sont celles confirmées par écrit lors de la commande, et elles seules engagent TLEMCENYA.",
+            "Les photographies des produits ne constituent pas un document contractuel."
+          ]
+        },
+        {
+          "h": "Liens vers des services tiers",
+          "p": [
+            "La page « Nous trouver » propose deux liens vers Google Maps et Waze. Ces liens ne s'activent que si vous les touchez : aucune donnée n'est transmise à ces services par le simple affichage de la page. En les suivant, vous quittez ce site et entrez dans les conditions d'utilisation et la politique de confidentialité de ces éditeurs."
+          ]
+        },
+        {
+          "h": "Droit applicable",
+          "p": [
+            "Le présent site est soumis au droit algérien. Tout litige relatif à sa consultation relève de la compétence des juridictions de Tlemcen, sauf disposition légale impérative contraire."
+          ]
+        }
+      ],
+      "updated": "Dernière mise à jour",
+      "todo": "à compléter",
+      "nav": "Informations légales",
+      "back": "Retour au site",
+      "docs": {
+        "legal": "Mentions légales",
+        "privacy": "Confidentialité",
+        "terms": "CGV"
+      },
+      "disclaimer": "Ce document a été rédigé à partir du fonctionnement réel du site. Il ne remplace pas la relecture d'un juriste, qui seul peut confirmer que les obligations de la loi 18-05 sur le commerce électronique sont couvertes.",
+      "updated_date": "2026-09-15"
+    },
+    "privacy": {
+      "slug": "privacy",
+      "meta": {
+        "title": "Politique de confidentialité — TLEMCENYA",
+        "description": "Quelles données TLEMCENYA collecte, pourquoi, pendant combien de temps, et comment exercer vos droits."
+      },
+      "title": "Politique de confidentialité",
+      "intro": "Ce document décrit exactement ce que ce site fait de vos données. Il est court parce que le site en collecte peu.",
+      "sections": [
+        {
+          "h": "Responsable du traitement",
+          "p": [
+            "TLEMCENYA, Route nationale N7, Tlemcen 13000, Algérie. Pour toute question relative à vos données : export@tlemcenya.dz."
+          ],
+          "after": [
+            "Le traitement relève de la loi algérienne n° 18-07 du 10 juin 2018 relative à la protection des personnes physiques dans le traitement des données à caractère personnel. Si vous nous écrivez depuis l'Union européenne, le RGPD s'applique également à ce traitement."
+          ]
+        },
+        {
+          "h": "Ce que nous collectons, et uniquement cela",
+          "p": [
+            "**Si vous passez une commande** (page boutique) : nom et prénom, téléphone, wilaya, commune, adresse de livraison, et la remarque facultative que vous ajoutez. Plus le contenu de votre commande.",
+            "**Si vous demandez une cotation** (page export) : société, nom du contact, courriel, téléphone, pays, format, volume, Incoterm et votre message.",
+            "C'est tout. Le site ne demande ni date de naissance, ni pièce d'identité, ni coordonnées bancaires — le paiement se fait en espèces au livreur."
+          ]
+        },
+        {
+          "h": "Pourquoi",
+          "ul": [
+            "Vous rappeler pour confirmer la commande, le délai et les frais de livraison.",
+            "Préparer et livrer la commande.",
+            "Répondre à une demande de cotation et établir une offre.",
+            "Conserver la trace d'une transaction, comme la loi commerciale l'exige."
+          ],
+          "after": [
+            "Vos données ne sont **jamais** vendues, louées, ni utilisées pour de la publicité. Nous ne vous enverrons pas de message commercial sans votre accord explicite."
+          ]
+        },
+        {
+          "h": "Combien de temps nous les gardons",
+          "dl": [
+            {
+              "label": "Commande non confirmée",
+              "value": "3 mois, puis suppression"
+            },
+            {
+              "label": "Commande livrée",
+              "value": "10 ans — durée légale de conservation des pièces commerciales"
+            },
+            {
+              "label": "Demande de cotation sans suite",
+              "value": "2 ans, puis suppression"
+            },
+            {
+              "label": "Panier dans votre navigateur",
+              "value": "30 jours, puis effacement automatique"
+            }
+          ],
+          "after": [
+            "Le panier n'est pas conservé chez nous : il reste dans votre propre navigateur et vous pouvez l'effacer à tout moment en vidant les données du site."
+          ]
+        },
+        {
+          "h": "Cookies",
+          "p": [
+            "**Ce site ne dépose aucun cookie.** Ni de mesure d'audience, ni publicitaire, ni de réseau social.",
+            "Il utilise une seule entrée de stockage local (`tly.cart.v1`) pour retenir votre panier entre deux pages. Cette entrée ne quitte jamais votre appareil, ne nous est jamais transmise, et ne permet pas de vous identifier : elle est strictement nécessaire au service que vous avez demandé.",
+            "Si un outil de mesure d'audience est ajouté un jour, cette page sera mise à jour et un bandeau de consentement apparaîtra avant tout dépôt."
+          ]
+        },
+        {
+          "h": "Qui d'autre y a accès",
+          "p": [
+            "Aucune donnée n'est transmise à un tiers pour l'affichage d'une page : les polices de caractères sont hébergées sur notre propre serveur, il n'y a ni carte intégrée, ni vidéo externe, ni bouton de réseau social."
+          ],
+          "ul": [
+            "**Le transporteur**, qui reçoit uniquement le nom, le téléphone et l'adresse nécessaires à la livraison.",
+            "**L'hébergeur du site**, qui conserve des journaux de connexion techniques.",
+            "**Le service d'acheminement des formulaires**, le cas échéant — @à préciser une fois le prestataire choisi."
+          ]
+        },
+        {
+          "h": "Transferts hors d'Algérie",
+          "p": [
+            "Si le formulaire est acheminé par un prestataire établi à l'étranger, vos données transitent par ses serveurs. Le prestataire retenu et son pays d'établissement seront nommés ici. Tant qu'aucun prestataire n'est configuré, les demandes partent par votre propre logiciel de messagerie et ne transitent par aucun intermédiaire."
+          ]
+        },
+        {
+          "h": "Sécurité",
+          "p": [
+            "Le site est servi en HTTPS, ce qui chiffre tout ce que vous saisissez entre votre appareil et le serveur. Il n'y a aucune base de données publique : le site est composé de fichiers statiques, sans espace d'administration ni compte utilisateur à compromettre.",
+            "Les commandes reçues sont conservées dans une boîte de courriel protégée par mot de passe et double authentification."
+          ]
+        },
+        {
+          "h": "Vos droits",
+          "p": [
+            "Vous pouvez demander à accéder à vos données, les faire rectifier, les faire effacer, ou vous opposer à leur traitement. Écrivez à export@tlemcenya.dz : nous répondons sous trente jours.",
+            "En Algérie, vous pouvez saisir l'Autorité nationale de protection des données à caractère personnel. Si vous résidez dans l'Union européenne, vous pouvez saisir l'autorité de contrôle de votre pays."
+          ]
+        }
+      ],
+      "updated": "Dernière mise à jour",
+      "todo": "à compléter",
+      "nav": "Informations légales",
+      "back": "Retour au site",
+      "docs": {
+        "legal": "Mentions légales",
+        "privacy": "Confidentialité",
+        "terms": "CGV"
+      },
+      "disclaimer": "Ce document a été rédigé à partir du fonctionnement réel du site. Il ne remplace pas la relecture d'un juriste, qui seul peut confirmer que les obligations de la loi 18-05 sur le commerce électronique sont couvertes.",
+      "updated_date": "2026-09-15"
+    },
+    "terms": {
+      "slug": "terms",
+      "meta": {
+        "title": "Conditions générales de vente — TLEMCENYA",
+        "description": "Commande, prix, paiement à la livraison, délais, retrait à l'huilerie et réclamations."
+      },
+      "title": "Conditions générales de vente",
+      "intro": "Ces conditions régissent les ventes aux particuliers passées depuis la boutique de ce site. Les ventes à l'export font l'objet d'une offre écrite distincte et ne sont pas régies par le présent document.",
+      "sections": [
+        {
+          "h": "Produits",
+          "p": [
+            "TLEMCENYA vend de l'huile d'olive vierge extra issue de sa propre production, conditionnée en cinq formats. Le contenu est identique d'un format à l'autre ; seul le contenant change.",
+            "Les photographies sont illustratives. L'étiquette apposée sur le produit livré fait foi quant à la contenance, la composition et la date de durabilité minimale."
+          ]
+        },
+        {
+          "h": "Prix",
+          "p": [
+            "Les prix sont indiqués en dinars algériens, toutes taxes comprises, hors frais de livraison. Les frais de livraison sont indiqués séparément et confirmés avant expédition.",
+            "TLEMCENYA peut modifier ses prix à tout moment ; le prix applicable est celui confirmé lors de l'appel de confirmation de votre commande."
+          ]
+        },
+        {
+          "h": "Commande",
+          "p": [
+            "Vous composez votre panier, puis transmettez vos coordonnées. **La transmission du formulaire ne vaut pas vente ferme.** La vente est formée lorsque nous vous appelons pour confirmer la disponibilité, le délai et le montant total, et que vous l'acceptez.",
+            "Nous pouvons refuser ou annuler une commande en cas d'indisponibilité, d'adresse manifestement erronée, ou de commande abusive."
+          ]
+        },
+        {
+          "h": "Paiement",
+          "p": [
+            "Le paiement s'effectue **en espèces, au livreur, à la réception**. Aucun paiement en ligne n'est demandé, et aucune coordonnée bancaire ne vous sera jamais réclamée sur ce site ni par téléphone.",
+            "Vous êtes invité à vérifier l'état du colis devant le livreur avant de payer."
+          ]
+        },
+        {
+          "h": "Livraison",
+          "p": [
+            "Nous livrons dans les 58 wilayas. Les frais dépendent de la zone et figurent sur la page « Livraison et paiement ».",
+            "Les délais annoncés courent à compter de la confirmation téléphonique. Ils sont indicatifs : un retard imputable au transporteur n'ouvre pas droit à indemnité, mais vous pouvez annuler une commande non encore expédiée sans frais."
+          ],
+          "after": [
+            "@Délai de livraison à renseigner une fois le transporteur choisi."
+          ]
+        },
+        {
+          "h": "Retrait à l'huilerie",
+          "p": [
+            "Vous pouvez retirer votre commande à l'huilerie, route nationale N7 à Tlemcen, sans frais. Nous vous indiquons par téléphone le créneau de retrait. Le paiement s'effectue sur place."
+          ]
+        },
+        {
+          "h": "Conformité et réclamation",
+          "p": [
+            "L'huile d'olive est une denrée alimentaire : une bouteille ouverte ne peut être ni reprise ni échangée, sauf défaut de conformité.",
+            "Si le produit livré est endommagé, non conforme à votre commande, ou présente un défaut, signalez-le dans les **quarante-huit heures** suivant la réception, par téléphone ou à export@tlemcenya.dz, photographies à l'appui. Nous remplaçons le produit ou remboursons la somme versée, à notre choix et après vérification."
+          ]
+        },
+        {
+          "h": "Conservation du produit",
+          "p": [
+            "Conservez l'huile à l'abri de la lumière et de la chaleur, bouchon fermé. TLEMCENYA ne répond pas d'une altération résultant de conditions de conservation inadaptées après la livraison."
+          ]
+        },
+        {
+          "h": "Données personnelles",
+          "p": [
+            "Le traitement de vos données est décrit dans la politique de confidentialité, qui fait partie intégrante des présentes conditions."
+          ]
+        },
+        {
+          "h": "Droit applicable et litiges",
+          "p": [
+            "Les présentes conditions sont soumises au droit algérien, notamment la loi n° 18-05 du 10 mai 2018 relative au commerce électronique et la loi n° 09-03 du 25 février 2009 relative à la protection du consommateur et à la répression des fraudes.",
+            "En cas de différend, nous cherchons d'abord une solution amiable. À défaut, les juridictions de Tlemcen sont compétentes."
+          ]
+        }
+      ],
+      "updated": "Dernière mise à jour",
+      "todo": "à compléter",
+      "nav": "Informations légales",
+      "back": "Retour au site",
+      "docs": {
+        "legal": "Mentions légales",
+        "privacy": "Confidentialité",
+        "terms": "CGV"
+      },
+      "disclaimer": "Ce document a été rédigé à partir du fonctionnement réel du site. Il ne remplace pas la relecture d'un juriste, qui seul peut confirmer que les obligations de la loi 18-05 sur le commerce électronique sont couvertes.",
+      "updated_date": "2026-09-15"
+    }
+  }
 }

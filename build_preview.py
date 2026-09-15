@@ -19,6 +19,8 @@ OUT = ROOT / "preview"
 
 # Site path -> file, in the order build.py writes them.
 PAGES = ["", "en", "ar", "export", "en/export", "ar/export"]
+for _slug in ("legal", "privacy", "terms"):
+    PAGES += [_slug, "en/" + _slug, "ar/" + _slug]
 
 
 def target(path: str) -> str:
@@ -26,34 +28,46 @@ def target(path: str) -> str:
 
 
 def relink(html: str, here: str) -> str:
-    """Rewrite absolute site links, then the two relative cross-links.
+    """Point every internal link at a file the host will actually serve.
 
-    Done longest-first: rewriting "/en/" before "/en/export/" would leave a
-    dangling "index.html/export/" behind.
+    Two shapes reach here: absolute site links ("/en/legal/") and relative
+    directory links ("legal/", "../"). Both are resolved against the page
+    being written, then looked up in PAGES — so a link that resolves to a
+    real page becomes a real file path, and anything else is left alone.
     """
     here_dir = here or "."
-    for path in sorted(PAGES, key=len, reverse=True):
-        rel = os.path.relpath(target(path), here_dir).replace(os.sep, "/")
-        html = html.replace(f'href="/{path + "/" if path else ""}"', f'href="{rel}"')
+    known = {p: target(p) for p in PAGES}
 
-    # The shop <-> export link is already relative, but it points at a
-    # directory, and a directory index is exactly what the host will not
-    # serve. Aim it at the file instead.
-    other = ("" if here.endswith("export") else
-             (here + "/export" if here else "export"))
-    other = other.strip("/")
-    if here.endswith("export"):
-        other = here[: -len("export")].strip("/")
-    rel = os.path.relpath(target(other), here_dir).replace(os.sep, "/")
-    html = re.sub(r'(<a class="crosslink" href=)"[^"]*"', r'\1"%s"' % rel, html)
+    def swap(m):
+        href = m.group(1)
+        if href.startswith("#") or "://" in href or href.startswith("mailto:"):
+            return m.group(0)
+        # "../#boutique" is a link to a page *and* an anchor in it. A real
+        # server resolves the directory to its index; the host will not, so
+        # the fragment is set aside, the path rewritten, then reattached.
+        href, _, frag = href.partition("#")
+        frag = ("#" + frag) if frag else ""
+        if not href:
+            return m.group(0)
+        if href.startswith("/"):
+            resolved = href.strip("/")
+        else:
+            resolved = os.path.normpath(os.path.join(here_dir, href))
+            resolved = "" if resolved == "." else resolved.replace(os.sep, "/")
+        if resolved not in known:
+            return m.group(0)
+        rel = os.path.relpath(known[resolved], here_dir).replace(os.sep, "/")
+        return 'href="%s%s"' % (rel, frag)
 
-    # hreflang alternates point at a domain that does not exist yet.
+    html = re.sub(r'href="([^"#][^"]*?)"', swap, html)
+    # hreflang alternates and canonical point at a domain that does not
+    # exist yet; a preview must not advertise one.
     return re.sub(r'<link rel="alternate"[^>]*>|<link rel="canonical"[^>]*>', "", html)
 
 
 if OUT.exists():
     shutil.rmtree(OUT)
-for sub in ("assets/css", "assets/js", "assets/img", "assets/video"):
+for sub in ("assets/css", "assets/js", "assets/img", "assets/video", "assets/fonts"):
     (OUT / sub).mkdir(parents=True, exist_ok=True)
 
 for path in PAGES:
@@ -72,6 +86,11 @@ for path in PAGES:
 
 for f in ("assets/css/site.css", "assets/js/site.js", "assets/img/favicon.svg"):
     shutil.copy(ROOT / f, OUT / f)
+
+# Self-hosted now means the preview has to carry them too: there is no
+# Google to fall back on if a face is missing.
+for src in sorted((ROOT / "assets" / "fonts").glob("*.woff2")):
+    shutil.copy(src, OUT / "assets" / "fonts" / src.name)
 
 # OUT is wiped on every run, so copying the media here is what keeps a
 # rebuild from publishing broken links.
