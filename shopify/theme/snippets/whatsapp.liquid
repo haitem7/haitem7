@@ -1,0 +1,12 @@
+{%- comment -%}
+  Floating WhatsApp button, or nothing while no real number is set.
+  A button that opens a chat with a number that does not exist costs more
+  trust than it buys — same rule as wa_link() in build.py.
+{%- endcomment -%}
+{%- assign digits = settings.whatsapp_number | default: settings.contact_phone | remove: '+' | remove: ' ' | remove: '-' | remove: '.' | remove: '(' | remove: ')' -%}
+{%- if digits.size >= 9 -%}
+  <a class="wa" href="https://wa.me/{{ digits }}" target="_blank" rel="noopener" aria-label="{{ 'content.footer.whatsapp' | t | escape }}">
+    <span class="wa-mark">{% render 'icon', name: 'whatsapp', size: 22 %}</span>
+    <span class="wa-text">{{ 'content.footer.whatsapp' | t }}</span>
+  </a>
+{%- endif -%}

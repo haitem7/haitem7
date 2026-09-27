@@ -1,0 +1,53 @@
+<section class="band band-paper">
+  <div class="shell">
+    <div class="acct-head">
+      <h1 class="display sec-title">{{ 'customer.account' | t }}</h1>
+      <a class="crosslink" href="{{ routes.account_logout_url }}">{{ 'customer.logout' | t }}</a>
+    </div>
+
+    <div class="acct-grid">
+      <div>
+        <h2 class="sub-title">{{ 'customer.orders' | t }}</h2>
+        {%- paginate customer.orders by 20 -%}
+          {%- if customer.orders.size > 0 -%}
+            <div class="scroll-x">
+              <table class="spec">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ 'customer.order' | t }}</th>
+                    <th scope="col">{{ 'customer.date' | t }}</th>
+                    <th scope="col">{{ 'customer.payment' | t }}</th>
+                    <th scope="col">{{ 'customer.fulfillment' | t }}</th>
+                    <th scope="col">{{ 'customer.total' | t }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for order in customer.orders -%}
+                    <tr>
+                      <th scope="row"><a href="{{ order.customer_url }}">{{ order.name }}</a></th>
+                      <td class="tnum">{{ order.created_at | time_tag: format: 'date' }}</td>
+                      <td>{{ order.financial_status_label }}</td>
+                      <td>{{ order.fulfillment_status_label }}</td>
+                      <td class="tnum">{{ order.total_price | money }}</td>
+                    </tr>
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+            {% render 'pagination', paginate: paginate %}
+          {%- else -%}
+            <p class="price-note">{{ 'customer.no_orders' | t }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+      <div>
+        <h2 class="sub-title">{{ 'customer.addresses' | t }}</h2>
+        {%- if customer.default_address -%}
+          <address class="foot-addr">{{ customer.default_address | format_address }}</address>
+        {%- endif -%}
+        <p><a class="crosslink" href="{{ routes.account_addresses_url }}">{{ 'customer.view_addresses' | t: count: customer.addresses_count }}</a></p>
+      </div>
+    </div>
+  </div>
+</section>

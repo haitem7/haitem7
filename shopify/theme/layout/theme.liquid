@@ -1,0 +1,52 @@
+{%- liquid
+  assign lang = request.locale.iso_code | split: '-' | first
+  if lang == 'ar'
+    assign dir = 'rtl'
+    assign body_font = 'ibm-plex-sans-arabic-arabic-400.woff2'
+  else
+    assign dir = 'ltr'
+    assign body_font = 'geist-latin.woff2'
+  endif
+-%}
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ dir }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151a10">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+  {%- else -%}
+    <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+  {%- endif -%}
+  {%- comment -%} One preload only: the face that paints body copy in this language. {%- endcomment -%}
+  {{ body_font | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+  {% render 'meta-tags' %}
+  {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+  <script>document.documentElement.classList.remove('no-js')</script>
+  <script>
+    window.theme = {
+      moneyFormat: {{ shop.money_format | json }},
+      routes: {
+        root: {{ routes.root_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }}
+      }
+    };
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  {{ content_for_header }}
+</head>
+<body class="tpl-{{ template.name }}{% if template.name != 'index' %} tpl-inner{% endif %}">
+  <a class="skip" href="#main">{{ 'content.skip' | t }}</a>
+  {% sections 'header-group' %}
+  <main id="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+  {% sections 'footer-group' %}
+  {% section 'cart-drawer' %}
+  {% render 'whatsapp' %}
+</body>
+</html>

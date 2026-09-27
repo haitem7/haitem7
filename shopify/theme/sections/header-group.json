@@ -1,0 +1,14 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "",
+        "export_url": ""
+      }
+    }
+  },
+  "order": ["header"]
+}

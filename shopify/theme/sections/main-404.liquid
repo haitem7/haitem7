@@ -1,0 +1,11 @@
+<section class="band band-paper">
+  <div class="shell">
+    <h1 class="display sec-title">{{ 'general.not_found_title' | t }}</h1>
+    <p class="measure sec-lede">{{ 'general.not_found_body' | t }}</p>
+    <p class="nf-actions"><a class="btn btn-primary" href="{{ routes.root_url }}#boutique">{{ 'general.back_home' | t }}</a></p>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Page introuvable", "class": "section-main-404", "settings": [] }
+{% endschema %}

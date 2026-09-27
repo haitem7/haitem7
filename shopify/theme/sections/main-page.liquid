@@ -1,0 +1,12 @@
+<section class="band band-paper doc">
+  <div class="shell doc-shell">
+    <header class="doc-head">
+      <h1 class="display sec-title">{{ page.title }}</h1>
+    </header>
+    <div class="rte doc-body">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Page", "class": "section-main-page", "settings": [] }
+{% endschema %}

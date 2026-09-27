@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "catalog": {
+      "type": "catalog",
+      "settings": {
+        "limit": 12,
+        "anchor": "boutique"
+      }
+    },
+    "delivery": {
+      "type": "delivery",
+      "settings": {
+        "show_pickup": true
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "settings": {}
+    },
+    "process": {
+      "type": "process",
+      "disabled": true,
+      "settings": {
+        "show_mark": true,
+        "anchor": "procede"
+      }
+    },
+    "location": {
+      "type": "location",
+      "settings": {
+        "gps": "34.8708962, -1.1253134"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "catalog",
+    "delivery",
+    "gallery",
+    "process",
+    "location"
+  ]
+}

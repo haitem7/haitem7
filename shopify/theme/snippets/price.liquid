@@ -1,0 +1,14 @@
+{%- comment -%}
+  A price, from and compare-at aware. Pass product: or variant:.
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign p = variant.price
+    assign cmp = variant.compare_at_price
+  else
+    assign p = product.price_min
+    assign cmp = product.compare_at_price_min
+  endif
+-%}
+{%- if cmp > p -%}<s class="price-was"><bdi>{{ cmp | money }}</bdi></s> {% endif -%}
+<span class="price-now"><bdi>{{ p | money }}</bdi></span>

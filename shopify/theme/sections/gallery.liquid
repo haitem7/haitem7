@@ -1,0 +1,81 @@
+{%- comment -%}
+  The mill. Up to three photographs as blocks; with none added, the one
+  photograph the client supplied (mill-extraction.jpg, bundled with the
+  theme) stands alone beside the text, as on the static shop.
+{%- endcomment -%}
+{%- liquid
+  assign title = section.settings.title
+  if title == blank
+    assign title = 'content.gallery.title' | t
+  endif
+  assign shots = section.blocks | where: 'type', 'shot'
+  assign n = 0
+  for b in shots
+    if b.settings.image != blank
+      assign n = n | plus: 1
+    endif
+  endfor
+  if n == 0
+    assign n = 1
+  endif
+-%}
+<section class="band band-stone gal gal-{{ n }}" id="huilerie">
+  <div class="shell gal-inner">
+    <div class="gal-text reveal">
+      <h2 class="display sec-title">{{ title }}</h2>
+      <p class="measure sec-lede">{{ 'content.gallery.body_1' | t }}</p>
+      <p class="measure sec-lede">{{ 'content.gallery.body_2' | t }}</p>
+    </div>
+    <div class="shots shots-{{ n }}">
+      {%- assign drawn = 0 -%}
+      {%- for b in shots -%}
+        {%- if b.settings.image != blank -%}
+          {%- assign drawn = drawn | plus: 1 -%}
+          <figure class="shot reveal" {{ b.shopify_attributes }}>
+            <div class="slot ar-4-5">
+              {{ b.settings.image | image_url: width: 1000 | image_tag:
+                widths: '400, 600, 800, 1000',
+                sizes: '(min-width: 46rem) 30vw, 92vw',
+                loading: 'lazy',
+                alt: b.settings.image.alt }}
+            </div>
+            {%- if b.settings.caption != blank -%}
+              <figcaption class="media-note">{{ b.settings.caption }}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if drawn == 0 -%}
+        <figure class="shot reveal">
+          <div class="slot ar-4-5">
+            <img src="{{ 'mill-extraction.jpg' | asset_url }}" alt="{{ 'content.gallery.shot_alt' | t | escape }}"
+                 width="800" height="1000" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="media-note">{{ 'content.gallery.shot_caption' | t }}</figcaption>
+        </figure>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "L'huilerie — photos",
+  "class": "section-gallery",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "info": "Vide : texte traduit du thème." }
+  ],
+  "blocks": [
+    {
+      "type": "shot",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Portrait 4:5. Montrez l'atelier tel qu'il est." },
+        { "type": "text", "id": "caption", "label": "Légende" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "L'huilerie — photos" }]
+}
+{% endschema %}

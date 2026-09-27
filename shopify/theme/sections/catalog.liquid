@@ -1,0 +1,78 @@
+{%- liquid
+  assign title = section.settings.title
+  if title == blank
+    assign title = 'content.catalog.title' | t
+  endif
+  assign lede = section.settings.lede
+  if lede == blank
+    assign lede = 'content.catalog.lede' | t
+  endif
+
+  if section.settings.collection != blank
+    assign items = section.settings.collection.products
+  else
+    comment
+      No collection chosen: every product, cheapest first. Price rises with
+      the bottle, so 250 ml leads and 5 L closes, as on the static shop.
+      Choose a manual collection to set the order yourself.
+    endcomment
+    assign items = collections.all.products | sort: 'price'
+  endif
+-%}
+<section class="band band-paper" id="{{ section.settings.anchor | default: 'boutique' }}">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <h2 class="display sec-title">{{ title }}</h2>
+      <p class="measure sec-lede">{{ lede }}</p>
+    </div>
+    {%- if items.size > 0 -%}
+      <ul class="cards">
+        {%- comment -%} Priced formats first; a format still "Prix à définir" goes to the end. {%- endcomment -%}
+        {%- for product in items limit: section.settings.limit -%}
+          {%- if product.price > 0 -%}{% render 'product-card', product: product %}{%- endif -%}
+        {%- endfor -%}
+        {%- for product in items limit: section.settings.limit -%}
+          {%- if product.price == 0 -%}{% render 'product-card', product: product %}{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="price-note">{{ 'products.empty_collection' | t }}</p>
+    {%- endif -%}
+    <p class="price-note reveal">{{ 'content.catalog.note' | t }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Boutique — formats",
+  "class": "section-catalog",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Vide : tous les produits, du moins cher au plus cher. Une collection manuelle permet de fixer l'ordre."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Nombre de produits",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Ancre",
+      "default": "boutique",
+      "info": "Le menu et le hero pointent vers #boutique."
+    },
+    { "type": "header", "content": "Textes (vide = texte traduit du thème)" },
+    { "type": "text", "id": "title", "label": "Titre" },
+    { "type": "textarea", "id": "lede", "label": "Chapeau" }
+  ],
+  "presets": [{ "name": "Boutique — formats" }]
+}
+{% endschema %}

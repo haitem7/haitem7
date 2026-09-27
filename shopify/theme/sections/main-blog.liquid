@@ -1,0 +1,34 @@
+{%- paginate blog.articles by 12 -%}
+<section class="band band-paper">
+  <div class="shell">
+    <h1 class="display sec-title">{{ blog.title }}</h1>
+    {%- if blog.articles.size == 0 -%}
+      <p class="sec-lede">{{ 'general.blog_empty' | t }}</p>
+    {%- else -%}
+      <ul class="cards">
+        {%- for article in blog.articles -%}
+          <li class="card reveal">
+            {%- if article.image -%}
+              <a class="card-media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+                <div class="slot ar-4-5">
+                  {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '360, 540, 800', sizes: '(min-width: 60rem) 30vw, 92vw', alt: article.image.alt | default: article.title }}
+                </div>
+              </a>
+            {%- endif -%}
+            <div class="card-body">
+              <p class="card-material tnum">{{ article.published_at | time_tag: format: 'date' }}</p>
+              <p class="card-head"><a class="card-name" href="{{ article.url }}">{{ article.title }}</a></p>
+              <p class="card-note">{{ article.excerpt_or_content | strip_html | truncatewords: 28 }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- endif -%}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Blog", "class": "section-main-blog", "settings": [] }
+{% endschema %}

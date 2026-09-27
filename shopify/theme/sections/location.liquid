@@ -1,0 +1,74 @@
+{%- comment -%}
+  Address and coordinates as data, two map buttons beside them. No
+  embedded map: an iframe costs a third-party connection and tracking on
+  every visit, for something a customer taps once. Real coordinates or
+  nothing — with the GPS field empty the buttons search the address.
+{%- endcomment -%}
+{%- liquid
+  assign a1 = 'content.footer.address_1' | t
+  assign a2 = 'content.footer.address_2' | t
+  assign a3 = 'content.footer.address_3' | t
+  assign gps = section.settings.gps | strip
+  if gps != blank
+    assign q = gps | url_encode
+    assign maps = 'https://www.google.com/maps/search/?api=1&query=' | append: q
+    assign waze = 'https://waze.com/ul?ll=' | append: q | append: '&navigate=yes'
+  else
+    assign q = a2 | append: ', ' | append: a3 | url_encode
+    assign maps = 'https://www.google.com/maps/search/?api=1&query=' | append: q
+    assign waze = 'https://waze.com/ul?q=' | append: q
+  endif
+-%}
+<section class="band band-paper" id="acces">
+  <div class="shell split">
+    <div class="split-text">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{{ 'content.location.title' | t }}</h2>
+        <p class="measure sec-lede">{{ 'content.location.lede' | t }}</p>
+      </div>
+      <dl class="datagrid loc-grid reveal">
+        <div>
+          <dt>{{ 'content.location.address_label' | t }}</dt>
+          <dd><address class="foot-addr">{{ a1 }}<br>{{ a2 }}<br>{{ a3 }}</address></dd>
+        </div>
+        <div>
+          <dt>{{ 'content.location.gps_label' | t }}</dt>
+          <dd>
+            {%- if gps != blank -%}
+              <span class="tnum" dir="ltr">{{ gps }}</span>
+            {%- else -%}
+              <span class="pending">{{ 'content.location.gps_pending' | t }}</span>
+            {%- endif -%}
+          </dd>
+        </div>
+      </dl>
+      <dl class="datagrid loc-facts">
+        <div><dt>{{ 'content.location.fact_1_label' | t }}</dt><dd class="tnum">{{ 'content.location.fact_1_value' | t }}</dd></div>
+        <div><dt>{{ 'content.location.fact_2_label' | t }}</dt><dd class="tnum">{{ 'content.location.fact_2_value' | t }}</dd></div>
+        <div><dt>{{ 'content.location.fact_3_label' | t }}</dt><dd class="tnum">{{ 'content.location.fact_3_value' | t }}</dd></div>
+      </dl>
+      <p class="loc-note reveal">{{ 'content.location.note' | t }}</p>
+    </div>
+    <div class="loc-actions reveal">
+      <a class="btn btn-quiet" href="{{ maps | escape }}" target="_blank" rel="noopener">{{ 'content.location.maps' | t }}</a>
+      <a class="btn btn-quiet" href="{{ waze | escape }}" target="_blank" rel="noopener">{{ 'content.location.waze' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nous trouver",
+  "class": "section-location",
+  "settings": [
+    {
+      "type": "text",
+      "id": "gps",
+      "label": "Coordonnées GPS",
+      "default": "34.8708962, -1.1253134",
+      "info": "Fournies par le client. Vérifiez sur place que l'épingle tombe sur le portail de l'huilerie. Vide : les boutons cherchent l'adresse."
+    }
+  ],
+  "presets": [{ "name": "Nous trouver" }]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+<section class="band band-paper">
+  <div class="shell acct">
+    <div class="acct-panel">
+      <h1 class="display sec-title">{{ 'customer.activate' | t }}</h1>
+      <p class="sec-lede">{{ 'customer.activate_body' | t }}</p>
+      {%- form 'activate_customer_password' -%}
+        {{ form.errors | default_errors }}
+        <div class="fields acct-fields">
+          <p class="field field-wide">
+            <label for="a-pw">{{ 'customer.password' | t }}</label>
+            <input id="a-pw" type="password" name="customer[password]" autocomplete="new-password" required>
+          </p>
+          <p class="field field-wide">
+            <label for="a-pw2">{{ 'customer.password_confirm' | t }}</label>
+            <input id="a-pw2" type="password" name="customer[password_confirmation]" autocomplete="new-password" required>
+          </p>
+        </div>
+        <p class="acct-actions">
+          <button class="btn btn-primary" type="submit">{{ 'customer.activate' | t }}</button>
+          <button class="btn btn-quiet" type="submit" name="decline">{{ 'customer.decline' | t }}</button>
+        </p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

@@ -14,6 +14,9 @@ build.py            renders the three pages from content/
 assets/             compiled css, js, images, documents
 ```
 
+**Shopify:** a full Online Store 2.0 theme built from the same content
+lives in `shopify/` — see [`shopify/README.md`](shopify/README.md).
+
 ---
 
 ## ⚠️ Read this before the site goes live

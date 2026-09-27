@@ -1,0 +1,19 @@
+<article class="band band-paper doc">
+  <div class="shell doc-shell">
+    <header class="doc-head">
+      <p class="pdp-crumb"><a href="{{ blog.url }}">{{ blog.title }}</a></p>
+      <h1 class="display sec-title">{{ article.title }}</h1>
+      <p class="doc-date tnum">{{ article.published_at | time_tag: format: 'date' }}</p>
+    </header>
+    {%- if article.image -%}
+      <div class="slot ar-1200-1600 article-img">
+        {{ article.image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 52rem) 52rem, 92vw', alt: article.image.alt | default: article.title }}
+      </div>
+    {%- endif -%}
+    <div class="rte doc-body">{{ article.content }}</div>
+  </div>
+</article>
+
+{% schema %}
+{ "name": "Article", "class": "section-main-article", "settings": [] }
+{% endschema %}

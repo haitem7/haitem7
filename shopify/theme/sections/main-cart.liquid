@@ -1,0 +1,67 @@
+{%- comment -%}
+  The full cart page, for visitors without JavaScript and for anyone who
+  lands on /cart. Works as a plain form: quantities post to /cart.
+{%- endcomment -%}
+<section class="band band-paper">
+  <div class="shell cart-page">
+    <h1 class="display sec-title">{{ 'cart_page.title' | t }}</h1>
+    {%- if cart.item_count == 0 -%}
+      <p class="sec-lede">{{ 'content.cart.empty' | t }}</p>
+      <p><a class="btn btn-primary" href="{{ routes.root_url }}#boutique">{{ 'content.cart.empty_cta' | t }}</a></p>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div class="scroll-x">
+          <table class="spec cart-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'cart_page.product' | t }}</th>
+                <th scope="col">{{ 'cart_page.price' | t }}</th>
+                <th scope="col">{{ 'content.cart.qty' | t }}</th>
+                <th scope="col">{{ 'cart_page.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for item in cart.items -%}
+                <tr>
+                  <th scope="row">
+                    <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    {%- unless item.product.has_only_default_variant -%}<br><span class="cart-unit">{{ item.variant.title }}</span>{%- endunless -%}
+                    <br><a class="cart-rm" href="{{ item.url_to_remove }}">{{ 'content.cart.remove' | t }}</a>
+                  </th>
+                  <td class="tnum"><bdi>{{ item.final_price | money }}</bdi></td>
+                  <td>
+                    <label class="vh" for="u-{{ item.key }}">{{ 'content.cart.qty' | t }} — {{ item.product.title }}</label>
+                    <input class="cart-qty" id="u-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                  </td>
+                  <td class="tnum"><bdi>{{ item.final_line_price | money }}</bdi></td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cart-page-foot">
+          <p class="field">
+            <label for="cart-note">{{ 'cart_page.note' | t }}</label>
+            <span class="hint" id="cart-note-hint">{{ 'cart_page.note_hint' | t }}</span>
+            <textarea id="cart-note" name="note" rows="3" aria-describedby="cart-note-hint">{{ cart.note }}</textarea>
+          </p>
+          <div class="cart-page-sum">
+            <p class="cart-row"><span>{{ 'content.cart.subtotal' | t }}</span><span class="tnum"><bdi>{{ cart.total_price | money }}</bdi></span></p>
+            <p class="cart-row cart-ship"><span>{{ 'content.cart.shipping' | t }}</span><span>{{ 'content.cart.shipping_pending' | t }}</span></p>
+            <p class="cart-row cart-ship"><span>{{ 'products.cod' | t }}</span></p>
+            <div class="cart-page-actions">
+              <button class="btn btn-quiet" type="submit" name="update">{{ 'cart_page.update' | t }}</button>
+              <button class="btn btn-primary" type="submit" name="checkout">{{ 'content.cart.checkout' | t }}</button>
+            </div>
+            <p><a class="crosslink" href="{{ routes.root_url }}#boutique">{{ 'cart_page.continue' | t }}</a></p>
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Panier (page)", "class": "section-main-cart", "settings": [] }
+{% endschema %}

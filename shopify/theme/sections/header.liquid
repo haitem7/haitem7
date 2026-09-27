@@ -1,0 +1,108 @@
+{%- comment -%}
+  Same header as the static site: transparent over the hero on the home
+  page, solid everywhere else. With no menu chosen it links to the home
+  page's own sections, which is what the static shop did.
+{%- endcomment -%}
+{%- liquid
+  assign anchor_base = ''
+  if template.name != 'index'
+    assign anchor_base = routes.root_url
+  endif
+  assign lang_label = 'general.language' | t
+  assign menu = linklists[section.settings.menu]
+-%}
+<header class="site-head on-dark{% if template.name != 'index' %} is-solid{% endif %}" data-head>
+  <div class="shell head-row">
+    <a class="brand display" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: class: 'brand-logo', alt: shop.name, widths: '200, 400', sizes: '200px', loading: 'eager' }}
+      {%- else -%}
+        {{ 'content.brand' | t }}
+      {%- endif -%}
+    </a>
+
+    <a class="head-cart" href="{{ routes.cart_url }}" data-cart-open
+       aria-label="{{ 'general.cart_count' | t: count: cart.item_count | escape }}">
+      {% render 'icon', name: 'basket', size: 20 %}
+      <span class="cart-count tnum" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+    </a>
+
+    <button class="nav-toggle btn btn-quiet" type="button" data-nav-toggle
+            aria-expanded="false" aria-controls="nav-panel"
+            data-label-close="{{ 'content.nav_close' | t | escape }}">
+      <span data-nav-label>{{ 'content.nav_open' | t }}</span>
+      <span data-nav-icon>{% render 'icon', name: 'menu' %}</span>
+    </button>
+
+    <div class="nav-panel" id="nav-panel" data-nav-panel>
+      <nav aria-label="{{ 'content.nav_label' | t | escape }}">
+        <ul class="navlist">
+          {%- if menu.links.size > 0 -%}
+            {%- for link in menu.links -%}
+              <li><a class="navlink" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a class="navlink" href="{{ anchor_base }}#boutique">{{ 'content.nav_shop' | t }}</a></li>
+            <li><a class="navlink" href="{{ anchor_base }}#livraison">{{ 'content.nav_delivery' | t }}</a></li>
+            <li><a class="navlink" href="{{ anchor_base }}#huilerie">{{ 'content.nav_mill' | t }}</a></li>
+            <li><a class="navlink" href="{{ anchor_base }}#acces">{{ 'content.nav_find' | t }}</a></li>
+          {%- endif -%}
+        </ul>
+      </nav>
+
+      {%- if localization.available_languages.size > 1 -%}
+        {%- form 'localization', class: 'langnav', aria-label: lang_label -%}
+          <ul>
+            {%- for l in localization.available_languages -%}
+              <li>
+                <button type="submit" name="language_code" value="{{ l.iso_code }}" lang="{{ l.iso_code }}"
+                  {%- if l.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
+                  {{- l.endonym_name | capitalize -}}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endform -%}
+      {%- endif -%}
+
+      {%- if section.settings.export_url != blank -%}
+        <a class="crosslink" href="{{ section.settings.export_url }}">{{ 'content.cross' | t }}</a>
+      {%- endif -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="crosslink" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+          {{- 'general.account' | t -}}
+        </a>
+      {%- endif -%}
+
+      <a class="btn btn-primary head-cta" href="{{ anchor_base }}#boutique">{{ 'content.nav_cta' | t }}</a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Vide : le nom TLEMCENYA en Fraunces, comme sur le site."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Vide : Boutique, Livraison, L'huilerie, Nous trouver — les sections de la page d'accueil, traduites dans les trois langues."
+    },
+    {
+      "type": "url",
+      "id": "export_url",
+      "label": "Lien « Acheteurs professionnels / export »",
+      "info": "L'adresse de la page export (le site statique /export/). Vide : le lien n'apparaît pas."
+    }
+  ]
+}
+{% endschema %}

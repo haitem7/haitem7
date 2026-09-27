@@ -1,0 +1,38 @@
+<section class="band {{ section.settings.band }}{% if section.settings.band == 'band-ink' %} on-dark{% endif %}">
+  <div class="shell">
+    {%- if section.settings.title != blank -%}
+      <h2 class="display sec-title reveal">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="measure sec-lede rte reveal">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <p class="rt-action reveal"><a class="btn btn-primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texte",
+  "class": "section-rich-text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "band",
+      "label": "Fond",
+      "default": "band-paper",
+      "options": [
+        { "value": "band-paper", "label": "Papier" },
+        { "value": "band-stone", "label": "Pierre de Tlemcen" },
+        { "value": "band-ink", "label": "Olive noire" }
+      ]
+    },
+    { "type": "text", "id": "title", "label": "Titre" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "button_label", "label": "Bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+  ],
+  "presets": [{ "name": "Texte" }]
+}
+{% endschema %}

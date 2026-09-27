@@ -1,0 +1,71 @@
+{%- comment -%}
+  The basket drawer. Rendered here, in Liquid, and nowhere else: after
+  every add, change or removal theme.js asks Shopify for this section again
+  (the Section Rendering API) and swaps [data-cart-body] in place. One
+  renderer, so the drawer can never disagree with the cart.
+
+  Checkout is Shopify's own. Cash on delivery is a manual payment method
+  (Settings > Payments), local pickup a delivery method — see the README.
+{%- endcomment -%}
+<button class="cart-fab" type="button" data-cart-open{% if cart.item_count == 0 %} hidden{% endif %}>
+  {% render 'icon', name: 'basket', size: 20 %}<span>{{ 'content.cart.open' | t }}</span>
+  <span class="cart-count tnum" data-cart-count>{{ cart.item_count }}</span>
+</button>
+<div class="cart-veil" data-cart-veil hidden></div>
+<aside class="cart" data-cart hidden aria-labelledby="cart-title" role="dialog" aria-modal="true"
+       data-removed="{{ 'content.cart.removed' | t | escape }}"
+       data-added="{{ 'content.cart.added_live' | t | escape }}">
+  <div class="cart-head">
+    <h2 class="sub-title" id="cart-title">{{ 'content.cart.title' | t }}</h2>
+    <button class="icon-btn" type="button" data-cart-close aria-label="{{ 'content.cart.close' | t | escape }}">
+      {%- render 'icon', name: 'close', size: 20 -%}
+    </button>
+  </div>
+  <div class="cart-body" data-cart-body data-count="{{ cart.item_count }}">
+    {%- if cart.item_count == 0 -%}
+      <p class="cart-empty">{{ 'content.cart.empty' | t }}
+        <a href="{{ routes.root_url }}#boutique" data-cart-close>{{ 'content.cart.empty_cta' | t }}</a></p>
+    {%- else -%}
+      <ul class="cart-lines">
+        {%- for item in cart.items -%}
+          {%- assign short = item.product.title | split: ' — ' | last -%}
+          <li class="cart-line">
+            <a class="cart-name" href="{{ item.url }}"><bdi>{{ short }}</bdi></a>
+            <span class="cart-unit tnum">
+              {%- unless item.product.has_only_default_variant %}{{ item.variant.title }} · {% endunless -%}
+              <bdi>{{ item.final_price | money }}</bdi>
+            </span>
+            <span class="qty" role="group" aria-label="{{ 'content.cart.qty' | t | escape }} — {{ short | escape }}">
+              <button class="qty-btn" type="button" data-qty-line="{{ forloop.index }}" data-qty="{{ item.quantity | minus: 1 }}"
+                      aria-label="{{ 'content.cart.dec' | t | escape }}">−</button>
+              <span class="qty-n tnum" aria-live="polite">{{ item.quantity }}</span>
+              <button class="qty-btn" type="button" data-qty-line="{{ forloop.index }}" data-qty="{{ item.quantity | plus: 1 }}"
+                      aria-label="{{ 'content.cart.inc' | t | escape }}">+</button>
+            </span>
+            <button class="cart-rm" type="button" data-qty-line="{{ forloop.index }}" data-qty="0" data-remove>
+              {{- 'content.cart.remove' | t -}}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="cart-foot">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <p class="cart-row cart-ship"><span>{{ discount.title }}</span><bdi class="tnum">−{{ discount.total_allocated_amount | money }}</bdi></p>
+        {%- endfor -%}
+        <p class="cart-row"><span>{{ 'content.cart.subtotal' | t }}</span><bdi class="tnum">{{ cart.total_price | money }}</bdi></p>
+        <p class="cart-row cart-ship"><span>{{ 'content.cart.shipping' | t }}</span><span>{{ 'content.cart.shipping_pending' | t }}</span></p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button class="btn btn-primary cart-go" type="submit" name="checkout">{{ 'content.cart.checkout' | t }}</button>
+        </form>
+      </div>
+    {%- endif -%}
+  </div>
+</aside>
+<div class="sr-live" role="status" aria-live="polite" data-cart-live></div>
+
+{% schema %}
+{
+  "name": "Panier",
+  "settings": []
+}
+{% endschema %}

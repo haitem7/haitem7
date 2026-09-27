@@ -1,0 +1,151 @@
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign priced = false
+  if v.price > 0
+    assign priced = true
+  endif
+-%}
+<section class="band band-paper pdp-band">
+  <div class="shell pdp">
+    <div class="pdp-media">
+      {%- if product.media.size > 0 -%}
+        {%- for media in product.media -%}
+          {%- liquid
+            assign loading = 'lazy'
+            if forloop.first
+              assign loading = 'eager'
+            endif
+          -%}
+          <figure class="pdp-shot{% if forloop.first %} is-first{% endif %}">
+            {%- case media.media_type -%}
+              {%- when 'image' -%}
+                <div class="slot ar-4-5">
+                  {{ media | image_url: width: 1600 | image_tag:
+                    widths: '480, 720, 960, 1280, 1600',
+                    sizes: '(min-width: 56rem) 52vw, 92vw',
+                    loading: loading,
+                    alt: media.alt | default: product.title }}
+                </div>
+              {%- when 'video' -%}
+                {{ media | video_tag: controls: true, playsinline: true, muted: true, image_size: '1600x' }}
+              {%- when 'external_video' -%}
+                {{ media | external_video_tag }}
+              {%- else -%}
+                {{ media | media_tag }}
+            {%- endcase -%}
+          </figure>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="slot ar-4-5" aria-hidden="true"></div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp-info">
+      <p class="pdp-crumb"><a href="{{ routes.root_url }}#boutique">{{ 'content.catalog.title' | t }}</a></p>
+      <h1 class="display sec-title pdp-title">{{ product.title }}</h1>
+      {%- if product.type != blank -%}<p class="card-material">{{ product.type }}</p>{%- endif -%}
+
+      <p class="pdp-price tnum" data-price>
+        {%- if priced -%}
+          {% render 'price', variant: v %}
+        {%- else -%}
+          <span class="pending">{{ 'products.price_pending' | t }}</span>
+        {%- endif -%}
+      </p>
+      <p class="pdp-tax">{{ 'products.tax_note' | t }}</p>
+
+      {%- form 'product', product, class: 'pdp-form', data-product-form: '', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ v.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <p class="field">
+              <label for="opt-{{ forloop.index }}">{{ option.name }}</label>
+              <select id="opt-{{ forloop.index }}" data-option="{{ forloop.index0 }}">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </p>
+          {%- endfor -%}
+          <script type="application/json" data-variants>
+            {{ product.variants | json }}
+          </script>
+        {%- endunless -%}
+
+        <p class="field pdp-qty">
+          <label for="qty">{{ 'products.quantity' | t }}</label>
+          <input id="qty" type="number" name="quantity" value="1" min="1" max="99" inputmode="numeric">
+        </p>
+
+        <p class="pdp-error" data-form-error role="alert" hidden></p>
+
+        <button class="btn btn-primary pdp-add" type="submit" name="add" data-add-button
+                data-label-add="{{ 'products.add' | t | escape }}"
+                data-label-sold="{{ 'products.sold_out' | t | escape }}"
+                data-label-pending="{{ 'products.price_pending' | t | escape }}"
+                data-label-unavailable="{{ 'products.unavailable' | t | escape }}"
+                data-added="{{ 'content.catalog.added' | t | escape }}"
+                {% if v.available == false or priced == false %}disabled aria-disabled="true"{% endif %}>
+          {%- if priced == false -%}
+            {{ 'products.price_pending' | t }}
+          {%- elsif v.available -%}
+            {{ 'products.add' | t }}
+          {%- else -%}
+            {{ 'products.sold_out' | t }}
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+
+      <dl class="datagrid pdp-facts">
+        <div><dt>{{ 'content.delivery.fact_1_label' | t }}</dt><dd>{{ 'content.delivery.fact_1_value' | t }}</dd></div>
+        <div><dt>{{ 'content.hero.data_3_label' | t }}</dt><dd><a href="{{ routes.root_url }}#livraison">{{ 'content.hero.data_3_value' | t }}</a></dd></div>
+      </dl>
+
+      {%- if product.description != blank -%}
+        <div class="rte pdp-desc">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.show_more -%}
+  {%- assign others = collections.all.products | sort: 'price' -%}
+  {%- if others.size > 1 -%}
+    <section class="band band-stone">
+      <div class="shell">
+        <h2 class="display sec-title reveal">{{ 'products.more' | t }}</h2>
+        <ul class="cards">
+          {%- for p in others limit: 8 -%}
+            {%- unless p.id == product.id -%}
+              {% render 'product-card', product: p %}
+            {%- endunless -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+{%- endif -%}
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Produit",
+  "class": "section-main-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_more",
+      "label": "Afficher les autres formats",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Un produit à 0 est affiché « Prix à définir » et ne peut pas être ajouté au panier : aucun prix n'est inventé."
+    }
+  ]
+}
+{% endschema %}

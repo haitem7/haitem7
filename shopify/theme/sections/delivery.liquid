@@ -1,0 +1,101 @@
+{%- comment -%}
+  Delivery zones. The wilaya lists per zone come from content/wilayas.json
+  (translated at build time); the prices are theme settings, because they
+  change with the carrier and not with the language.
+
+  An empty price renders "À définir", never a guess. The prices shown here
+  are information: what the customer actually pays is set in
+  Settings > Shipping and delivery. Keep the two in step.
+{%- endcomment -%}
+{%- liquid
+  assign title = section.settings.title
+  if title == blank
+    assign title = 'content.delivery.title' | t
+  endif
+  assign lede = section.settings.lede
+  if lede == blank
+    assign lede = 'content.delivery.lede' | t
+  endif
+  assign lead_time = section.settings.lead_time
+  if lead_time == blank
+    assign lead_time = 'content.delivery.fact_2_value' | t
+  endif
+-%}
+<section class="band band-stone" id="livraison">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <h2 class="display sec-title">{{ title }}</h2>
+      <p class="measure sec-lede">{{ lede }}</p>
+    </div>
+    <dl class="datagrid facts-grid">
+      <div><dt>{{ 'content.delivery.fact_1_label' | t }}</dt><dd class="tnum">{{ 'content.delivery.fact_1_value' | t }}</dd></div>
+      <div><dt>{{ 'content.delivery.fact_2_label' | t }}</dt><dd class="tnum">{{ lead_time }}</dd></div>
+      <div><dt>{{ 'content.delivery.fact_3_label' | t }}</dt><dd class="tnum">{{ 'content.delivery.fact_3_value' | t }}</dd></div>
+    </dl>
+
+    <h3 class="sub-title reveal">{{ 'content.delivery.zones_title' | t }}</h3>
+    <div class="scroll-x reveal">
+      <table class="spec zones">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'content.delivery.zone_label' | t }}</th>
+            <th scope="col">{{ 'content.delivery.price_label' | t }}</th>
+            <th scope="col">{{ 'content.delivery.wilayas_label' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for i in (1..4) -%}
+            {%- liquid
+              assign name_key = 'content.delivery.zone_' | append: i | append: '_name'
+              assign wil_key = 'content.delivery.zone_' | append: i | append: '_wilayas'
+              assign price_id = 'zone_' | append: i | append: '_price'
+              assign price = section.settings[price_id]
+            -%}
+            <tr>
+              <th scope="row">{{ name_key | t }}</th>
+              <td class="tnum">
+                {%- if price != blank -%}
+                  {{ price }}
+                {%- else -%}
+                  <span class="pending">{{ 'content.delivery.pending' | t }}</span>
+                {%- endif -%}
+              </td>
+              <td class="zone-w">{{ wil_key | t }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    {%- if section.settings.show_pickup -%}
+      <div class="pickup reveal">
+        <h3 class="sub-title">{{ 'content.delivery.pickup_title' | t }}</h3>
+        <p class="measure">{{ 'content.delivery.pickup_body' | t }}</p>
+      </div>
+    {%- endif -%}
+    <p class="price-note reveal">{{ 'content.delivery.note' | t }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Livraison et paiement",
+  "class": "section-delivery",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Tarifs affichés à titre d'information. Le montant réellement facturé se règle dans Paramètres > Expédition et livraison : gardez les deux identiques."
+    },
+    { "type": "text", "id": "zone_1_price", "label": "Tarif zone Ouest", "info": "Ex. « 400 DA ». Vide : « À définir »." },
+    { "type": "text", "id": "zone_2_price", "label": "Tarif zone Centre" },
+    { "type": "text", "id": "zone_3_price", "label": "Tarif zone Est" },
+    { "type": "text", "id": "zone_4_price", "label": "Tarif zone Sud" },
+    { "type": "text", "id": "lead_time", "label": "Délai de livraison", "info": "Vide : « À confirmer »." },
+    { "type": "checkbox", "id": "show_pickup", "label": "Afficher le retrait à l'huilerie", "default": true },
+    { "type": "header", "content": "Textes (vide = texte traduit du thème)" },
+    { "type": "text", "id": "title", "label": "Titre" },
+    { "type": "textarea", "id": "lede", "label": "Chapeau" }
+  ],
+  "presets": [{ "name": "Livraison et paiement" }]
+}
+{% endschema %}

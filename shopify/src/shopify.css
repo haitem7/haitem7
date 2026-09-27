@@ -1,0 +1,169 @@
+/* ------------------------------------------------------------------ *
+ * Shopify theme additions.
+ * Appended to the compiled assets/css/site.css by build_shopify.py.
+ * Same tokens, same layer: everything here is a page type the static
+ * site never had (product page, cart page, account, search) or a Shopify
+ * control (the localization form) that needs to look like its static twin.
+ * ------------------------------------------------------------------ */
+@layer components {
+
+  main:focus { outline: none; }
+
+  /* ---- Header ------------------------------------------------------ */
+  /* Over the hero on the home page, solid on every other template, where
+     the header would otherwise sit on paper in paper-coloured type. */
+  .site-head.is-solid {
+    background: color-mix(in oklab, var(--color-ink) 96%, transparent);
+    box-shadow: 0 1px 0 var(--color-bark);
+  }
+  .tpl-inner main { padding-block-start: 4.6rem; }
+  @media (min-width: 48rem) and (max-width: 67.99rem) {
+    .tpl-inner main { padding-block-start: 7.4rem; }
+  }
+  .brand-logo { display: block; height: 2.25rem; width: auto; }
+
+  .head-cart {
+    position: relative;
+    display: inline-grid; place-items: center;
+    min-width: 2.75rem; min-height: 2.75rem;
+    color: var(--color-stone);
+    border-radius: 2px;
+  }
+  .head-cart:hover { color: var(--color-amber); }
+  .head-cart .cart-count {
+    position: absolute; inset-block-start: .1rem; inset-inline-end: -.1rem;
+    min-width: 1.15rem; height: 1.15rem; font-size: .6875rem;
+  }
+  .head-cart .cart-count[hidden] { display: none; }
+  @media (min-width: 68rem) {
+    .head-cart { order: 3; }
+  }
+
+  /* Language switcher. Shopify switches language with a form post, so the
+     static site's links become buttons that must read as the same links. */
+  .langnav button, .foot-langs button {
+    display: inline-flex; align-items: center; min-height: 1.75rem;
+    padding: 0 .15rem; border: 0; background: none;
+    font: inherit; color: inherit; cursor: pointer;
+  }
+  .langnav button {
+    font-size: var(--text-micro);
+    color: color-mix(in oklab, var(--color-stone) 70%, transparent);
+  }
+  .langnav button:hover { color: var(--color-stone); }
+  .langnav button[aria-current] { color: var(--color-amber); }
+  .foot-langs button { text-decoration: underline; text-decoration-color: var(--color-rule); text-underline-offset: 3px; }
+  .foot-langs button[aria-current] { color: color-mix(in oklab, var(--color-ink) 60%, transparent); text-decoration: none; }
+  @media (max-width: 47.99rem) {
+    .langnav button { padding-block: .7rem; font-size: var(--text-fine); color: var(--color-stone); opacity: .75; }
+    .langnav button[aria-current] { color: var(--color-amber); opacity: 1; }
+  }
+
+  /* ---- Hero image (when chosen instead of the video) --------------- */
+  .hero-image {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: .9;
+  }
+
+  /* ---- Cards --------------------------------------------------------- */
+  .card-media { display: block; }
+  .card-media .slot { height: 100%; }
+  .card-name:hover { text-decoration: underline; text-underline-offset: .2em; }
+  .card-form { margin: 0; }
+  .price-was { opacity: .55; font-weight: 400; margin-inline-end: .35rem; }
+
+  /* ---- Product page ------------------------------------------------ */
+  .pdp { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  @media (min-width: 56rem) {
+    .pdp { grid-template-columns: 1.1fr 0.9fr; }
+    .pdp-info { position: sticky; inset-block-start: 6.5rem; }
+  }
+  .pdp-media { display: grid; gap: 1rem; }
+  .pdp-shot { margin: 0; }
+  .pdp-shot video, .pdp-shot iframe { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .pdp-crumb { font-size: var(--text-fine); margin: 0 0 1rem; opacity: .75; }
+  .pdp-crumb a { text-decoration: underline; text-underline-offset: 3px; }
+  .pdp-title { margin-block-end: .5rem; }
+  .pdp-price { font-size: var(--text-h3); font-weight: 500; margin: 1.25rem 0 .25rem; }
+  .pdp-tax { font-size: var(--text-micro); opacity: .66; margin: 0 0 1.75rem; }
+  .pdp-form { display: grid; gap: 1.1rem; max-width: 26rem; }
+  .pdp-qty input { max-width: 7rem; }
+  .pdp-add { justify-content: center; }
+  .pdp-error { color: var(--color-danger); font-size: var(--text-fine); margin: 0; }
+  .pdp-facts { grid-template-columns: 1fr 1fr; margin-block-start: 2rem; }
+  .pdp-facts a { text-decoration: underline; text-underline-offset: 3px; }
+  .pdp-desc { margin-block-start: 2rem; }
+
+  /* ---- Rich text (descriptions, pages, articles, policies) ---------- */
+  .rte > * + * { margin-block-start: 1rem; }
+  .rte h2, .rte h3 { font-family: var(--font-display); font-weight: 500; margin-block-start: 2rem; }
+  .rte h2 { font-size: var(--text-h3); }
+  .rte h3 { font-size: var(--text-lead); }
+  .rte a { text-decoration: underline; text-underline-offset: 3px; }
+  .rte ul { list-style: disc; padding-inline-start: 1.25rem; }
+  .rte ol { list-style: decimal; padding-inline-start: 1.25rem; }
+  .rte img { max-width: 100%; height: auto; }
+  .rte table { width: 100%; border-collapse: collapse; }
+  .rte th, .rte td { text-align: start; padding: .6rem .75rem; border-block-end: 1px solid var(--color-rule); }
+  .doc-body { padding-block-end: 1rem; }
+  .article-img { margin-block-end: 2rem; }
+
+  /* ---- Cart page ------------------------------------------------------ */
+  .cart-table .cart-qty { width: 5rem; min-height: 2.5rem; padding: .4rem .6rem;
+    background: var(--color-stone); border: 1px solid var(--color-rule); border-radius: 2px; font: inherit; }
+  .cart-table .cart-rm { display: inline-flex; }
+  .cart-page-foot { display: grid; gap: 2rem; margin-block-start: 2rem; }
+  @media (min-width: 48rem) { .cart-page-foot { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .cart-page-sum { padding: 1.25rem; border: 1px solid var(--color-rule); border-radius: 3px; background: var(--color-stone); }
+  .cart-page-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1.25rem .75rem; }
+  .cart-page-actions .btn-primary { flex: 1; justify-content: center; }
+
+  /* The drawer body swaps as one node; keep it filling the panel. */
+  .cart-body { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .cart[aria-busy="true"] .cart-body { opacity: .55; pointer-events: none; }
+
+  /* ---- Pagination, search, 404 ------------------------------------- */
+  .pager { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-block-start: 2.5rem; }
+  .pager-n { font-size: var(--text-fine); opacity: .7; }
+  .search-form { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; margin-block: 1.5rem 2rem; }
+  .search-form .field { flex: 1 1 18rem; margin: 0; }
+  .nf-actions, .rt-action { margin-block-start: 2rem; }
+
+  /* ---- Customer account -------------------------------------------- */
+  .acct { display: grid; gap: 3rem; }
+  @media (min-width: 56rem) { .acct { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .acct-panel { max-width: 30rem; }
+  .acct-fields { margin-block: 1.5rem; }
+  .acct-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-block: 1rem; }
+  .acct-recover:not(:target) { opacity: .92; }
+  .acct-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .acct-grid { display: grid; gap: 2.5rem; margin-block-start: 2rem; }
+  @media (min-width: 56rem) { .acct-grid { grid-template-columns: 2fr 1fr; } }
+  .acct-sum { max-width: 34rem; }
+  .acct-addresses { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-block: 2rem; }
+  .acct-new { margin-block-start: 2rem; }
+  .acct-new > summary, .card-foot summary { list-style: none; cursor: pointer; }
+  .acct-new > summary::-webkit-details-marker, .card-foot summary::-webkit-details-marker { display: none; }
+  .acct-form { margin-block-start: 1.5rem; }
+
+  /* Shopify's default_errors markup. */
+  .errors { border: 1px solid var(--color-danger); color: var(--color-danger);
+    padding: .75rem 1rem; margin-block-end: 1.25rem; font-size: var(--text-fine); }
+  .errors ul { margin: 0; padding-inline-start: 1.1rem; list-style: disc; }
+
+  /* ---- Password page ------------------------------------------------ */
+  .pw-hero .brand { margin-block-end: 2rem; }
+  .pw-form { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; max-width: 34rem; margin-block-start: 1.5rem; }
+  .pw-form .field { flex: 1 1 16rem; margin: 0; }
+  .pw-form .field label { color: var(--color-stone); }
+  .pw-login { margin-block-start: 2.5rem; font-size: var(--text-fine); }
+  .pw-login summary { cursor: pointer; opacity: .8; }
+
+  /* ---- Gift card ---------------------------------------------------- */
+  .gift { padding-block: 3rem; }
+  .gift-brand { color: var(--color-ink); margin-block-end: 2rem; }
+  .gift-amount { font-family: var(--font-display); font-size: var(--text-h1); line-height: 1; margin: 1rem 0 2rem; }
+  .gift-qr { margin-block: 2rem; }
+  @media print { .acct-actions { display: none; } }
+}

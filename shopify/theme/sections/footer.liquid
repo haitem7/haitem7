@@ -1,0 +1,70 @@
+{%- liquid
+  assign phone = settings.contact_phone
+  assign email = settings.contact_email | default: shop.email
+-%}
+<footer class="site-foot band-paper">
+  <div class="shell foot-grid">
+    <div>
+      <p class="foot-label">{{ 'content.footer.address_label' | t }}</p>
+      <address class="foot-addr">
+        {{- 'content.footer.address_1' | t }}<br>
+        {{ 'content.footer.address_2' | t }}<br>
+        {{ 'content.footer.address_3' | t -}}
+      </address>
+    </div>
+    <div>
+      {%- if phone != blank -%}
+        <p class="foot-label">{{ 'content.footer.phone_label' | t }}</p>
+        <p><a class="wrap-any" href="tel:{{ phone | remove: ' ' }}" dir="ltr">{{ phone }}</a></p>
+      {%- endif -%}
+      {%- if email != blank -%}
+        <p class="foot-label{% if phone != blank %} foot-label-gap{% endif %}">{{ 'content.footer.email_label' | t }}</p>
+        <p><a class="wrap-any" href="mailto:{{ email }}">{{ email }}</a></p>
+      {%- endif -%}
+    </div>
+    <div>
+      <p class="foot-label">{{ 'content.footer.hours_label' | t }}</p>
+      <p class="tnum">{{ 'content.footer.hours' | t }}</p>
+    </div>
+    <div>
+      {%- if localization.available_languages.size > 1 -%}
+        <p class="foot-label">{{ 'content.footer.lang_label' | t }}</p>
+        {%- form 'localization', class: 'foot-langs-form' -%}
+          <ul class="foot-langs">
+            {%- for l in localization.available_languages -%}
+              <li>
+                <button type="submit" name="language_code" value="{{ l.iso_code }}" lang="{{ l.iso_code }}"
+                  {%- if l.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
+                  {{- l.endonym_name | capitalize -}}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="shell foot-legal">
+    <p>{{ 'content.footer.legal' | t }} © {{ 'now' | date: '%Y' }}</p>
+    {%- if shop.policies.size > 0 -%}
+      <nav class="foot-docs" aria-label="{{ 'general.policies' | t | escape }}">
+        {%- for policy in shop.policies -%}
+          <a href="{{ policy.url }}">{{ policy.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Adresse, horaires et mentions viennent des textes du thème (Boutique en ligne > Thèmes > … > Modifier le contenu par défaut), traduits en FR, EN et AR. Téléphone et e-mail : Paramètres du thème > Coordonnées."
+    }
+  ]
+}
+{% endschema %}

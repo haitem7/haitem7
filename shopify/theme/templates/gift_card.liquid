@@ -1,0 +1,48 @@
+{%- layout none -%}
+{%- liquid
+  assign lang = request.locale.iso_code | split: '-' | first
+  assign dir = 'ltr'
+  if lang == 'ar'
+    assign dir = 'rtl'
+  endif
+-%}
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ dir }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ 'gift_card.title' | t }} — {{ shop.name }}</title>
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+  {{ content_for_header }}
+</head>
+<body class="tpl-gift-card">
+  <main id="main" class="band band-paper">
+    <div class="shell doc-shell gift">
+      <p class="brand display gift-brand">{{ 'content.brand' | t }}</p>
+      <h1 class="display sec-title">{{ 'gift_card.title' | t }}</h1>
+      <p class="gift-amount tnum">{{ gift_card.balance | money }}</p>
+      {%- if gift_card.expired -%}
+        <p class="summary">{{ 'gift_card.expired' | t }}</p>
+      {%- elsif gift_card.enabled == false -%}
+        <p class="summary">{{ 'gift_card.disabled' | t }}</p>
+      {%- endif -%}
+      <dl class="datagrid lot-grid">
+        <div><dt>{{ 'gift_card.code' | t }}</dt><dd class="tnum" dir="ltr">{{ gift_card.code | format_code }}</dd></div>
+      </dl>
+      <div class="gift-qr" id="QrCode" data-identifier="{{ gift_card.qr_identifier }}"></div>
+      <p class="acct-actions">
+        <a class="btn btn-primary" href="{{ shop.url }}">{{ 'gift_card.shop' | t }}</a>
+        <button class="btn btn-quiet" type="button" onclick="window.print()">{{ 'gift_card.print' | t }}</button>
+      </p>
+    </div>
+  </main>
+  <script>
+    window.addEventListener('load', function () {
+      var el = document.getElementById('QrCode');
+      if (el && window.QRCode) new QRCode(el, { text: el.dataset.identifier, width: 120, height: 120 });
+    });
+  </script>
+</body>
+</html>

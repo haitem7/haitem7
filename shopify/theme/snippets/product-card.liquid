@@ -1,0 +1,61 @@
+{%- comment -%}
+  One format of the oil. Same card as the static shop (catalog() in build.py).
+
+  A product priced at 0 is treated as "price not set yet": the card says so
+  and the button stays disabled. An invented price is a commercial
+  commitment; nobody should add an unpriced item and discover the cost later.
+
+  The short name is the part of the title after " — ", so
+  "Huile d'olive vierge extra — 250 ml" shows as "250 ml". The product
+  type carries the container ("Verre", "PET").
+{%- endcomment -%}
+{%- liquid
+  assign short = product.title | split: ' — ' | last
+  assign v = product.selected_or_first_available_variant
+  assign priced = false
+  if product.price > 0
+    assign priced = true
+  endif
+-%}
+<li class="card reveal">
+  {%- if product.featured_media -%}
+    <a class="card-media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+      <div class="slot ar-4-5">
+        {{ product.featured_media | image_url: width: 1000 | image_tag:
+          widths: '360, 540, 720, 1000',
+          sizes: '(min-width: 60rem) 22vw, (min-width: 40rem) 45vw, 92vw',
+          loading: 'lazy',
+          alt: product.featured_media.alt | default: product.title }}
+      </div>
+    </a>
+  {%- endif -%}
+  <div class="card-body">
+    <p class="card-head">
+      <a class="card-name tnum" href="{{ product.url }}"><bdi>{{ short }}</bdi></a>
+      {%- if product.type != blank -%}<span class="card-material">{{ product.type }}</span>{%- endif -%}
+    </p>
+    {%- assign note = product.metafields.custom.card_note.value | default: product.description | strip_html | truncatewords: 18 -%}
+    {%- if note != blank -%}<p class="card-note">{{ note }}</p>{%- endif -%}
+  </div>
+  <div class="card-foot">
+    {%- if priced -%}
+      <p class="card-price tnum">{% render 'price', product: product %}</p>
+    {%- else -%}
+      <p class="card-price pending">{{ 'content.catalog.price_pending' | t }}</p>
+    {%- endif -%}
+
+    {%- if priced == false -%}
+      <button class="btn btn-quiet card-add" type="button" disabled aria-disabled="true">{{ 'content.catalog.add' | t }}</button>
+    {%- elsif product.available == false -%}
+      <button class="btn btn-quiet card-add" type="button" disabled aria-disabled="true">{{ 'content.catalog.sold_out' | t }}</button>
+    {%- elsif product.has_only_default_variant -%}
+      {%- form 'product', product, class: 'card-form', data-product-form: '' -%}
+        <input type="hidden" name="id" value="{{ v.id }}">
+        <button class="btn btn-primary card-add" type="submit" name="add"
+                data-added="{{ 'content.catalog.added' | t | escape }}">{{ 'content.catalog.add' | t }}</button>
+      {%- endform -%}
+    {%- else -%}
+      <a class="btn btn-primary card-add" href="{{ product.url }}">{{ 'content.catalog.add' | t }}</a>
+    {%- endif -%}
+  </div>
+</li>

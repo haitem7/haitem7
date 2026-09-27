@@ -1,0 +1,27 @@
+{%- paginate collection.products by 24 -%}
+<section class="band band-paper">
+  <div class="shell">
+    <div class="sec-head">
+      <h1 class="display sec-title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="measure sec-lede rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+    {%- if collection.products.size > 0 -%}
+      <ul class="cards">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- else -%}
+      <p class="price-note">{{ 'products.empty_collection' | t }}</p>
+    {%- endif -%}
+    <p class="price-note">{{ 'content.catalog.note' | t }}</p>
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Collection", "class": "section-main-collection", "settings": [] }
+{% endschema %}

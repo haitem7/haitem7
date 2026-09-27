@@ -1,0 +1,26 @@
+<section class="band band-paper">
+  <div class="shell">
+    <h1 class="display sec-title">{{ page_title }}</h1>
+    <ul class="cards">
+      {%- for c in collections -%}
+        <li class="card reveal">
+          {%- if c.featured_image -%}
+            <a class="card-media" href="{{ c.url }}" tabindex="-1" aria-hidden="true">
+              <div class="slot ar-4-5">
+                {{ c.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '360, 540, 800', sizes: '(min-width: 60rem) 22vw, 45vw' }}
+              </div>
+            </a>
+          {%- endif -%}
+          <div class="card-body">
+            <p class="card-head"><a class="card-name" href="{{ c.url }}">{{ c.title }}</a>
+              <span class="card-material tnum">{{ c.products_count }}</span></p>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collections", "class": "section-list-collections", "settings": [] }
+{% endschema %}

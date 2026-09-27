@@ -1,0 +1,48 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Tlemcenya",
+    "theme_version": "1.0.0",
+    "theme_author": "TLEMCENYA",
+    "theme_documentation_url": "https://github.com/haitem7/haitem7/tree/main/shopify",
+    "theme_support_url": "https://github.com/haitem7/haitem7/issues"
+  },
+  {
+    "name": "Coordonnées",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Le téléphone apparaît dans le pied de page. Tant qu'il est vide, aucun bouton WhatsApp n'est affiché : un bouton vers un numéro inexistant coûte plus de confiance qu'il n'en rapporte."
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Téléphone",
+        "info": "Format international, ex. +213 5X XX XX XX."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Numéro WhatsApp",
+        "info": "Chiffres seulement, indicatif compris (ex. 2135XXXXXXXX). Vide : le téléphone ci-dessus."
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "E-mail",
+        "info": "Vide : l'e-mail de la boutique (Paramètres > Détails de la boutique)."
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Vide : la goutte TLEMCENYA fournie avec le thème. 64 × 64 px."
+      }
+    ]
+  }
+]

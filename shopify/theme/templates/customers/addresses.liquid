@@ -1,0 +1,42 @@
+{%- comment -%}
+  Address book. Country and province selects are filled by Shopify's own
+  script (shopify_common.js), which also keeps the province list in step
+  with the country chosen.
+{%- endcomment -%}
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+<section class="band band-paper">
+  <div class="shell">
+    <p class="pdp-crumb"><a href="{{ routes.account_url }}">{{ 'customer.back_account' | t }}</a></p>
+    <h1 class="display sec-title">{{ 'customer.addresses' | t }}</h1>
+
+    {%- paginate customer.addresses by 10 -%}
+      <ul class="acct-addresses">
+        {%- for address in customer.addresses -%}
+          <li class="card">
+            <div class="card-body">
+              {%- if address == customer.default_address -%}<p class="card-material">{{ 'customer.default' | t }}</p>{%- endif -%}
+              <address class="foot-addr">{{ address | format_address }}</address>
+            </div>
+            <div class="card-foot">
+              <details>
+                <summary class="crosslink">{{ 'customer.edit' | t }}</summary>
+                {% render 'address-form', address: address, form_id: address.id %}
+              </details>
+              <form class="acct-del" method="post" action="{{ address.url }}"
+                    data-confirm="{{ 'customer.delete_confirm' | t | escape }}">
+                <input type="hidden" name="_method" value="delete">
+                <button class="cart-rm" type="submit">{{ 'customer.delete' | t }}</button>
+              </form>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+
+    <details class="acct-new">
+      <summary class="btn btn-primary">{{ 'customer.add_address' | t }}</summary>
+      {% render 'address-form', address: customer.new_address, form_id: 'new' %}
+    </details>
+  </div>
+</section>

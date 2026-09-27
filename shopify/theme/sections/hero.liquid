@@ -1,0 +1,90 @@
+{%- comment -%}
+  The oil field: four drifting gradients, pure CSS, then an optional video
+  on top. The video is fetched only when theme.js decides the viewport, the
+  connection and the motion preference all allow it — sources carry
+  data-src, not src. If it never loads, the oil field simply stays.
+
+  Every text falls back to the translated copy from content/*.json, so the
+  hero is right in French, English and Arabic with no setting filled in.
+{%- endcomment -%}
+{%- liquid
+  assign line_1 = section.settings.line_1
+  if line_1 == blank
+    assign line_1 = 'content.hero.line_1' | t
+  endif
+  assign line_2 = section.settings.line_2
+  if line_2 == blank
+    assign line_2 = 'content.hero.line_2' | t
+  endif
+  assign lede = section.settings.lede
+  if lede == blank
+    assign lede = 'content.hero.lede' | t
+  endif
+  assign v = section.settings.video
+-%}
+<section class="hero on-dark grain" data-oil>
+  <div class="oil-field" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  {%- if v != blank -%}
+    <video class="hero-video" data-hero-video aria-hidden="true" tabindex="-1"
+           muted loop playsinline preload="none"
+           poster="{{ v.preview_image | image_url: width: 1920 }}">
+      {%- for source in v.sources -%}
+        {%- if source.mime_type == 'video/mp4' or source.mime_type == 'video/webm' -%}
+          <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+        {%- endif -%}
+      {%- endfor -%}
+    </video>
+  {%- elsif section.settings.image != blank -%}
+    {{ section.settings.image | image_url: width: 2400 | image_tag:
+      class: 'hero-image', widths: '800, 1200, 1600, 2400', sizes: '100vw',
+      loading: 'eager', fetchpriority: 'high', alt: '' }}
+  {%- endif -%}
+
+  <div class="shell hero-inner">
+    <h1 class="display hero-title"><span>{{ line_1 }}</span><span>{{ line_2 }}</span></h1>
+    <p class="hero-lede measure">{{ lede }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#boutique">{{ 'content.hero.cta_primary' | t }}</a>
+      <a class="btn btn-quiet" href="#livraison">{{ 'content.hero.cta_secondary' | t }}</a>
+    </div>
+    <dl class="datagrid hero-data">
+      <div><dt>{{ 'content.hero.data_1_label' | t }}</dt><dd class="tnum">{{ 'content.hero.data_1_value' | t }}</dd></div>
+      <div><dt>{{ 'content.hero.data_2_label' | t }}</dt><dd class="tnum">{{ 'content.hero.data_2_value' | t }}</dd></div>
+      <div><dt>{{ 'content.hero.data_3_label' | t }}</dt><dd class="tnum">{{ 'content.hero.data_3_value' | t }}</dd></div>
+    </dl>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero — champ d'huile",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vidéo de fond",
+      "info": "Facultatif. Chargée seulement sur grand écran, connexion rapide, sans « réduire les animations ». Attention : assets/video/hero.mp4 du dépôt porte un filigrane tryveo3.ai — ne pas l'utiliser en ligne."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image de fond",
+      "info": "Utilisée seulement sans vidéo. Vide : le champ d'huile animé, en CSS."
+    },
+    {
+      "type": "header",
+      "content": "Textes"
+    },
+    {
+      "type": "paragraph",
+      "content": "Laissez vide pour utiliser le texte traduit du thème (FR / EN / AR). Un texte saisi ici s'affiche dans toutes les langues, sauf traduction via Translate & Adapt."
+    },
+    { "type": "text", "id": "line_1", "label": "Titre, ligne 1" },
+    { "type": "text", "id": "line_2", "label": "Titre, ligne 2" },
+    { "type": "textarea", "id": "lede", "label": "Chapeau" }
+  ],
+  "presets": [{ "name": "Hero — champ d'huile" }]
+}
+{% endschema %}

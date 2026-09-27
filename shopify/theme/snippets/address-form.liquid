@@ -1,0 +1,60 @@
+{%- comment -%}
+  Add / edit an address. Pass address: and form_id: (the address id, or 'new').
+  The province select is driven by Shopify.CountryProvinceSelector, started
+  in theme.js for every [data-address-country].
+{%- endcomment -%}
+{%- form 'customer_address', address, class: 'acct-form' -%}
+  {{ form.errors | default_errors }}
+  <div class="fields acct-fields">
+    <p class="field">
+      <label for="af-first-{{ form_id }}">{{ 'customer.first_name' | t }}</label>
+      <input id="af-first-{{ form_id }}" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+    </p>
+    <p class="field">
+      <label for="af-last-{{ form_id }}">{{ 'customer.last_name' | t }}</label>
+      <input id="af-last-{{ form_id }}" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+    </p>
+    <p class="field field-wide">
+      <label for="af-company-{{ form_id }}">{{ 'customer.company' | t }}</label>
+      <input id="af-company-{{ form_id }}" type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+    </p>
+    <p class="field field-wide">
+      <label for="af-a1-{{ form_id }}">{{ 'customer.address1' | t }}</label>
+      <input id="af-a1-{{ form_id }}" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+    </p>
+    <p class="field field-wide">
+      <label for="af-a2-{{ form_id }}">{{ 'customer.address2' | t }}</label>
+      <input id="af-a2-{{ form_id }}" type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+    </p>
+    <p class="field">
+      <label for="af-city-{{ form_id }}">{{ 'customer.city' | t }}</label>
+      <input id="af-city-{{ form_id }}" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+    </p>
+    <p class="field">
+      <label for="af-country-{{ form_id }}">{{ 'customer.country' | t }}</label>
+      <select id="af-country-{{ form_id }}" name="address[country]"
+              data-address-country data-province-id="af-province-{{ form_id }}"
+              data-province-wrap="af-province-wrap-{{ form_id }}"
+              data-default="{{ form.country | default: 'Algeria' | escape }}">
+        {{ all_country_option_tags }}
+      </select>
+    </p>
+    <p class="field" id="af-province-wrap-{{ form_id }}">
+      <label for="af-province-{{ form_id }}">{{ 'customer.province' | t }}</label>
+      <select id="af-province-{{ form_id }}" name="address[province]" data-default="{{ form.province | escape }}"></select>
+    </p>
+    <p class="field">
+      <label for="af-zip-{{ form_id }}">{{ 'customer.zip' | t }}</label>
+      <input id="af-zip-{{ form_id }}" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code">
+    </p>
+    <p class="field">
+      <label for="af-phone-{{ form_id }}">{{ 'customer.phone' | t }}</label>
+      <input id="af-phone-{{ form_id }}" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+    </p>
+    <p class="field field-wide mode">
+      {{ form.set_as_default_checkbox }}
+      <label for="address_default_address_{{ form.id }}">{{ 'customer.set_default' | t }}</label>
+    </p>
+  </div>
+  <p class="acct-actions"><button class="btn btn-primary" type="submit">{{ 'customer.save' | t }}</button></p>
+{%- endform -%}

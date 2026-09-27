@@ -1,0 +1,53 @@
+{%- comment -%}
+  From the tree to the tank: the six steps of the export page, with the
+  seal travelling beside them. Not on the home page by default — the
+  static shop left it to the trade page — but one click away in the editor.
+{%- endcomment -%}
+<section class="band band-ink on-dark" id="{{ section.settings.anchor | default: 'procede' }}">
+  <div class="shell proc-split">
+    <div class="proc-main">
+      <div class="sec-head reveal">
+        <h2 class="display sec-title">{{ 'content.process.title' | t }}</h2>
+        <p class="measure sec-lede">{{ 'content.process.lede' | t }}</p>
+      </div>
+      <div class="rail-wrap">
+        <div class="rail" aria-hidden="true"><div class="rail-fill"></div></div>
+        <ol class="steps">
+          {%- for i in (1..6) -%}
+            {%- assign k = 'content.process.step_' | append: i -%}
+            <li class="step reveal">
+              <span class="step-n tnum" aria-hidden="true">{{ i }}</span>
+              <div class="step-body">
+                <h3 class="step-title">{{ k | append: '_title' | t }}</h3>
+                <p>{{ k | append: '_body' | t }}</p>
+                <p class="step-tag tnum">{{ k | append: '_tag' | t }}</p>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+    {%- if section.settings.show_mark -%}
+      <div class="proc-mark reveal">
+        <img src="{{ 'mark.jpg' | asset_url }}" alt="{{ 'content.process.mark_alt' | t | escape }}"
+             width="320" height="320" loading="lazy" decoding="async">
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Procédé",
+  "class": "section-process",
+  "settings": [
+    { "type": "checkbox", "id": "show_mark", "label": "Afficher le sceau", "default": true },
+    { "type": "text", "id": "anchor", "label": "Ancre", "default": "procede" },
+    {
+      "type": "paragraph",
+      "content": "Les six étapes sont traduites dans les textes du thème. Relisez les chiffres (≤ 6 h, 26 °C, 16 °C, 12 000 l) : ce sont des valeurs de travail, pas les vôtres — voir README."
+    }
+  ],
+  "presets": [{ "name": "Procédé" }]
+}
+{% endschema %}

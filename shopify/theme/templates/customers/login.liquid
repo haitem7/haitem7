@@ -1,0 +1,50 @@
+<section class="band band-paper">
+  <div class="shell acct">
+    <div id="login" class="acct-panel">
+      <h1 class="display sec-title">{{ 'customer.login' | t }}</h1>
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {{ form.errors | default_errors }}
+        <div class="fields acct-fields">
+          <p class="field field-wide">
+            <label for="login-email">{{ 'customer.email' | t }}</label>
+            <input id="login-email" type="email" name="customer[email]" autocomplete="email" required>
+          </p>
+          {%- if form.password_needed -%}
+            <p class="field field-wide">
+              <label for="login-password">{{ 'customer.password' | t }}</label>
+              <input id="login-password" type="password" name="customer[password]" autocomplete="current-password" required>
+            </p>
+          {%- endif -%}
+        </div>
+        <p class="acct-actions">
+          <button class="btn btn-primary" type="submit">{{ 'customer.sign_in' | t }}</button>
+          {%- if form.password_needed -%}<a class="crosslink" href="#recover">{{ 'customer.forgot' | t }}</a>{%- endif -%}
+        </p>
+      {%- endform -%}
+      <p class="price-note">{{ 'customer.no_account' | t }} <a href="{{ routes.account_register_url }}">{{ 'customer.register' | t }}</a></p>
+      {%- if shop.checkout.guest_login -%}
+        {%- form 'guest_login' -%}
+          <button class="btn btn-quiet" type="submit">{{ 'customer.guest' | t }}</button>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+
+    <div id="recover" class="acct-panel acct-recover">
+      <h2 class="sub-title">{{ 'customer.recover_title' | t }}</h2>
+      <p class="price-note">{{ 'customer.recover_body' | t }}</p>
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="done-title" role="status">{% render 'icon', name: 'check', size: 18 %}<span>{{ 'customer.recover_done' | t }}</span></p>
+        {%- endif -%}
+        {{ form.errors | default_errors }}
+        <p class="field">
+          <label for="recover-email">{{ 'customer.email' | t }}</label>
+          <input id="recover-email" type="email" name="email" autocomplete="email" required>
+        </p>
+        <p class="acct-actions">
+          <button class="btn btn-quiet" type="submit">{{ 'customer.recover_submit' | t }}</button>
+        </p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
