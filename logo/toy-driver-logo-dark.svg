@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 1024 1070" width="1024" height="1100"><defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="300" y1="140" x2="720" y2="720">
+      <stop offset="0" stop-color="#2F8BFF"/><stop offset="1" stop-color="#0047D6"/>
+    </linearGradient>
+    <linearGradient id="gw" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1F7BFF"/><stop offset="1" stop-color="#0047D6"/>
+    </linearGradient>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,900&amp;display=block');
+      .toy{font-family:Montserrat,sans-serif;font-weight:900;font-style:italic}
+      .drv{font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:38px}</style>
+  </defs><rect x="0" y="0" width="1024" height="1200" fill="#0B1530"/>
+  <g id="icon">
+    <ellipse cx="512" cy="712" rx="200" ry="44" fill="none" stroke="#2F8BFF" stroke-opacity=".18" stroke-width="16"/>
+    <ellipse cx="512" cy="712" rx="120" ry="24" fill="#2F8BFF" fill-opacity=".12"/>
+    <path d="M344,502 A220,220 0 1 1 680,502 Q600,612 512,708 Q424,612 344,502 Z" fill="url(#g)"/>
+    <circle cx="512" cy="360" r="168" fill="#0B1530"/>
+    <g fill="none" stroke="#fff" stroke-linecap="round">
+      <circle cx="512" cy="360" r="128" stroke-width="30"/>
+      <path d="M390,372 Q450,330 512,360 Q574,330 634,372" stroke-width="30"/>
+      <path d="M512,360 L512,484" stroke-width="34"/>
+    </g>
+    <circle cx="512" cy="360" r="40" fill="#fff"/>
+    <circle cx="512" cy="360" r="14" fill="#0B1530"/>
+  </g>
+  <g transform="translate(0,0)">
+    <g stroke="#2F8BFF" stroke-width="14" stroke-linecap="round">
+      <line x1="232" y1="850" x2="330" y2="850"/>
+      <line x1="196" y1="886" x2="318" y2="886" stroke-opacity=".75"/>
+      <line x1="240" y1="922" x2="306" y2="922" stroke-opacity=".5"/>
+    </g>
+    <text x="545" y="950" text-anchor="middle" font-size="190" class="toy" fill="#ffffff" letter-spacing="4">TOY</text>
+    <text x="531" y="1032" text-anchor="middle" font-size="58" class="drv" fill="#7FB2FF">DRIVER</text>
+  </g></svg>
